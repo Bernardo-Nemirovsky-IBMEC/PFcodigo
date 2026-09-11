@@ -75,6 +75,7 @@ body {
   color: #7dd3fc;
 }
 
+/* Nomes das Empresas (Desktop) */
 .bar-labels {
   display: flex;
   justify-content: space-between;
@@ -93,6 +94,13 @@ body {
 }
 .bar-label.oto {
   color: #38b6ff;
+}
+
+/* Oculta os nomes em telas menores para evitar colisão visual */
+@media (max-width: 768px) {
+  .bar-labels {
+    display: none;
+  }
 }
 
 /* Focus visible para acessibilidade */
