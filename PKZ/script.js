@@ -13,8 +13,79 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll(".animate-on-scroll")
     .forEach((el) => observer.observe(el));
 
+  // ── Menu Mobile Hambúrguer PKZ ──
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const primaryNav = document.getElementById("primary-navigation");
+
+  function toggleMobileMenu() {
+    if (!mobileMenuBtn || !primaryNav) return;
+    const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+    mobileMenuBtn.classList.toggle("active");
+    primaryNav.classList.toggle("nav-open");
+    mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
+  }
+
+  function closeMobileMenu() {
+    if (!mobileMenuBtn || !primaryNav) return;
+    mobileMenuBtn.classList.remove("active");
+    primaryNav.classList.remove("nav-open");
+    mobileMenuBtn.setAttribute("aria-expanded", "false");
+  }
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+  }
+
+  // Fecha menu mobile ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (
+      primaryNav &&
+      primaryNav.classList.contains("nav-open") &&
+      !primaryNav.contains(e.target) &&
+      mobileMenuBtn &&
+      !mobileMenuBtn.contains(e.target)
+    ) {
+      closeMobileMenu();
+    }
+  });
+
+  // Fecha menu mobile com Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMobileMenu();
+    }
+  });
+
+  // ── Smooth Scroll para Links Internos (com compensação de Header Fixo) ──
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      closeMobileMenu();
+      const targetId = link.getAttribute("href");
+      if (link.id === "open-contact-modal" || targetId === "#") return;
+
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        e.preventDefault();
+        const headerHeight =
+          document.querySelector(".site-header")?.offsetHeight || 75;
+        const targetPosition =
+          targetSection.getBoundingClientRect().top +
+          window.pageYOffset -
+          headerHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
   // Lógica do Modal de Contato
-  const modal = document.getElementById("contact-modal");
+  const modal =
+    document.getElementById("contact") ||
+    document.getElementById("contact-modal");
   const openModalBtn = document.getElementById("open-contact-modal");
   const closeModalBtn = document.getElementById("close-modal");
   const nameInput = document.getElementById("name");

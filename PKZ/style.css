@@ -28,6 +28,7 @@
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -51,32 +52,40 @@ section {
 }
 
 .site-header {
-  background-color: var(--bg-surface);
-  padding: 16px 24px;
+  background-color: rgba(7, 17, 30, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 14px 24px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
   border-bottom: 1px solid var(--border);
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
-  max-width: 1000px;
+  max-width: 1080px;
   margin: 0 auto;
   align-items: center;
+  position: relative;
 }
 
 .nav-links {
   display: flex;
   gap: 20px;
   list-style: none;
+  align-items: center;
 }
 .nav-link,
 .back-link {
   color: var(--text-muted);
   text-decoration: none;
   font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
 }
 .nav-link:hover,
 .back-link:hover {
@@ -90,6 +99,7 @@ section {
   letter-spacing: 3px;
   background: linear-gradient(135deg, #ffffff 40%, var(--accent-hover) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   transform: skewX(-4deg);
@@ -97,9 +107,50 @@ section {
     transform 0.2s ease,
     opacity 0.2s ease;
   user-select: none;
+  white-space: nowrap;
 }
 .brand-logo:hover {
   transform: skewX(-4deg) scale(1.04);
+}
+
+/* ── Botão Hambúrguer Mobile PKZ ── */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 110;
+  transition: background-color 0.2s ease;
+}
+.menu-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.2s ease;
+}
+.menu-toggle.active .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 h1,
@@ -117,22 +168,24 @@ h3 {
 
 /* ── Hero Section em Destaque ── */
 .hero-section {
-  padding: 110px 24px 85px;
+  padding: 100px 24px 75px;
   max-width: 900px;
 }
 .hero-content h1 {
-  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  font-size: clamp(1.9rem, 5.5vw, 3.8rem);
   font-weight: 900;
   line-height: 1.15;
-  letter-spacing: -1.5px;
-  margin-bottom: 22px;
+  letter-spacing: -1px;
+  margin-bottom: 18px;
   background: linear-gradient(180deg, #ffffff 30%, #93c5fd 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 10px 30px rgba(29, 78, 216, 0.3);
+  word-break: break-word;
 }
-.hero-content p {
-  font-size: clamp(1.2rem, 2.8vw, 1.55rem);
+.hero-content h2 {
+  font-size: clamp(1.05rem, 2.5vw, 1.45rem);
   font-weight: 600;
   color: var(--accent-hover);
   letter-spacing: 0.5px;
@@ -172,6 +225,131 @@ h3 {
   margin-top: 8px;
 }
 
+/* ── Seção Sobre a PKZ (About Us) ── */
+.about-section {
+  max-width: 1080px;
+  padding: 85px 24px;
+  margin: 0 auto;
+}
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: stretch;
+  text-align: left;
+}
+.about-image-col {
+  display: flex;
+  align-items: center;
+}
+.about-image-wrapper {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  background-color: var(--bg-surface);
+  width: 100%;
+}
+.about-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-image-wrapper:hover img {
+  transform: scale(1.03);
+}
+.about-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #93c5fd;
+  background: rgba(29, 78, 216, 0.22);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+.about-content-col h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  line-height: 1.25;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+}
+.about-lead {
+  font-size: 1.05rem;
+  color: #f1f5f9;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.about-content-col p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.highlight-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.highlight-item:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.2);
+}
+.highlight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background-color: rgba(29, 78, 216, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--accent-hover);
+  flex-shrink: 0;
+}
+.highlight-svg {
+  width: 20px;
+  height: 20px;
+}
+.highlight-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+.highlight-item p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* Location Section */
 .location-section {
   max-width: 800px;
@@ -180,10 +358,25 @@ h3 {
   font-size: 1.1rem;
   color: var(--text-muted);
   margin-bottom: 28px;
-  line-height: 1.8;
+  line-height: 1.7;
 }
-.location-address strong {
+.location-address-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   color: var(--text-primary);
+  font-size: 1.15rem;
+}
+.location-address-header .meta-icon {
+  color: var(--accent-hover);
+  flex-shrink: 0;
+}
+.location-city {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 .map-wrapper {
   border-radius: 8px;
@@ -203,12 +396,28 @@ h3 {
   border-radius: 8px;
   padding: 20px 24px;
   display: flex;
-  gap: 14px;
+  gap: 16px;
   align-items: flex-start;
+  transition: border-color 0.2s ease;
+}
+.reference-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
 }
 .ref-icon {
-  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: rgba(29, 78, 216, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: var(--accent-hover);
   flex-shrink: 0;
+}
+.ref-svg-icon {
+  width: 22px;
+  height: 22px;
 }
 .reference-card p {
   color: var(--text-muted);
@@ -288,9 +497,9 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-weight: 700;
-  color: var(--accent-hover);
-  background: rgba(29, 78, 216, 0.18);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+  background: rgba(29, 78, 216, 0.22);
+  border: 1px solid rgba(147, 197, 253, 0.35);
   padding: 4px 12px;
   border-radius: 20px;
   margin-bottom: 12px;
@@ -376,10 +585,11 @@ h3 {
   font-size: 1.1rem;
   letter-spacing: -0.2px;
   color: var(--text-primary);
+  margin-bottom: 2px;
 }
 .sport-sub {
-  font-size: 0.9rem;
-  color: var(--accent-hover);
+  font-size: 0.92rem;
+  color: #93c5fd;
   font-weight: 600;
 }
 
@@ -608,4 +818,138 @@ h3 {
 .btn:focus-visible,
 .back-to-top:focus-visible {
   outline-color: var(--accent-hover);
+}
+
+/* ── Responsivo PKZ ── */
+@media (max-width: 860px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .about-image-wrapper {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 12px 18px;
+  }
+  .navbar {
+    gap: 12px;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+  .brand-logo {
+    font-size: 1.6rem;
+  }
+  .back-link {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+  .nav-links {
+    position: fixed;
+    top: 66px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(7, 17, 30, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 18px 24px;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    transform: translateY(-130%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.25s ease;
+    z-index: 99;
+  }
+  .nav-links.nav-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links li {
+    width: 100%;
+  }
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .nav-link:hover,
+  .nav-link:focus {
+    background-color: rgba(29, 78, 216, 0.15);
+    color: var(--accent-hover);
+  }
+  .nav-link-highlight {
+    color: var(--accent-hover) !important;
+    font-weight: 700;
+  }
+  .sport-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 55px 18px 40px;
+  }
+  .hero-content h1 {
+    font-size: clamp(1.75rem, 7vw, 2.35rem);
+    margin-bottom: 14px;
+  }
+  .hero-content h2 {
+    font-size: 0.95rem;
+  }
+  .about-section {
+    padding: 50px 18px;
+  }
+  .about-content-col h2 {
+    font-size: 1.7rem;
+  }
+  .services-section {
+    padding: 50px 18px;
+  }
+  .services-section h2 {
+    font-size: 1.75rem;
+  }
+  .services-intro {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+  .team-support-card {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+  .sport-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .location-section {
+    padding: 50px 18px;
+  }
+  .location-section h2 {
+    font-size: 1.75rem;
+  }
+  .reference-points {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .modal-box {
+    padding: 26px 20px;
+  }
 }
