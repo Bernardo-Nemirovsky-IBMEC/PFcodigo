@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ── Smooth Scroll para Links Internos (com compensação de Header Fixo) ──
+  // ── Smooth Scroll para Links Internos ──
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!modal) return;
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden"; // Previne scroll de fundo
+    document.body.style.overflow = "hidden";
     setTimeout(() => {
       if (nameInput) nameInput.focus();
     }, 150);
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Lógica da Seta Voltar ao Topo (scroll ligeiramente rápido)
+  // Lógica da Seta Voltar ao Topo
   const backToTopBtn = document.getElementById("back-to-top");
 
   if (backToTopBtn) {
@@ -157,14 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const startY = window.scrollY;
       if (startY <= 0) return;
 
-      const duration = 650; // Duração ideal para uma subida fluida e suave
+      const duration = 650;
       const startTime = performance.now();
 
       function scrollStep(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        // Curva suave ease-in-out (início e fim desacelerados suavemente)
         const ease =
           progress < 0.5
             ? 4 * progress * progress * progress

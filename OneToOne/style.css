@@ -195,7 +195,7 @@ h2 {
   transform: translateY(0);
 }
 
-/* ── Seção Sobre Nós (About Us) ── */
+/* ── Seção Sobre Nós ── */
 .about-section {
   max-width: 1080px;
   padding: 85px 24px;
@@ -317,7 +317,7 @@ h2 {
   line-height: 1.5;
 }
 
-/* ── Serviços: Soluções Exclusivas (Padrão PKZ: Cards com imagem e hierarquia visual) ── */
+/* ── Serviços ── */
 .services-section {
   background-color: var(--bg-surface);
   max-width: 100%;
@@ -824,7 +824,7 @@ h2 {
   }
 }
 
-/* ── Focus visible — acessibilidade ── */
+/* ── Focus visible ── */
 .nav-link:focus-visible,
 .back-link:focus-visible,
 .btn:focus-visible,

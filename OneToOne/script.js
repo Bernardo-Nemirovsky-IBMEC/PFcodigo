@@ -49,13 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ── Smooth Scroll para Links Internos (com compensação de Header Fixo) ──
+  // ── Smooth Scroll para Links Internos ──
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
       closeMobileMenu();
       const targetId = link.getAttribute("href");
-      // Se for o botão de contato ou âncora vazia, deixa o handler específico agir
       if (link.id === "open-contact-modal" || targetId === "#") return;
 
       const targetSection = document.querySelector(targetId);
@@ -91,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!modal) return;
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden"; // Previne scroll do fundo
+    document.body.style.overflow = "hidden";
     setTimeout(() => {
       if (nameInput) nameInput.focus();
     }, 150);
@@ -104,29 +103,24 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
   }
 
-  // Abre pelo nav "Contato"
   if (openModalBtn) {
     openModalBtn.addEventListener("click", openModal);
   }
 
-  // Abre pelo CTA "Agendar Avaliação" do hero
   if (openModalHeroBtn) {
     openModalHeroBtn.addEventListener("click", openModal);
   }
 
-  // Fecha pelo botão ×
   if (closeModalBtn) {
     closeModalBtn.addEventListener("click", closeModal);
   }
 
-  // Fecha ao clicar no fundo (overlay)
   if (modal) {
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
   }
 
-  // Fecha com Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal && modal.classList.contains("active")) {
       closeModal();
@@ -166,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
 
-        // Curva ease-in-out cúbica (suave nos extremos)
         const ease =
           progress < 0.5
             ? 4 * progress * progress * progress

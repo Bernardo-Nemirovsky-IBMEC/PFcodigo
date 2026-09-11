@@ -219,13 +219,12 @@ h3 {
   color: #fff;
 }
 
-/* Hero buttons wrapper */
 .hero-content .btn + .btn {
   display: inline-block;
   margin-top: 8px;
 }
 
-/* ── Seção Sobre a PKZ (About Us) ── */
+/* ── Seção Sobre a PKZ ── */
 .about-section {
   max-width: 1080px;
   padding: 85px 24px;
@@ -240,7 +239,7 @@ h3 {
 }
 .about-image-col {
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
 .about-image-wrapper {
   position: relative;
@@ -250,6 +249,7 @@ h3 {
   border: 1px solid var(--border);
   background-color: var(--bg-surface);
   width: 100%;
+  height: 100%;
 }
 .about-image-wrapper img {
   width: 100%;
@@ -264,7 +264,7 @@ h3 {
 .about-content-col {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .section-tag {
   display: inline-block;
@@ -350,7 +350,7 @@ h3 {
   line-height: 1.5;
 }
 
-/* Location Section */
+/* Localização */
 .location-section {
   max-width: 800px;
 }
@@ -428,7 +428,7 @@ h3 {
   color: var(--text-primary);
 }
 
-/* ── Sport Gallery (Serviços) ── */
+/* ── Galeria de Esportes (Serviços) ── */
 .services-section h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2.25rem;
@@ -449,7 +449,7 @@ h3 {
   color: var(--text-primary);
 }
 
-/* ── Bloco de Apoio Multidisciplinar (Nutricionistas & Testes Físicos) ── */
+/* ── Bloco de Apoio Multidisciplinar ── */
 .team-support-card {
   display: flex;
   align-items: center;
@@ -602,7 +602,7 @@ h3 {
   color: var(--text-primary);
 }
 
-/* ── Pop-up Modal de Contato (Branco com fundo borrado) ── */
+/* ── Modal Pop-up de Contato ── */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -749,7 +749,7 @@ h3 {
   transform: translateY(0);
 }
 
-/* ── Botão Flutuante Voltar ao Topo (Seta veloz) ── */
+/* ── Botão Voltar ao Topo ── */
 .back-to-top {
   position: fixed;
   bottom: 30px;
@@ -804,7 +804,7 @@ h3 {
   transform: translateY(0);
 }
 
-/* Focus visible para acessibilidade */
+/* Focus visible */
 .nav-link:focus-visible,
 .back-link:focus-visible,
 .btn:focus-visible,
@@ -830,6 +830,7 @@ h3 {
     max-width: 520px;
     margin: 0 auto;
     width: 100%;
+    aspect-ratio: 4 / 3;
   }
 }
 
