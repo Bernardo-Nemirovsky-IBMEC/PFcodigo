@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One To One | Studio Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -12,50 +18,254 @@
         <a href="../Landing%20Page/index.html" class="back-link">← Portal</a>
         <div class="brand-logo">One To One</div>
         <ul class="nav-links">
+          <!-- Item de navegação Sobre adicionado -->
+          <li><a href="#sobre" class="nav-link">Sobre</a></li>
           <li><a href="#services" class="nav-link">Serviços</a></li>
-          <li><a href="#contact" class="nav-link">Contato</a></li>
+          <li><a href="#location" class="nav-link">Localização</a></li>
+          <li>
+            <a href="#contact" id="open-contact-modal" class="nav-link"
+              >Contato</a
+            >
+          </li>
         </ul>
       </nav>
     </header>
 
-    <main>
+    <main id="main-content">
+      <!-- ── Hero ── -->
       <section id="home" class="hero-section animate-on-scroll">
         <div class="hero-content">
           <h1>Evolua com Propósito</h1>
           <p>Atendimento individualizado e ambiente sofisticado.</p>
-          <a href="#contact" class="btn btn-primary">Agendar Avaliação</a>
+          <a href="#contact" id="open-contact-hero" class="btn btn-primary">
+            Agendar Avaliação
+          </a>
         </div>
       </section>
 
+      <!-- ── Nova Seção: Sobre Nós (About Us) ── -->
+      <!-- Layout responsivo de 2 colunas: Imagem em destaque + Bloco de texto 'Quem Somos & O Que Fazemos' -->
+      <section id="sobre" class="about-section animate-on-scroll">
+        <div class="about-container">
+          <div class="about-image-col">
+            <div class="about-image-wrapper">
+              <!-- Placeholder de imagem com src configurado e de fácil customização -->
+              <img
+                src="Fotos/equipe.jpg"
+                alt="Equipe multidisciplinar de especialistas One To One"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <div class="about-content-col">
+            <span class="section-tag">Sobre a One To One</span>
+            <h2>Quem Somos & O Que Fazemos</h2>
+            <p class="about-lead">
+              A <strong>One To One</strong> é um estúdio de saúde e bem-estar
+              premium dedicado ao desenvolvimento físico integral através de
+              atendimento estritamente individualizado.
+            </p>
+            <p>
+              Unimos ciência, acolhimento e tecnologia para transformar
+              objetivos em longevidade e alta performance. Nosso corpo técnico
+              integra <strong>Personal Training</strong>,
+              <strong>Fisioterapia</strong> e
+              <strong>Nutrição</strong> trabalhando em sinergia completa para
+              cuidar de você.
+            </p>
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <span class="highlight-icon">🎯</span>
+                <div>
+                  <strong>Atendimento 1-para-1 Genuíno</strong>
+                  <p>
+                    Acompanhamento exclusivo de profissionais dedicados ao seu
+                    treino e bem-estar.
+                  </p>
+                </div>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-icon">🔬</span>
+                <div>
+                  <strong>Metodologia Científica Integrada</strong>
+                  <p>
+                    Avaliações biomecânicas e metabólicas periódicas para
+                    resultados consistentes e seguros.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Serviços: Soluções Exclusivas (Hierarquia Visual e Cards inspirados na PKZ) ── -->
       <section id="services" class="services-section animate-on-scroll">
         <h2>Soluções Exclusivas</h2>
+        <p class="services-subtitle">
+          Programas personalizados desenvolvidos para atender suas metas com
+          máxima precisão e conforto.
+        </p>
         <div class="card-grid">
-          <div class="card">
-            <h3>Personal Training</h3>
-            <p>Acompanhamento focado nos seus objetivos corporais.</p>
-          </div>
-          <div class="card">
-            <h3>Fisioterapia</h3>
-            <p>Reabilitação e tratamento especializado.</p>
-          </div>
+          <!-- Card 1: Personal Training -->
+          <article class="service-card">
+            <div class="service-img-wrapper">
+              <!-- Imagem com placeholder dedicado -->
+              <img
+                src="Fotos/personal-training.jpg"
+                alt="Acompanhamento exclusivo de Personal Training na One To One"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-body">
+              <span class="service-tag">Treinamento & Força</span>
+              <h3>Personal Training</h3>
+              <p>
+                Acompanhamento focado nos seus objetivos corporais, com
+                periodização inteligente e correção postural constante.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 2: Fisioterapia -->
+          <article class="service-card">
+            <div class="service-img-wrapper">
+              <!-- Imagem com placeholder dedicado -->
+              <img
+                src="Fotos/fisioterapia.jpg"
+                alt="Atendimento clínico e preventivo de Fisioterapia na One To One"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-body">
+              <span class="service-tag">Reabilitação & Mobilidade</span>
+              <h3>Fisioterapia</h3>
+              <p>
+                Reabilitação e tratamento especializado, prevenção de lesões e
+                restauração da mobilidade funcional.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 3: Nutricionista (Novo serviço integrado) -->
+          <article class="service-card">
+            <div class="service-img-wrapper">
+              <!-- Imagem com placeholder dedicado -->
+              <img
+                src="Fotos/nutricao.jpg"
+                alt="Consulta e planejamento alimentar com Nutricionista esportiva na One To One"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-body">
+              <span class="service-tag">Nutrição & Metabolismo</span>
+              <h3>Nutricionista</h3>
+              <p>
+                Consultoria nutricional individualizada, composição corporal e
+                planos alimentares desenhados para sua rotina e rendimento.
+              </p>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section id="contact" class="contact-section animate-on-scroll">
-        <h2>Inicie sua jornada</h2>
-        <div class="form-wrapper">
-          <label for="name" class="visually-hidden">Seu nome</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Como gosta de ser chamado?"
-          />
-          <button id="whatsapp-cta" class="btn btn-primary">
-            Falar com Consultor →
-          </button>
+      <!-- ── Localização ── -->
+      <section id="location" class="location-section animate-on-scroll">
+        <h2>Nossa Localização</h2>
+        <p class="location-address">
+          📍 <strong>Av. Armando Lombardi, 949 — Loja i</strong><br />
+          Barra da Tijuca, Rio de Janeiro — RJ
+        </p>
+        <div class="map-wrapper">
+          <iframe
+            title="Localização One To One na Av. Armando Lombardi, 949"
+            src="https://www.google.com/maps?q=Av.+Armando+Lombardi,+949,+Barra+da+Tijuca,+Rio+de+Janeiro&output=embed"
+            width="100%"
+            height="400"
+            style="border: 0; border-radius: 8px"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+        <div class="reference-points">
+          <div class="reference-card">
+            <span class="ref-icon">🏬</span>
+            <p>
+              <strong>Referência 1:</strong> Próximo ao Shopping Barra Garden, a
+              5 min a pé.
+            </p>
+          </div>
+          <div class="reference-card">
+            <span class="ref-icon">🚌</span>
+            <p>
+              <strong>Referência 2:</strong> Em frente à estação de BRT Jardim
+              Oceânico, acesso fácil por transporte público.
+            </p>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- ── Modal Pop-up de Contato ── -->
+    <div
+      id="contact-modal"
+      class="modal-overlay"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-box">
+        <button id="close-modal" class="modal-close" aria-label="Fechar modal">
+          &times;
+        </button>
+        <div class="modal-header">
+          <span class="modal-badge">Fale Conosco</span>
+          <h2 id="modal-title">Inicie sua Jornada</h2>
+          <p>
+            Fale diretamente com nosso time de personal trainers pelo WhatsApp e
+            agende sua avaliação exclusiva.
+          </p>
+        </div>
+        <div class="modal-body">
+          <label for="name" class="modal-label"
+            >Como gosta de ser chamado?</label
+          >
+          <input
+            type="text"
+            id="name"
+            class="modal-input"
+            placeholder="Digite seu nome"
+            autocomplete="name"
+          />
+          <button id="whatsapp-cta" class="btn btn-modal">
+            Falar com Consultor →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Botão Voltar ao Topo ── -->
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-label="Voltar ao início do site"
+      title="Voltar ao topo"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
 
     <script src="script.js" defer></script>
   </body>
