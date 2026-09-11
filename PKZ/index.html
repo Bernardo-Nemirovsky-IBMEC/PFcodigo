@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visão da PKZ | Alto Rendimento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar">
+        <a href="../Landing%20Page/index.html" class="back-link">← Portal</a>
+        <div class="brand-logo">PKZ</div>
+        <ul class="nav-links">
+          <li><a href="#services" class="nav-link">Serviços</a></li>
+          <li><a href="#location" class="nav-link">Localização</a></li>
+          <li>
+            <a href="#contact" id="open-contact-modal" class="nav-link"
+              >Contato</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="home" class="hero-section animate-on-scroll">
+        <div class="hero-content">
+          <h1>Treine Como um Profissional</h1>
+          <p>Alto rendimento e performance garantida.</p>
+        </div>
+      </section>
+
+      <section id="services" class="services-section animate-on-scroll">
+        <h2>Sem Limites de Esporte</h2>
+        <p class="services-intro">
+          Na PKZ, acreditamos que cada pessoa tem um esporte que a move. Por
+          isso, não nos limitamos a uma modalidade — estamos prontos para
+          atender <strong>qualquer esporte que você praticar</strong>. Nosso
+          time de especialistas se adapta ao seu ritmo, ao seu esporte e ao seu
+          objetivo.
+        </p>
+
+        <!-- Bloco de Apoio Multidisciplinar e Científico -->
+        <div class="team-support-card">
+          <div class="team-support-img">
+            <img
+              src="Fotos/equipe-saude.jpg"
+              alt="Equipe PKZ de nutricionistas, preparadores físicos e fisiologistas"
+              loading="lazy"
+            />
+          </div>
+          <div class="team-support-content">
+            <span class="support-tag">Suporte Completo & Ciência</span>
+            <h3>Corpo Técnico Especializado</h3>
+            <p>
+              Para alcançar o seu ápice atlético com segurança, contamos com
+              <strong>nutricionistas dedicados</strong> ao seu rendimento e
+              realizamos
+              <strong>testes físicos aprovados academicamente</strong>. Cada
+              avaliação metabólica, biomecânica e composição corporal segue
+              rigorosos protocolos científicos para prescrever exatamente o que
+              o seu corpo precisa.
+            </p>
+          </div>
+        </div>
+
+        <div class="sport-grid">
+          <div class="sport-card">
+            <div class="sport-img-wrapper">
+              <img
+                src="Fotos/karate.jpg"
+                alt="Aula de Karatê com mestre e aluno em dojo"
+                loading="lazy"
+              />
+            </div>
+            <div class="sport-caption">
+              <span class="sport-label">Karateca?</span>
+              <span class="sport-sub">Nós ajudamos.</span>
+            </div>
+          </div>
+
+          <div class="sport-card">
+            <div class="sport-img-wrapper">
+              <img
+                src="Fotos/jiu-jitsu.jpg"
+                alt="Professor ensinando Jiu-Jitsu a criança no tatame"
+                loading="lazy"
+              />
+            </div>
+            <div class="sport-caption">
+              <span class="sport-label">Praticante de Jiu-Jitsu?</span>
+              <span class="sport-sub">Nós ajudamos.</span>
+            </div>
+          </div>
+
+          <div class="sport-card">
+            <div class="sport-img-wrapper">
+              <img
+                src="Fotos/volei.jpg"
+                alt="Treinadora ensinando fundamentos do vôlei para criança"
+                loading="lazy"
+              />
+            </div>
+            <div class="sport-caption">
+              <span class="sport-label">Jogadora de Vôlei?</span>
+              <span class="sport-sub">Nós ajudamos.</span>
+            </div>
+          </div>
+        </div>
+        <p class="services-footer">
+          E muito mais — futebol, natação, atletismo, dança, até hipismo...
+          <strong>Qual é o seu esporte?</strong>
+        </p>
+      </section>
+
+      <section id="location" class="location-section animate-on-scroll">
+        <h2>Nossa Localização</h2>
+        <p class="location-address">
+          📍 <strong>Av. Armando Lombardi, 949 — Loja i</strong><br />
+          Barra da Tijuca, Rio de Janeiro — RJ
+        </p>
+        <div class="map-wrapper">
+          <iframe
+            title="Localização PKZ na Av. Armando Lombardi, 949"
+            src="https://www.google.com/maps?q=Av.+Armando+Lombardi,+949,+Barra+da+Tijuca,+Rio+de+Janeiro&output=embed"
+            width="100%"
+            height="400"
+            style="border: 0; border-radius: 8px"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+        <div class="reference-points">
+          <div class="reference-card">
+            <span class="ref-icon">🏬</span>
+            <p>
+              <strong>Referência 1:</strong> Próximo ao Shopping Barra Garden, a
+              5 min a pé.
+            </p>
+          </div>
+          <div class="reference-card">
+            <span class="ref-icon">🚌</span>
+            <p>
+              <strong>Referência 2:</strong> Em frente à estação de BRT Jardim
+              Oceânico, acesso fácil por transporte público.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal Pop-up de Contato (Branco com blur no fundo) -->
+    <div
+      id="contact-modal"
+      class="modal-overlay"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-box">
+        <button id="close-modal" class="modal-close" aria-label="Fechar modal">
+          &times;
+        </button>
+        <div class="modal-header">
+          <span class="modal-badge">Fale Conosco</span>
+          <h2 id="modal-title">Pronto para o Desafio?</h2>
+          <p>
+            Conecte-se diretamente com nossa equipe de especialistas pelo
+            WhatsApp e monte sua rotina de alta performance.
+          </p>
+        </div>
+        <div class="modal-body">
+          <label for="name" class="modal-label">Qual o seu nome?</label>
+          <input
+            type="text"
+            id="name"
+            class="modal-input"
+            placeholder="Digite seu nome completo"
+            autocomplete="name"
+          />
+          <button id="whatsapp-cta" class="btn btn-modal">
+            Enviar para WhatsApp →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de Voltar ao Topo (Seta veloz) -->
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-label="Voltar ao início do site"
+      title="Voltar ao topo"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
