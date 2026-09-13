@@ -1,5 +1,5 @@
-const PKZ_URL = "../PKZ/index.html";
-const OTO_URL = "../OneToOne/index.html";
+const PKZ_URL = "PKZ/index.html";
+const OTO_URL = "OneToOne/index.html";
 
 const handle = document.getElementById("handle");
 const track = document.getElementById("track");
