@@ -20,14 +20,14 @@ body {
   left: 0;
   right: 0;
   height: 96px;
-  background: #060b14;
+  background: #020b18;
   z-index: 200;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 clamp(16px, 4vw, 52px) 12px;
   gap: 8px;
-  border-bottom: 1px solid #101f38;
+  border-bottom: 1px solid #014c6f;
 }
 
 #drag-hint {
@@ -60,7 +60,7 @@ body {
 }
 
 #drag-hint span {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed", "Just Sans", sans-serif;
   font-weight: 700;
   font-size: clamp(10px, 2.2vw, 12px);
   letter-spacing: 0.12em;
@@ -72,7 +72,7 @@ body {
 }
 
 #drag-hint .hint-oto {
-  color: #7dd3fc;
+  color: #00bbff;
 }
 
 /* Nomes das Empresas (Desktop) */
@@ -83,7 +83,7 @@ body {
 }
 
 .bar-label {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed", "Just Sans", sans-serif;
   font-weight: 700;
   font-size: clamp(14px, 3.5vw, 19px);
   letter-spacing: 0.12em;
@@ -93,20 +93,18 @@ body {
   color: #ffffff;
 }
 .bar-label.oto {
-  color: #38b6ff;
+  color: #00bbff;
 }
 
-/* Oculta os nomes em telas menores para evitar colisão visual */
 @media (max-width: 768px) {
   .bar-labels {
     display: none;
   }
 }
 
-/* Focus visible para acessibilidade */
 .bar-label:focus-visible,
 #drag-hint span:focus-visible {
-  outline: 2px solid #38b6ff;
+  outline: 2px solid #00bbff;
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -121,7 +119,7 @@ body {
 #track {
   width: 100%;
   height: 5px;
-  background: #111e36;
+  background: #012133;
   border-radius: 3px;
   position: relative;
 }
@@ -132,7 +130,7 @@ body {
   top: 0;
   bottom: 0;
   width: 50%;
-  background: #003865;
+  background: #014c6f;
   border-radius: 3px;
   opacity: 0.85;
   pointer-events: none;
@@ -143,7 +141,7 @@ body {
   top: 0;
   bottom: 0;
   width: 50%;
-  background: #38b6ff;
+  background: #00bbff;
   border-radius: 3px;
   opacity: 0.85;
   pointer-events: none;
@@ -188,9 +186,9 @@ body {
 
 #pkz {
   width: 50%;
-  background-color: #07111e;
+  background-color: #020b18;
   background-image:
-    linear-gradient(to bottom, rgba(7, 17, 30, 0.88), rgba(7, 17, 30, 0.82)),
+    linear-gradient(to bottom, rgba(2, 11, 24, 0.88), rgba(2, 11, 24, 0.82)),
     url("Fotos/LandingPKZ.webp");
   background-size: cover;
   background-position: center;
@@ -203,12 +201,12 @@ body {
 
 #oto {
   flex: 1;
-  background-color: #38b6ff;
+  background-color: #00bbff;
   background-image:
     linear-gradient(
       to bottom,
-      rgba(240, 249, 255, 0.88),
-      rgba(224, 242, 254, 0.85)
+      rgba(179, 236, 255, 0.88),
+      rgba(255, 255, 255, 0.85)
     ),
     url("Fotos/LandingOneToOne.webp");
   background-size: cover;
@@ -244,7 +242,7 @@ body {
 
 .tag {
   display: inline-block;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed", "Just Sans", sans-serif;
   font-weight: 700;
   font-size: clamp(9px, 2vw, 11px);
   letter-spacing: 0.18em;
@@ -263,8 +261,8 @@ body {
 
 #oto .tag {
   color: #000000;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(0, 0, 0, 0.35);
+  background: rgba(179, 236, 255, 0.75);
+  border: 1px solid rgba(1, 76, 111, 0.35);
 }
 
 .title-box {
@@ -289,22 +287,23 @@ body {
 }
 
 #oto h1 {
-  font-family: "Barlow Condensed", sans-serif;
-  font-weight: 900;
+  font-family: "Just Sans", "Inter", sans-serif;
+  font-weight: 800;
   font-size: clamp(1.5rem, 5vw, 3rem);
   line-height: 1;
-  color: #032b43;
+  color: #014c6f;
   letter-spacing: -0.01em;
   margin-bottom: 2px;
   word-break: break-word;
 }
 
 #oto .sub {
-  font-family: "Barlow Condensed", sans-serif;
-  font-weight: 900;
-  font-style: italic;
+  font-family: "Just Sans", "Inter", sans-serif;
+  font-weight: 700;
   font-size: clamp(0.9rem, 3vw, 1.4rem);
-  color: #0077b6;
+  color: #00bbff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   white-space: nowrap;
 }
 
@@ -323,7 +322,7 @@ body {
   color: #cbd5e1;
 }
 #oto p {
-  color: #334155;
+  color: #014c6f;
 }
 
 /* ═══════════════════════════════════════
@@ -335,7 +334,7 @@ body {
   justify-content: center;
   padding: clamp(10px, 1.8vh, 14px) clamp(22px, 3vw, 32px);
   border-radius: 9999px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed", "Just Sans", sans-serif;
   font-weight: 700;
   font-size: clamp(0.85rem, 2.2vw, 1.05rem);
   letter-spacing: 0.1em;
@@ -355,7 +354,7 @@ body {
 
 .pkz-btn {
   background-color: #ffffff;
-  color: #07111e;
+  color: #020b18;
   border: 2px solid #ffffff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
@@ -373,26 +372,27 @@ body {
 }
 
 .oto-btn {
-  background-color: #032b43;
+  background-color: #014c6f;
   color: #ffffff;
-  border: 2px solid #032b43;
-  box-shadow: 0 4px 16px rgba(3, 43, 67, 0.25);
+  border: 2px solid #014c6f;
+  box-shadow: 0 4px 16px rgba(1, 76, 111, 0.25);
 }
 
 .oto-btn:hover {
-  background-color: #0077b6;
-  border-color: #0077b6;
+  background-color: #00bbff;
+  border-color: #00bbff;
+  color: #000000;
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 6px 22px rgba(0, 119, 182, 0.35);
+  box-shadow: 0 6px 22px rgba(0, 187, 255, 0.35);
 }
 
 .oto-btn:active {
   transform: translateY(0) scale(0.98);
-  box-shadow: 0 2px 8px rgba(3, 43, 67, 0.3);
+  box-shadow: 0 2px 8px rgba(1, 76, 111, 0.3);
 }
 
 /* ═══════════════════════════════════════
-  SETAS NAS BORDAS (WCAG COMPLIANT - SVG COM OUTLINE)
+  SETAS NAS BORDAS
 ═══════════════════════════════════════ */
 .arrow-hint {
   position: fixed;
@@ -419,7 +419,7 @@ body {
 
 .arrow-hint.l {
   left: clamp(12px, 2vw, 24px);
-  background-color: #07111e;
+  background-color: #020b18;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -443,16 +443,12 @@ body {
   }
 }
 
-/* Focus visible para acessibilidade por teclado */
 .arrow-hint:focus-visible {
-  outline: 3px solid #38b6ff;
+  outline: 3px solid #00bbff;
   outline-offset: 2px;
   opacity: 1;
 }
 
-/* ═══════════════════════════════════════
-  OVERLAY DE REDIRECT
-═══════════════════════════════════════ */
 #redir {
   position: fixed;
   inset: 0;
@@ -470,7 +466,7 @@ body {
   pointer-events: all;
 }
 #redir h2 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed", "Just Sans", sans-serif;
   font-weight: 900;
   font-style: italic;
   font-size: clamp(2.5rem, 10vw, 4.5rem);
@@ -485,19 +481,8 @@ body {
   color: inherit;
 }
 
-/* ═══════════════════════════════════════
-  FOCUS VISIBLE - ACESSIBILIDADE POR TECLADO
-═══════════════════════════════════════ */
 #handle:focus-visible,
 .cta-button:focus-visible {
-  outline: 3px solid #38b6ff;
+  outline: 3px solid #00bbff;
   outline-offset: 3px;
-}
-
-#handle:focus-visible {
-  outline-color: #38b6ff;
-}
-
-.cta-button:focus-visible {
-  outline-color: #38b6ff;
 }
