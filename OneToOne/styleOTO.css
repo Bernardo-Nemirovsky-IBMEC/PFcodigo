@@ -12,7 +12,6 @@
   --border: rgba(1, 76, 111, 0.2);
 }
 
-/* ── Reset & Base ── */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -30,10 +29,17 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+html,
+body {
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
+
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
@@ -41,7 +47,6 @@ body {
   line-height: 1.6;
 }
 
-/* ── Seções genéricas ── */
 section {
   padding: 80px 24px;
   max-width: 1000px;
@@ -54,26 +59,49 @@ section {
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 14px 24px;
+  padding: 12px 24px;
   position: sticky;
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--border);
 }
+
+/* ── Nova Estrutura Header com CSS Grid ── */
 .navbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   max-width: 1080px;
   margin: 0 auto;
-  align-items: center;
-  position: relative;
+  width: 100%;
 }
+
+.nav-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ── Elementos do Header ── */
 .nav-links {
   display: flex;
   gap: 20px;
   list-style: none;
   align-items: center;
 }
+
 .nav-link,
 .back-link {
   color: var(--text-muted);
@@ -86,19 +114,32 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 44px; /* Touch target size */
 }
+
 .nav-link:hover,
 .back-link:hover {
   color: var(--accent-light);
 }
-.brand-logo {
-  font-size: 1.5rem;
-  font-family: "Just Sans", "Inter", sans-serif;
-  font-weight: 800;
-  color: var(--accent);
-  white-space: nowrap;
-  letter-spacing: -0.3px;
-  text-transform: uppercase;
+
+.brand-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo {
+  max-height: 42px;
+  width: auto;
+  object-fit: contain;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.brand-logo-link:hover .nav-logo {
+  transform: scale(1.03);
+  opacity: 0.9;
 }
 
 /* ── Botão Hambúrguer Mobile ── */
@@ -108,8 +149,8 @@ section {
   border: none;
   cursor: pointer;
   padding: 8px;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
   flex-direction: column;
   justify-content: center;
@@ -175,7 +216,9 @@ h2 {
 
 /* ── Botões ── */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 13px 28px;
   border-radius: 24px;
   font-weight: 700;
@@ -187,6 +230,7 @@ h2 {
     background-color 0.2s,
     transform 0.15s;
   font-family: "Just Sans", sans-serif;
+  min-height: 44px;
 }
 .btn-primary {
   background-color: var(--accent);
@@ -201,7 +245,7 @@ h2 {
   transform: translateY(0);
 }
 
-/* ── Seção Sobre Nós ── */
+/* ── Restante da Estilização One To One ── */
 .about-section {
   max-width: 1080px;
   padding: 85px 24px;
@@ -323,7 +367,7 @@ h2 {
   line-height: 1.5;
 }
 
-/* ── Serviços ── */
+/* Serviços */
 .services-section {
   background-color: rgba(179, 236, 255, 0.2);
   max-width: 100%;
@@ -426,7 +470,7 @@ h2 {
   margin: 0;
 }
 
-/* ── Localização ── */
+/* Localização */
 .location-section {
   max-width: 800px;
 }
@@ -507,7 +551,7 @@ h2 {
   color: var(--text-primary);
 }
 
-/* ── Modal ── */
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -652,7 +696,7 @@ h2 {
   transform: translateY(0);
 }
 
-/* ── Botão Voltar ao Topo ── */
+/* Back to Top */
 .back-to-top {
   position: fixed;
   bottom: 30px;
@@ -693,7 +737,7 @@ h2 {
   transform: translateY(-1px);
 }
 
-/* ── Animação de scroll ── */
+/* Util */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
@@ -705,8 +749,6 @@ h2 {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ── Focus visible ── */
 .nav-link:focus-visible,
 .back-link:focus-visible,
 .btn:focus-visible,
@@ -717,4 +759,138 @@ h2 {
   outline: 2px solid var(--accent-light);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ── Responsivo (Mobile & Tablets) ── */
+@media (max-width: 860px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .about-image-wrapper {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 10px 16px;
+  }
+
+  /* Esconde o texto do botão "Portal", mantém apenas a seta */
+  .back-text {
+    display: none;
+  }
+
+  .back-link {
+    padding: 8px; /* Melhor área de clique */
+    margin-left: -8px;
+  }
+
+  .back-arrow-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-logo {
+    max-height: 34px;
+  }
+
+  /* Exibe o botão de hambúrguer */
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Menu responsivo off-canvas/dropdown */
+  .nav-links {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 18px 24px;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+    transform: translateY(-130%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.25s ease;
+    z-index: 99;
+  }
+  .nav-links.nav-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links li {
+    width: 100%;
+  }
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  }
+  .nav-link:hover,
+  .nav-link:focus {
+    background-color: #eff6ff;
+    color: var(--accent);
+  }
+  .nav-link-highlight {
+    color: var(--accent) !important;
+    font-weight: 700;
+  }
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    padding: 50px 18px;
+  } /* Ajuste de padding geral para mobile */
+  .hero-section {
+    padding: 45px 18px 30px;
+  }
+  .hero-content h1 {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    margin-bottom: 12px;
+  }
+  .hero-content p {
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+  }
+  .about-content-col h2 {
+    font-size: 1.7rem;
+  }
+  .services-section h2 {
+    font-size: 1.7rem;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .service-body {
+    padding: 20px;
+  }
+  .reference-points {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .modal-box {
+    padding: 26px 20px;
+  }
 }

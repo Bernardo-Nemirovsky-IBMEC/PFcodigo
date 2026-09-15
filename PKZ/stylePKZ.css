@@ -27,6 +27,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+html,
+body {
+  overflow-x: hidden; /* Evita scroll horizontal no mobile */
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -52,11 +58,12 @@ section {
   text-align: center;
 }
 
+/* ── Nova Estrutura Header com CSS Grid ── */
 .site-header {
   background-color: rgba(2, 11, 24, 0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 14px 24px;
+  padding: 12px 24px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -64,20 +71,40 @@ section {
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   max-width: 1080px;
   margin: 0 auto;
-  align-items: center;
-  position: relative;
+  width: 100%;
 }
 
+.nav-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ── Elementos do Header ── */
 .nav-links {
   display: flex;
   gap: 20px;
   list-style: none;
   align-items: center;
 }
+
 .nav-link,
 .back-link {
   color: var(--text-muted);
@@ -87,31 +114,32 @@ section {
   align-items: center;
   gap: 6px;
   transition: color 0.2s ease;
+  min-height: 44px; /* Touch target size */
 }
+
 .nav-link:hover,
 .back-link:hover {
   color: var(--text-primary);
 }
-.brand-logo {
-  font-size: 2.2rem;
-  font-weight: 900;
-  font-family: "Montserrat", sans-serif;
-  font-style: italic;
-  letter-spacing: 3px;
-  background: linear-gradient(135deg, #ffffff 40%, #93c5fd 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transform: skewX(-4deg);
+
+.brand-logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo {
+  max-height: 42px;
+  width: auto;
+  object-fit: contain;
   transition:
     transform 0.2s ease,
     opacity 0.2s ease;
-  user-select: none;
-  white-space: nowrap;
 }
-.brand-logo:hover {
-  transform: skewX(-4deg) scale(1.04);
+
+.brand-logo-link:hover .nav-logo {
+  transform: scale(1.03);
+  opacity: 0.9;
 }
 
 /* ── Botão Hambúrguer Mobile PKZ ── */
@@ -121,8 +149,8 @@ section {
   border: none;
   cursor: pointer;
   padding: 8px;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
   flex-direction: column;
   justify-content: center;
@@ -194,13 +222,16 @@ h3 {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px 24px;
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
   border: none;
   text-decoration: none;
+  min-height: 44px;
 }
 .btn-primary {
   background-color: var(--accent);
@@ -209,23 +240,8 @@ h3 {
 .btn-primary:hover {
   background-color: var(--accent-hover);
 }
-.btn-secondary {
-  background-color: transparent;
-  color: var(--accent-hover);
-  border: 2px solid var(--accent-hover);
-  margin-left: 12px;
-}
-.btn-secondary:hover {
-  background-color: var(--accent-hover);
-  color: #fff;
-}
 
-.hero-content .btn + .btn {
-  display: inline-block;
-  margin-top: 8px;
-}
-
-/* ── Seção Sobre a PKZ ── */
+/* ── Restante das Estilizações PKZ ── */
 .about-section {
   max-width: 1080px;
   padding: 85px 24px;
@@ -429,7 +445,7 @@ h3 {
   color: var(--text-primary);
 }
 
-/* ── Galeria de Esportes (Serviços) ── */
+/* Serviços */
 .services-section h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2.25rem;
@@ -438,7 +454,6 @@ h3 {
   color: var(--text-primary);
   margin-bottom: 20px;
 }
-
 .services-intro {
   max-width: 680px;
   margin: 0 auto 36px;
@@ -449,8 +464,6 @@ h3 {
 .services-intro strong {
   color: var(--text-primary);
 }
-
-/* ── Bloco de Apoio Multidisciplinar ── */
 .team-support-card {
   display: flex;
   align-items: center;
@@ -470,7 +483,6 @@ h3 {
   border-color: rgba(147, 197, 253, 0.4);
   transform: translateY(-3px);
 }
-
 .team-support-img {
   flex: 0 0 45%;
   max-width: 420px;
@@ -488,7 +500,6 @@ h3 {
 .team-support-card:hover .team-support-img img {
   transform: scale(1.03);
 }
-
 .team-support-content {
   flex: 1;
 }
@@ -518,31 +529,12 @@ h3 {
 .team-support-content strong {
   color: var(--text-primary);
 }
-
-@media (max-width: 768px) {
-  .team-support-card {
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-    text-align: left;
-  }
-  .team-support-img {
-    flex: 1 1 auto;
-    width: 100%;
-    max-width: 100%;
-  }
-  .brand-logo {
-    font-size: 1.8rem;
-  }
-}
-
 .sport-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 28px;
   margin-bottom: 40px;
 }
-
 .sport-card {
   border-radius: 10px;
   overflow: hidden;
@@ -556,7 +548,6 @@ h3 {
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0, 45, 107, 0.3);
 }
-
 .sport-img-wrapper {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -572,7 +563,6 @@ h3 {
 .sport-card:hover .sport-img-wrapper img {
   transform: scale(1.05);
 }
-
 .sport-caption {
   padding: 16px 18px;
   display: flex;
@@ -593,7 +583,6 @@ h3 {
   color: #93c5fd;
   font-weight: 600;
 }
-
 .services-footer {
   color: var(--text-muted);
   font-size: 1rem;
@@ -603,7 +592,7 @@ h3 {
   color: var(--text-primary);
 }
 
-/* ── Modal Pop-up de Contato ── */
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -624,12 +613,10 @@ h3 {
     opacity 0.3s ease,
     visibility 0.3s ease;
 }
-
 .modal-overlay.active {
   opacity: 1;
   visibility: visible;
 }
-
 .modal-box {
   background: var(--bg-surface);
   color: var(--text-primary);
@@ -645,11 +632,9 @@ h3 {
   transform: translateY(24px) scale(0.96);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .modal-overlay.active .modal-box {
   transform: translateY(0) scale(1);
 }
-
 .modal-close {
   position: absolute;
   top: 16px;
@@ -670,7 +655,6 @@ h3 {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
 }
-
 .modal-badge {
   display: inline-block;
   font-size: 0.75rem;
@@ -683,7 +667,6 @@ h3 {
   border-radius: 20px;
   margin-bottom: 10px;
 }
-
 .modal-header h2 {
   font-size: 1.85rem;
   font-weight: 800;
@@ -691,14 +674,12 @@ h3 {
   margin-bottom: 8px;
   letter-spacing: -0.5px;
 }
-
 .modal-header p {
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 24px;
 }
-
 .modal-label {
   display: block;
   font-size: 0.85rem;
@@ -706,7 +687,6 @@ h3 {
   color: #cbd5e1;
   margin-bottom: 8px;
 }
-
 .modal-input {
   width: 100%;
   padding: 13px 16px;
@@ -727,7 +707,6 @@ h3 {
   background-color: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.15);
 }
-
 .btn-modal {
   width: 100%;
   background-color: var(--accent);
@@ -750,7 +729,7 @@ h3 {
   transform: translateY(0);
 }
 
-/* ── Botão Voltar ao Topo ── */
+/* Back to Top */
 .back-to-top {
   position: fixed;
   bottom: 30px;
@@ -776,23 +755,21 @@ h3 {
     visibility 0.3s,
     background-color 0.2s;
 }
-
 .back-to-top.show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-
 .back-to-top:hover {
   background-color: var(--accent-hover);
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(0, 45, 107, 0.5);
 }
-
 .back-to-top:active {
   transform: translateY(-1px);
 }
 
+/* Util */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
@@ -804,8 +781,6 @@ h3 {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Focus visible */
 .nav-link:focus-visible,
 .back-link:focus-visible,
 .btn:focus-visible,
@@ -815,13 +790,12 @@ h3 {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-
 .btn:focus-visible,
 .back-to-top:focus-visible {
   outline-color: #93c5fd;
 }
 
-/* ── Responsivo PKZ ── */
+/* ── Responsivo (Mobile & Tablets) ── */
 @media (max-width: 860px) {
   .about-container {
     grid-template-columns: 1fr;
@@ -837,24 +811,37 @@ h3 {
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 12px 18px;
+    padding: 10px 16px;
   }
-  .navbar {
-    gap: 12px;
+
+  /* Esconde o texto do botão "Portal", mantém apenas a seta */
+  .back-text {
+    display: none;
   }
+
+  .back-link {
+    padding: 8px; /* Melhor área de clique */
+    margin-left: -8px;
+  }
+
+  .back-arrow-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-logo {
+    max-height: 34px;
+  }
+
+  /* Exibe o botão de hambúrguer */
   .menu-toggle {
     display: flex;
   }
-  .brand-logo {
-    font-size: 1.6rem;
-  }
-  .back-link {
-    font-size: 0.9rem;
-    padding: 6px 8px;
-  }
+
+  /* Menu responsivo off-canvas/dropdown */
   .nav-links {
     position: fixed;
-    top: 66px;
+    top: 64px;
     left: 0;
     right: 0;
     width: 100%;
@@ -907,8 +894,11 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  section {
+    padding: 50px 18px;
+  } /* Ajuste de padding geral para mobile */
   .hero-section {
-    padding: 55px 18px 40px;
+    padding: 45px 18px 30px;
   }
   .hero-content h1 {
     font-size: clamp(1.75rem, 7vw, 2.35rem);
@@ -917,16 +907,11 @@ h3 {
   .hero-content h2 {
     font-size: 0.95rem;
   }
-  .about-section {
-    padding: 50px 18px;
-  }
   .about-content-col h2 {
     font-size: 1.7rem;
   }
-  .services-section {
-    padding: 50px 18px;
-  }
-  .services-section h2 {
+  .services-section h2,
+  .location-section h2 {
     font-size: 1.75rem;
   }
   .services-intro {
@@ -940,12 +925,6 @@ h3 {
   .sport-grid {
     grid-template-columns: 1fr;
     gap: 18px;
-  }
-  .location-section {
-    padding: 50px 18px;
-  }
-  .location-section h2 {
-    font-size: 1.75rem;
   }
   .reference-points {
     grid-template-columns: 1fr;

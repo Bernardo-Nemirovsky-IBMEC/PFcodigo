@@ -10,56 +10,72 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap"
       rel="stylesheet"
     />
-    <!-- Link corrigido para o novo nome do arquivo CSS -->
     <link rel="stylesheet" href="./stylePKZ.css" />
   </head>
   <body>
     <header class="site-header">
       <nav class="navbar">
-        <a href="../index.html" class="back-link">
-          <svg
-            class="back-arrow-icon"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
+        <!-- Esquerda: Botão Voltar -->
+        <div class="nav-left">
+          <a
+            href="../index.html"
+            class="back-link"
+            aria-label="Voltar para o Portal"
           >
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
-          </svg>
-          Portal
-        </a>
-        <div class="brand-logo">Playmakerz</div>
-        <!-- Botão Menu Mobile Hambúrguer -->
-        <button
-          id="mobile-menu-btn"
-          class="menu-toggle"
-          aria-label="Abrir menu de navegação"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-        </button>
-        <ul id="primary-navigation" class="nav-links">
-          <li><a href="#sobre" class="nav-link">Sobre</a></li>
-          <li><a href="#services" class="nav-link">Serviços</a></li>
-          <li><a href="#location" class="nav-link">Localização</a></li>
-          <li>
-            <a
-              href="#contact"
-              id="open-contact-modal"
-              class="nav-link nav-link-highlight"
-              >Contato</a
+            <svg
+              class="back-arrow-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
             >
-          </li>
-        </ul>
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span class="back-text">Portal</span>
+          </a>
+        </div>
+
+        <!-- Centro: Logo da Marca -->
+        <div class="nav-center">
+          <a href="#" class="brand-logo-link" aria-label="Voltar ao início">
+            <img src="Fotos/logo-pkz.png" alt="Logo PKZ Lab" class="nav-logo" />
+          </a>
+        </div>
+
+        <!-- Direita: Menu Desktop & Hambúrguer Mobile -->
+        <div class="nav-right">
+          <ul id="primary-navigation" class="nav-links">
+            <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#services" class="nav-link">Serviços</a></li>
+            <li><a href="#location" class="nav-link">Localização</a></li>
+            <li>
+              <a
+                href="#contact"
+                id="open-contact-modal"
+                class="nav-link nav-link-highlight"
+                >Contato</a
+              >
+            </li>
+          </ul>
+          <!-- Botão Hambúrguer -->
+          <button
+            id="mobile-menu-btn"
+            class="menu-toggle"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+        </div>
       </nav>
     </header>
 
@@ -429,7 +445,6 @@
       </svg>
     </button>
 
-    <!-- Link corrigido para o novo nome do arquivo JS -->
     <script src="./scriptPKZ.js" defer></script>
   </body>
 </html>
