@@ -2,12 +2,15 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Visão da PKZ | Alto Rendimento</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,700;0,800;0,900;1,900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./stylePKZ.css" />
@@ -15,7 +18,6 @@
   <body>
     <header class="site-header">
       <nav class="navbar">
-        <!-- Esquerda: Botão Voltar -->
         <div class="nav-left">
           <a
             href="../index.html"
@@ -41,14 +43,13 @@
           </a>
         </div>
 
-        <!-- Centro: Logo da Marca -->
         <div class="nav-center">
           <a href="#" class="brand-logo-link" aria-label="Voltar ao início">
-            <img src="Fotos/logo-pkz.png" alt="Logo PKZ Lab" class="nav-logo" />
+            <span class="brand-text desktop-logo">PLAYMAKERZ</span>
+            <span class="brand-text mobile-logo">PKZ LAB</span>
           </a>
         </div>
 
-        <!-- Direita: Menu Desktop & Hambúrguer Mobile -->
         <div class="nav-right">
           <ul id="primary-navigation" class="nav-links">
             <li><a href="#sobre" class="nav-link">Sobre</a></li>
@@ -63,7 +64,6 @@
               >
             </li>
           </ul>
-          <!-- Botão Hambúrguer -->
           <button
             id="mobile-menu-btn"
             class="menu-toggle"
@@ -79,6 +79,8 @@
       </nav>
     </header>
 
+    <div id="mobile-menu-overlay" class="menu-overlay" aria-hidden="true"></div>
+
     <main id="main-content">
       <section id="home" class="hero-section animate-on-scroll">
         <div class="hero-content">
@@ -87,14 +89,13 @@
         </div>
       </section>
 
-      <!-- ── Seção: Sobre a PKZ ── -->
       <section id="sobre" class="about-section animate-on-scroll">
         <div class="about-container">
           <div class="about-image-col">
             <div class="about-image-wrapper">
               <img
                 src="Fotos/EquipePKZ.webp"
-                alt="Corpo técnico da PKZ: preparadores físicos, nutricionistas e fisiologistas"
+                alt="Corpo técnico da PKZ"
                 loading="lazy"
               />
             </div>
@@ -112,7 +113,7 @@
               <strong>metodologia científica</strong>,
               <strong>avaliação biomecânica de precisão</strong> e
               <strong>suporte nutricional contínuo</strong> para que cada atleta
-              evolua com máxima segurança, consistência e potência.
+              evolua com máxima segurança.
             </p>
             <div class="about-highlights">
               <div class="highlight-item">
@@ -136,7 +137,7 @@
                   <strong>Metodologia de Elite</strong>
                   <p>
                     Periodização estratégica inspirada em programas de
-                    treinamento olímpicos e profissionais.
+                    treinamento profissionais.
                   </p>
                 </div>
               </div>
@@ -163,7 +164,7 @@
                   <strong>Suporte Multidisciplinar Científico</strong>
                   <p>
                     Acompanhamento integrado de fisiologia, nutrição e análise
-                    de composição corporal.
+                    corporal.
                   </p>
                 </div>
               </div>
@@ -175,33 +176,23 @@
       <section id="services" class="services-section animate-on-scroll">
         <h2>Sem Limites de Esporte</h2>
         <p class="services-intro">
-          Na PKZ, acreditamos que cada pessoa tem um esporte que a move. Por
-          isso, não nos limitamos a uma modalidade — estamos prontos para
-          atender <strong>qualquer esporte que você praticar</strong>. Nosso
-          time de especialistas se adapta ao seu ritmo, ao seu esporte e ao seu
-          objetivo.
+          Na PKZ, acreditamos que cada pessoa tem um esporte que a move. Estamos
+          prontos para atender
+          <strong>qualquer esporte que você praticar</strong>.
         </p>
 
-        <!-- Bloco de Apoio Multidisciplinar e Científico -->
         <div class="team-support-card">
           <div class="team-support-img">
-            <img
-              src="Fotos/EquipePKZ.webp"
-              alt="Equipe PKZ de nutricionistas, preparadores físicos e fisiologistas"
-              loading="lazy"
-            />
+            <img src="Fotos/EquipePKZ.webp" alt="Equipe PKZ" loading="lazy" />
           </div>
           <div class="team-support-content">
             <span class="support-tag">Suporte Completo & Ciência</span>
             <h3>Corpo Técnico Especializado</h3>
             <p>
-              Para alcançar o seu ápice atlético com segurança, contamos com
-              <strong>nutricionistas dedicados</strong> ao seu rendimento e
-              realizamos
-              <strong>testes físicos aprovados academicamente</strong>. Cada
-              avaliação metabólica, biomecânica e composição corporal segue
-              rigorosos protocolos científicos para prescrever exatamente o que
-              o seu corpo precisa.
+              Contamos com <strong>nutricionistas dedicados</strong> ao seu
+              rendimento e realizamos
+              <strong>testes físicos aprovados academicamente</strong> seguindo
+              rigorosos protocolos.
             </p>
           </div>
         </div>
@@ -209,39 +200,25 @@
         <div class="sport-grid">
           <div class="sport-card">
             <div class="sport-img-wrapper">
-              <img
-                src="Fotos/karate.webp"
-                alt="Aula de Karatê com mestre e aluno em dojo"
-                loading="lazy"
-              />
+              <img src="Fotos/karate.webp" alt="Karate" loading="lazy" />
             </div>
             <div class="sport-caption">
               <h3 class="sport-label">Karateca?</h3>
               <span class="sport-sub">Nós ajudamos.</span>
             </div>
           </div>
-
           <div class="sport-card">
             <div class="sport-img-wrapper">
-              <img
-                src="Fotos/JiuJitsu.webp"
-                alt="Professor ensinando Jiu-Jitsu a criança no tatame"
-                loading="lazy"
-              />
+              <img src="Fotos/JiuJitsu.webp" alt="Jiu-Jitsu" loading="lazy" />
             </div>
             <div class="sport-caption">
               <h3 class="sport-label">Praticante de Jiu-Jitsu?</h3>
               <span class="sport-sub">Nós ajudamos.</span>
             </div>
           </div>
-
           <div class="sport-card">
             <div class="sport-img-wrapper">
-              <img
-                src="Fotos/volei.webp"
-                alt="Treinadora ensinando fundamentos do vôlei para criança"
-                loading="lazy"
-              />
+              <img src="Fotos/volei.webp" alt="Vôlei" loading="lazy" />
             </div>
             <div class="sport-caption">
               <h3 class="sport-label">Jogadora de Vôlei?</h3>
@@ -250,7 +227,7 @@
           </div>
         </div>
         <p class="services-footer">
-          E muito mais — futebol, natação, atletismo, dança, até hipismo...
+          E muito mais — futebol, natação, atletismo...
           <strong>Qual é o seu esporte?</strong>
         </p>
       </section>
@@ -280,115 +257,20 @@
             >Barra da Tijuca, Rio de Janeiro — RJ</span
           >
         </p>
-
-        <p
-          style="
-            margin-bottom: 28px;
-            color: var(--text-muted);
-            font-size: 1.05rem;
-          "
-        >
-          <span
-            style="
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              gap: 8px;
-            "
-          >
-            <svg
-              class="meta-icon"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--accent-hover)"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-            <strong>Horário de Funcionamento:</strong> De acordo com a sua
-            demanda, agendamentos flexíveis para atender atletas de todos os
-            níveis e horários.
-          </span>
-        </p>
-
         <div class="map-wrapper">
           <iframe
-            title="Localização PKZ na Av. Armando Lombardi, 949 loja G, Barra da Tijuca, Rio de Janeiro"
+            title="Localização PKZ"
             src="https://www.google.com/maps?q=Av.+Armando+Lombardi,+949,+Barra+da+Tijuca,+Rio+de+Janeiro&output=embed"
             width="100%"
             height="400"
             style="border: 0; border-radius: 8px"
             allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
-          </iframe>
-        </div>
-        <div class="reference-points">
-          <div class="reference-card">
-            <span class="ref-icon">
-              <svg
-                class="ref-svg-icon"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path
-                  d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
-                ></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-            </span>
-            <p>
-              <strong>Referência 1:</strong> Próximo ao Shopping Barra Garden, a
-              5 min a pé.
-            </p>
-          </div>
-          <div class="reference-card">
-            <span class="ref-icon">
-              <svg
-                class="ref-svg-icon"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="3" y="3" width="18" height="15" rx="3"></rect>
-                <path d="M3 9h18"></path>
-                <circle cx="7.5" cy="14.5" r="1.5"></circle>
-                <circle cx="16.5" cy="14.5" r="1.5"></circle>
-                <line x1="6" y1="18" x2="6" y2="21"></line>
-                <line x1="18" y1="18" x2="18" y2="21"></line>
-              </svg>
-            </span>
-            <p>
-              <strong>Referência 2:</strong> Em frente à estação de BRT Jardim
-              Oceânico, acesso fácil por transporte público.
-            </p>
-          </div>
+          ></iframe>
         </div>
       </section>
     </main>
 
-    <!-- Modal Pop-up de Contato -->
     <div
       id="contact"
       class="modal-overlay"
@@ -404,8 +286,8 @@
           <span class="modal-badge">Fale Conosco</span>
           <h2 id="modal-title">Pronto para o Desafio?</h2>
           <p>
-            Conecte-se diretamente com nossa equipe de especialistas pelo
-            WhatsApp e monte sua rotina de alta performance.
+            Conecte-se com nossa equipe pelo WhatsApp e monte sua rotina de alta
+            performance.
           </p>
         </div>
         <div class="modal-body">
@@ -424,11 +306,10 @@
       </div>
     </div>
 
-    <!-- Botão de Voltar ao Topo -->
     <button
       id="back-to-top"
       class="back-to-top"
-      aria-label="Voltar ao início do site"
+      aria-label="Voltar ao início"
       title="Voltar ao topo"
     >
       <svg
