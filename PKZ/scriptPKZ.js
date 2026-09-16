@@ -1,3 +1,22 @@
+function smoothScrollTo(targetY, duration = 1000) {
+  const startY = window.pageYOffset;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function step(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, startY + distance * easeInOutQuad(progress));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Configuração refinada do IntersectionObserver para renderização baseada na rolagem
   const observerOptions = {
@@ -116,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
       else backToTopBtn.classList.remove("show");
     });
     backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      smoothScrollTo(0, 1200);
     });
   }
 });
