@@ -1,3 +1,26 @@
+function getFocusable(container) {
+  return Array.from(
+    container.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((el) => el.offsetParent !== null);
+}
+
+function trapFocus(e, container) {
+  if (e.key !== "Tab") return;
+  const focusable = getFocusable(container);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
 function smoothScrollTo(targetY, duration = 1000) {
   const startY = window.pageYOffset;
   const distance = targetY - startY;
@@ -93,10 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModalBtn = document.getElementById("close-modal");
   const nameInput = document.getElementById("name");
   const wppBtn = document.getElementById("whatsapp-cta");
+  let lastFocusedBeforeModal = null;
 
   function openModal(e) {
     if (e) e.preventDefault();
     if (!modal) return;
+    lastFocusedBeforeModal = document.activeElement;
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("no-scroll");
@@ -110,14 +135,20 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("active");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("no-scroll");
+    if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
   }
 
   if (openModalBtn) openModalBtn.addEventListener("click", openModal);
   if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
-  if (modal)
+  if (modal) {
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
+    modal.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+      else trapFocus(e, modal);
+    });
+  }
 
   if (wppBtn) {
     wppBtn.addEventListener("click", () => {

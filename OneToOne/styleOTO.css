@@ -84,6 +84,7 @@ section {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: 16px;
 }
 .nav-center {
   flex: 1 1 auto;
@@ -130,7 +131,7 @@ section {
 
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 14px;
   list-style: none;
   align-items: center;
 }
@@ -151,6 +152,34 @@ section {
 .nav-link:hover,
 .back-link:hover {
   color: var(--accent-light);
+}
+
+.cross-brand-nav-link {
+  color: var(--text-placeholder);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.cross-brand-nav-link:hover {
+  color: var(--accent);
+}
+@media (max-width: 640px) {
+  .cross-brand-nav-link {
+    display: none;
+  }
+}
+
+.nav-link-highlight {
+  color: var(--accent);
+  background-color: var(--bg-surface);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.nav-link-highlight:hover {
+  color: #ffffff;
+  background-color: var(--accent);
 }
 
 .menu-toggle {
@@ -237,6 +266,12 @@ h3 {
   font-size: clamp(1.1rem, 2.6vw, 1.5rem);
   color: var(--text-muted);
   margin-bottom: 32px;
+}
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn {
@@ -416,6 +451,152 @@ h3 {
   color: var(--text-primary);
   font-size: 1rem;
   margin-bottom: 16px;
+}
+.btn-modal {
+  width: 100%;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 14px 20px;
+  font-weight: 700;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  font-family: "Just Sans", "Inter", sans-serif;
+  transition: background-color 0.2s;
+}
+.btn-modal:hover {
+  background-color: var(--accent-light);
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.modal-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background-color: var(--bg-surface);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.modal-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+textarea.modal-input {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+.booking-error {
+  color: #b91c1c;
+  font-size: 0.85rem;
+  margin: -8px 0 14px;
+}
+.booking-confirmation {
+  text-align: center;
+}
+.booking-confirmation p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Aula Experimental — Grade de Horários */
+.schedule-section {
+  max-width: 1100px;
+}
+.schedule-intro {
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+.schedule-grid-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 74px repeat(7, minmax(84px, 1fr));
+  grid-template-rows: auto repeat(16, 1fr);
+  min-width: 720px;
+}
+.schedule-row {
+  display: contents;
+}
+.schedule-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 6px;
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.schedule-header .schedule-cell {
+  font-weight: 700;
+  background: var(--bg-surface);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.schedule-time-label,
+.schedule-corner {
+  font-weight: 600;
+  background: var(--bg-surface);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+.schedule-corner {
+  z-index: 3;
+}
+.schedule-slot {
+  background: var(--bg-base);
+  cursor: pointer;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  transition: background-color 0.15s;
+}
+.schedule-slot:hover,
+.schedule-slot:focus-visible {
+  background-color: var(--accent-light);
+}
+
+/* Conheça Também (cross-brand) */
+.cross-brand-section {
+  max-width: 1080px;
+}
+.cross-brand-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: left;
+}
+.cross-brand-text h3 {
+  margin: 6px 0;
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+.cross-brand-text p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 /* Footer */
@@ -649,5 +830,18 @@ h3 {
   }
   .modal-box {
     padding: 26px 20px;
+  }
+  .schedule-cell {
+    padding: 8px 4px;
+    font-size: 0.78rem;
+    min-width: 62px;
+  }
+  .schedule-time-label {
+    min-width: 56px;
+  }
+  .cross-brand-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
   }
 }

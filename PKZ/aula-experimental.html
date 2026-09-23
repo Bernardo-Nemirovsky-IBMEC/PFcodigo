@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Aula Experimental | PKZ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,700;0,800;0,900;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./stylePKZ.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar">
+        <div class="nav-left">
+          <a
+            href="../index.html"
+            class="back-link"
+            aria-label="Voltar para o Portal"
+          >
+            <svg
+              class="back-arrow-icon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span class="back-text">Portal</span>
+          </a>
+          <a
+            href="../OneToOne/indexOTO.html"
+            class="cross-brand-nav-link"
+            >Studio One To One →</a
+          >
+        </div>
+
+        <div class="nav-center">
+          <a href="./indexPKZ.html" class="brand-logo-link" aria-label="Ir para a página inicial da PKZ">
+            <span class="brand-text desktop-logo">PLAYMAKERZ</span>
+            <span class="brand-text mobile-logo">PKZ LAB</span>
+          </a>
+        </div>
+
+        <div class="nav-right">
+          <ul id="primary-navigation" class="nav-links">
+            <li><a href="indexPKZ.html#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="indexPKZ.html#location" class="nav-link">Localização</a></li>
+            <li>
+              <a
+                href="#contact"
+                id="open-contact-modal"
+                class="nav-link nav-link-highlight"
+                >Contato</a
+              >
+            </li>
+          </ul>
+          <button
+            id="mobile-menu-btn"
+            class="menu-toggle"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div id="mobile-menu-overlay" class="menu-overlay" aria-hidden="true"></div>
+
+    <main id="main-content">
+      <section id="aula-hero" class="hero-section animate-on-scroll">
+        <div class="hero-content">
+          <h1>Aula Experimental</h1>
+          <h2>Escolha o melhor dia e horário para conhecer a PKZ de perto.</h2>
+        </div>
+      </section>
+
+      <section id="agenda" class="schedule-section animate-on-scroll">
+        <span class="section-tag">Marque sua Aula</span>
+        <h2>Escolha o Dia e o Horário</h2>
+        <p class="schedule-intro">
+          Toque em um horário disponível para preencher seus dados. Nossa
+          equipe confirma sua vaga em seguida.
+        </p>
+
+      <div class="schedule-grid-wrapper">
+        <div class="schedule-grid" role="table" aria-label="Grade de horários para aula experimental">
+          <div class="schedule-row schedule-header" role="row">
+            <div class="schedule-cell schedule-corner" role="columnheader"></div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Seg</div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Ter</div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Qua</div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Qui</div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Sex</div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Sáb</div>
+            <div class="schedule-cell schedule-day-label" role="columnheader">Dom</div>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">07:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="07:00" aria-label="Segunda-feira às 07:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="07:00" aria-label="Terça-feira às 07:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="07:00" aria-label="Quarta-feira às 07:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="07:00" aria-label="Quinta-feira às 07:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="07:00" aria-label="Sexta-feira às 07:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="07:00" aria-label="Sábado às 07:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="07:00" aria-label="Domingo às 07:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">08:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="08:00" aria-label="Segunda-feira às 08:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="08:00" aria-label="Terça-feira às 08:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="08:00" aria-label="Quarta-feira às 08:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="08:00" aria-label="Quinta-feira às 08:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="08:00" aria-label="Sexta-feira às 08:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="08:00" aria-label="Sábado às 08:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="08:00" aria-label="Domingo às 08:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">09:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="09:00" aria-label="Segunda-feira às 09:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="09:00" aria-label="Terça-feira às 09:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="09:00" aria-label="Quarta-feira às 09:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="09:00" aria-label="Quinta-feira às 09:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="09:00" aria-label="Sexta-feira às 09:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="09:00" aria-label="Sábado às 09:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="09:00" aria-label="Domingo às 09:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">10:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="10:00" aria-label="Segunda-feira às 10:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="10:00" aria-label="Terça-feira às 10:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="10:00" aria-label="Quarta-feira às 10:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="10:00" aria-label="Quinta-feira às 10:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="10:00" aria-label="Sexta-feira às 10:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="10:00" aria-label="Sábado às 10:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="10:00" aria-label="Domingo às 10:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">11:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="11:00" aria-label="Segunda-feira às 11:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="11:00" aria-label="Terça-feira às 11:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="11:00" aria-label="Quarta-feira às 11:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="11:00" aria-label="Quinta-feira às 11:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="11:00" aria-label="Sexta-feira às 11:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="11:00" aria-label="Sábado às 11:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="11:00" aria-label="Domingo às 11:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">12:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="12:00" aria-label="Segunda-feira às 12:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="12:00" aria-label="Terça-feira às 12:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="12:00" aria-label="Quarta-feira às 12:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="12:00" aria-label="Quinta-feira às 12:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="12:00" aria-label="Sexta-feira às 12:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="12:00" aria-label="Sábado às 12:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="12:00" aria-label="Domingo às 12:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">13:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="13:00" aria-label="Segunda-feira às 13:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="13:00" aria-label="Terça-feira às 13:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="13:00" aria-label="Quarta-feira às 13:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="13:00" aria-label="Quinta-feira às 13:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="13:00" aria-label="Sexta-feira às 13:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="13:00" aria-label="Sábado às 13:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="13:00" aria-label="Domingo às 13:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">14:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="14:00" aria-label="Segunda-feira às 14:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="14:00" aria-label="Terça-feira às 14:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="14:00" aria-label="Quarta-feira às 14:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="14:00" aria-label="Quinta-feira às 14:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="14:00" aria-label="Sexta-feira às 14:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="14:00" aria-label="Sábado às 14:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="14:00" aria-label="Domingo às 14:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">15:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="15:00" aria-label="Segunda-feira às 15:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="15:00" aria-label="Terça-feira às 15:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="15:00" aria-label="Quarta-feira às 15:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="15:00" aria-label="Quinta-feira às 15:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="15:00" aria-label="Sexta-feira às 15:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="15:00" aria-label="Sábado às 15:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="15:00" aria-label="Domingo às 15:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">16:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="16:00" aria-label="Segunda-feira às 16:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="16:00" aria-label="Terça-feira às 16:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="16:00" aria-label="Quarta-feira às 16:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="16:00" aria-label="Quinta-feira às 16:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="16:00" aria-label="Sexta-feira às 16:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="16:00" aria-label="Sábado às 16:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="16:00" aria-label="Domingo às 16:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">17:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="17:00" aria-label="Segunda-feira às 17:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="17:00" aria-label="Terça-feira às 17:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="17:00" aria-label="Quarta-feira às 17:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="17:00" aria-label="Quinta-feira às 17:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="17:00" aria-label="Sexta-feira às 17:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="17:00" aria-label="Sábado às 17:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="17:00" aria-label="Domingo às 17:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">18:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="18:00" aria-label="Segunda-feira às 18:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="18:00" aria-label="Terça-feira às 18:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="18:00" aria-label="Quarta-feira às 18:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="18:00" aria-label="Quinta-feira às 18:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="18:00" aria-label="Sexta-feira às 18:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="18:00" aria-label="Sábado às 18:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="18:00" aria-label="Domingo às 18:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">19:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="19:00" aria-label="Segunda-feira às 19:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="19:00" aria-label="Terça-feira às 19:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="19:00" aria-label="Quarta-feira às 19:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="19:00" aria-label="Quinta-feira às 19:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="19:00" aria-label="Sexta-feira às 19:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="19:00" aria-label="Sábado às 19:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="19:00" aria-label="Domingo às 19:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">20:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="20:00" aria-label="Segunda-feira às 20:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="20:00" aria-label="Terça-feira às 20:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="20:00" aria-label="Quarta-feira às 20:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="20:00" aria-label="Quinta-feira às 20:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="20:00" aria-label="Sexta-feira às 20:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="20:00" aria-label="Sábado às 20:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="20:00" aria-label="Domingo às 20:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">21:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="21:00" aria-label="Segunda-feira às 21:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="21:00" aria-label="Terça-feira às 21:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="21:00" aria-label="Quarta-feira às 21:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="21:00" aria-label="Quinta-feira às 21:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="21:00" aria-label="Sexta-feira às 21:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="21:00" aria-label="Sábado às 21:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="21:00" aria-label="Domingo às 21:00"></button>
+          </div>
+          <div class="schedule-row" role="row">
+            <div class="schedule-cell schedule-time-label" role="rowheader">22:00</div>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Segunda-feira" data-time="22:00" aria-label="Segunda-feira às 22:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Terça-feira" data-time="22:00" aria-label="Terça-feira às 22:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quarta-feira" data-time="22:00" aria-label="Quarta-feira às 22:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Quinta-feira" data-time="22:00" aria-label="Quinta-feira às 22:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sexta-feira" data-time="22:00" aria-label="Sexta-feira às 22:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Sábado" data-time="22:00" aria-label="Sábado às 22:00"></button>
+            <button type="button" class="schedule-cell schedule-slot" role="cell" data-day="Domingo" data-time="22:00" aria-label="Domingo às 22:00"></button>
+          </div>
+        </div>
+      </div>
+      </section>
+    </main>
+
+    <div
+      id="booking-modal"
+      class="modal-overlay"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="booking-modal-title"
+    >
+      <div class="modal-box">
+        <button
+          id="booking-close-modal"
+          class="modal-close"
+          aria-label="Fechar modal"
+        >
+          &times;
+        </button>
+        <div class="modal-header">
+          <span class="modal-badge" id="booking-slot-badge"
+            >Segunda-feira · 07:00</span
+          >
+          <h2 id="booking-modal-title">Confirme sua Aula Experimental</h2>
+          <p>Preencha seus dados e entraremos em contato para confirmar.</p>
+        </div>
+        <form id="booking-form" class="modal-body" novalidate>
+          <label for="booking-name" class="modal-label">Nome completo</label>
+          <input
+            type="text"
+            id="booking-name"
+            class="modal-input"
+            placeholder="Digite seu nome completo"
+            autocomplete="name"
+            required
+          />
+
+          <label for="booking-phone" class="modal-label"
+            >Telefone / WhatsApp</label
+          >
+          <input
+            type="tel"
+            id="booking-phone"
+            class="modal-input"
+            placeholder="(21) 90000-0000"
+            autocomplete="tel"
+            required
+          />
+
+          <label for="booking-cpf" class="modal-label">CPF</label>
+          <input
+            type="text"
+            id="booking-cpf"
+            class="modal-input"
+            placeholder="000.000.000-00"
+            inputmode="numeric"
+            maxlength="14"
+            required
+          />
+
+          <label for="booking-notes" class="modal-label"
+            >Dúvida ou observação (opcional)</label
+          >
+          <textarea
+            id="booking-notes"
+            class="modal-input"
+            rows="3"
+            placeholder="Alguma informação que queira compartilhar?"
+          ></textarea>
+
+          <p id="booking-error" class="booking-error" hidden></p>
+          <button type="submit" class="btn btn-modal">Confirmar Aula →</button>
+        </form>
+        <div id="booking-confirmation" class="booking-confirmation" hidden>
+          <p id="booking-confirmation-text"></p>
+          <button type="button" id="booking-done-btn" class="btn btn-modal">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="contact"
+      class="modal-overlay"
+      aria-hidden="true"
+      role="dialog"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-box">
+        <button id="close-modal" class="modal-close" aria-label="Fechar modal">
+          &times;
+        </button>
+        <div class="modal-header">
+          <span class="modal-badge">Fale Conosco</span>
+          <h2 id="modal-title">Pronto para o Desafio?</h2>
+          <p>
+            Conecte-se com nossa equipe pelo WhatsApp e monte sua rotina de alta
+            performance.
+          </p>
+        </div>
+        <div class="modal-body">
+          <label for="name" class="modal-label">Qual o seu nome?</label>
+          <input
+            type="text"
+            id="name"
+            class="modal-input"
+            placeholder="Digite seu nome completo"
+            autocomplete="name"
+          />
+          <button id="whatsapp-cta" class="btn btn-modal">
+            Enviar para WhatsApp →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer-page">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">PLAYMAKERZ</span>
+          <p>
+            Alto rendimento esportivo para todas as idades e todos os
+            esportes.
+          </p>
+        </div>
+
+        <div class="footer-contact">
+          <p>
+            Av. Armando Lombardi, 949 — Loja G<br />
+            Barra da Tijuca, Rio de Janeiro — RJ
+          </p>
+        </div>
+
+        <a
+          class="footer-social"
+          href="https://www.instagram.com/playmakerz_pkz/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram da PKZ (abre em nova aba)"
+        >
+          <span class="footer-social-icon">
+            <img
+              src="Fotos/instagram-icon.png"
+              alt=""
+              width="20"
+              height="20"
+              loading="lazy"
+            />
+          </span>
+          <span>@playmakerz_pkz</span>
+        </a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 PKZ. Todos os direitos reservados.</span>
+      </div>
+    </footer>
+
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      aria-label="Voltar ao início"
+      title="Voltar ao topo"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+
+    <script src="./scriptAula.js" defer></script>
+  </body>
+</html>
