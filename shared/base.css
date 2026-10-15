@@ -32,6 +32,7 @@
   --header-h: 5.25rem;
   /* curva "expo out" usada no painel do menu e na revelação ao rolar */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-menu: cubic-bezier(0.32, 0.72, 0, 1); /* curva de "folha" do iOS: arranca suave e assenta devagar */
 
   /* Escala tipográfica (rem: acompanha o html font-size fluido abaixo).
      Piso: nenhum texto visível < 14px (--fs-xs). Texto corrido >= --fs-base. */
@@ -260,8 +261,8 @@ h3 {
   background-color: var(--text-primary);
   border-radius: 2px;
   transition:
-    transform 0.3s var(--ease-hamburger),
-    opacity 0.2s ease;
+    transform 0.45s var(--ease-menu),
+    opacity 0.25s ease;
 }
 .menu-toggle.active .hamburger-bar:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
@@ -282,12 +283,15 @@ h3 {
   visibility: hidden;
   transition:
     opacity 0.3s ease,
-    visibility 0.3s ease;
+    visibility 0s linear 0.3s; /* fechar: some o fade e só depois esconde */
   z-index: 150;
 }
 .menu-overlay.active {
   opacity: 1;
   visibility: visible;
+  transition:
+    opacity 0.5s ease,
+    visibility 0s;
 }
 
 /* ============================================================
@@ -920,23 +924,53 @@ textarea.modal-input {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     box-shadow: var(--shadow-nav);
-    transform: translateY(-150%);
+    /* fechado: recolhido para cima. A sombra fica fora do recorte (insets negativos). */
+    transform: translateY(-1.25rem);
     opacity: 0;
+    clip-path: inset(0 -2rem 100% -2rem);
     pointer-events: none;
     visibility: hidden;
+    /* usada ao FECHAR: rápida */
     transition:
-      transform 0.4s var(--ease-out),
-      opacity 0.3s ease,
-      visibility 0s linear 0.4s;
+      transform 0.3s var(--ease-menu),
+      clip-path 0.3s var(--ease-menu),
+      opacity 0.2s ease,
+      visibility 0s linear 0.3s;
     z-index: 160;
   }
   .nav-links.nav-open {
     transform: translateY(0);
     opacity: 1;
+    clip-path: inset(0 -2rem -3rem -2rem);
     pointer-events: auto;
     visibility: visible;
-    transition-delay: 0s;
+    /* usada ao ABRIR: mais longa e suave */
+    transition:
+      transform 0.6s var(--ease-menu),
+      clip-path 0.6s var(--ease-menu),
+      opacity 0.35s ease,
+      visibility 0s;
   }
+  /* itens entram um a um (cascata); ao fechar somem juntos e rápido */
+  .nav-links li {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+  .nav-links.nav-open li {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.4s ease calc(0.12s + var(--i, 0) * 0.06s),
+      transform 0.5s var(--ease-menu) calc(0.12s + var(--i, 0) * 0.06s);
+  }
+  .nav-links li:nth-child(2) { --i: 1; }
+  .nav-links li:nth-child(3) { --i: 2; }
+  .nav-links li:nth-child(4) { --i: 3; }
+  .nav-links li:nth-child(5) { --i: 4; }
+  .nav-links li:nth-child(6) { --i: 5; }
   .nav-link {
     display: block;
     width: 100%;
@@ -1250,6 +1284,29 @@ select:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Menu: reduzir movimento != cortar a resposta visual. Só aparece/some com um fade curto. */
+  .nav-links,
+  .nav-links.nav-open {
+    transform: none !important;
+    clip-path: none !important;
+    transition-duration: 0.25s, 0.25s, 0.25s, 0s !important;
+  }
+  .nav-links {
+    transition-delay: 0s, 0s, 0s, 0.25s !important; /* fechar: só esconde depois do fade */
+  }
+  .nav-links.nav-open {
+    transition-delay: 0s !important;
+  }
+  .nav-links li,
+  .nav-links.nav-open li {
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+  }
+  .menu-overlay,
+  .menu-overlay.active {
+    transition-duration: 0.25s, 0s !important;
+  }
   html {
     scroll-behavior: auto;
   }
