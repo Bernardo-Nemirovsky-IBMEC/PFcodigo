@@ -68,7 +68,7 @@
   --heading-weight: 700;
   --heading-tracking: normal;
   --nav-weight: 600; /* links do menu */
-  --nav-size: 0.95rem;
+  --nav-size: 1rem;
   --nav-hover: var(--accent);
   --nav-hover-decoration: underline;
   --nav-transition:
@@ -126,7 +126,7 @@
 
 /* ---------- Botões: fonte, transição e elevação no hover ---------- */
 .btn {
-  font-size: 1rem;
+  font-size: var(--fs-base);
   font-family: "Plus Jakarta Sans", sans-serif;
   transition:
     background-color 0.2s,
@@ -185,8 +185,9 @@
 }
 .service-tag {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--pill-fg);
   background: var(--pill-bg);

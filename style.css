@@ -9,6 +9,25 @@
   --font-display: "Barlow Condensed", "Plus Jakarta Sans", sans-serif; /* rótulos e títulos PKZ */
   --font-display-oto: "Plus Jakarta Sans", "Inter", sans-serif; /* títulos One To One */
   --font-body: "Inter", sans-serif;
+
+  /* Escala tipográfica: piso de 14px, cresce com a largura (rem + vw). */
+  --fs-xs: clamp(0.875rem, 0.74rem + 0.3vw, 1.25rem); /* tags, dica do halter, rodapé fino */
+  --fs-sm: clamp(0.9375rem, 0.75rem + 0.35vw, 1.25rem); /* rodapé */
+  --fs-md: clamp(1rem, 0.72rem + 0.6vw, 1.625rem); /* texto corrido */
+  --fs-lg: clamp(1.0625rem, 0.6rem + 1.1vw, 2.2rem); /* subtítulo, intro h2 menor */
+  --fs-cta: clamp(0.875rem, 0.6rem + 0.6vw, 1.5rem); /* botões */
+  --fs-label: clamp(1rem, 0.55rem + 1.05vw, 2.4rem); /* rótulos da barra */
+  --fs-title: clamp(1.5rem, 0.5rem + 3.2vw, 5.5rem); /* título One To One */
+  --fs-h2: clamp(1.8rem, 1rem + 2.4vw, 4.5rem); /* título da apresentação */
+  --fs-hero: clamp(2.5rem, 1rem + 6.2vw, 9rem); /* título PKZ */
+
+  /* Altura da barra superior: mobile sem rótulos; desktop com rótulos + dica + trilho. */
+  --bar-h: 96px;
+}
+@media (min-width: 769px) {
+  :root {
+    --bar-h: calc(108px + 1.2vw);
+  }
 }
 
 * {
@@ -35,7 +54,7 @@ html {
 
 body {
   min-height: 100%;
-  padding-top: 96px;
+  padding-top: var(--bar-h);
   overflow-x: hidden;
 }
 
@@ -47,7 +66,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 96px;
+  height: var(--bar-h);
   background: var(--bg-base);
   z-index: 200;
   display: flex;
@@ -61,7 +80,7 @@ body {
 
 #drag-hint {
   position: absolute;
-  bottom: 56px;
+  bottom: 52px;
   left: 0;
   right: 0;
   display: flex;
@@ -91,8 +110,9 @@ body {
 #drag-hint span {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(10px, 2.2vw, 12px);
-  letter-spacing: 0.12em;
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -109,12 +129,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: calc(var(--fs-xs) * 1.3 + 4px); /* espaço da linha da dica do halter */
 }
 
 .bar-label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(14px, 3.5vw, 19px);
+  font-size: var(--fs-label);
+  line-height: 1.2;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
@@ -230,7 +252,7 @@ body {
 }
 
 .intro-inner {
-  max-width: 1100px;
+  max-width: clamp(1100px, 62vw, 1500px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -242,8 +264,8 @@ body {
   display: inline-block;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(11px, 2vw, 13px);
-  letter-spacing: 0.16em;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent-light);
   background: rgba(0, 187, 255, 0.12);
@@ -257,7 +279,7 @@ body {
   font-family: var(--font-display);
   font-weight: 900;
   font-style: italic;
-  font-size: clamp(1.8rem, 4.2vw, 2.8rem);
+  font-size: var(--fs-h2);
   line-height: 1.15;
   color: #ffffff;
   margin-bottom: 18px;
@@ -266,8 +288,8 @@ body {
 
 .intro-text p {
   font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.6vw, 1.02rem);
-  line-height: 1.7;
+  font-size: var(--fs-md);
+  line-height: 1.65;
   color: var(--text-muted);
   margin-bottom: 16px;
   max-width: 46ch;
@@ -325,8 +347,8 @@ body {
 #stage {
   position: relative;
   width: 100%;
-  height: calc(100vh - 96px);
-  height: calc(100svh - 96px);
+  height: calc(100vh - var(--bar-h));
+  height: calc(100svh - var(--bar-h));
   display: flex;
   overflow: hidden;
 }
@@ -411,7 +433,7 @@ body {
   padding: clamp(16px, 3vh, 44px) clamp(12px, 3vw, 36px);
   text-align: center;
   width: 100%;
-  max-width: 380px;
+  max-width: clamp(380px, 36vw, 720px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -421,13 +443,14 @@ body {
   display: inline-block;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(9px, 2vw, 11px);
-  letter-spacing: 0.18em;
+  font-size: var(--fs-xs);
+  line-height: 1.3;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: clamp(4px, 1vh, 6px) clamp(10px, 2vw, 18px);
+  padding: 0.4em 1em;
   border-radius: 6px;
   margin-bottom: clamp(10px, 2vh, 20px);
-  white-space: nowrap;
+  text-wrap: balance; /* no mobile quebra em 2 linhas em vez de cortar */
 }
 
 #pkz .tag {
@@ -456,7 +479,7 @@ body {
   font-family: "Barlow Condensed", sans-serif;
   font-weight: 900;
   font-style: italic;
-  font-size: clamp(2rem, 8vw, 5.5rem);
+  font-size: var(--fs-hero);
   line-height: 0.9;
   color: #ffffff;
   letter-spacing: -0.02em;
@@ -466,7 +489,7 @@ body {
 #oto h2 {
   font-family: var(--font-display-oto);
   font-weight: 800;
-  font-size: clamp(1.5rem, 5vw, 3rem);
+  font-size: var(--fs-title);
   line-height: 1;
   color: var(--accent);
   letter-spacing: -0.01em;
@@ -477,19 +500,19 @@ body {
 #oto .sub {
   font-family: var(--font-display-oto);
   font-weight: 700;
-  font-size: clamp(0.9rem, 3vw, 1.4rem);
+  font-size: var(--fs-lg);
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 1px;
-  white-space: nowrap;
+  text-wrap: balance; /* mobile: PERSONAL / TRAINING em 2 linhas */
 }
 
 #pkz p,
 #oto p {
   font-family: var(--font-body);
-  font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+  font-size: var(--fs-md);
   line-height: 1.5;
-  max-width: 260px;
+  max-width: 22em;
   width: 100%;
   margin: 0 auto clamp(14px, 2vh, 24px);
 }
@@ -508,12 +531,12 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(10px, 1.8vh, 14px) clamp(22px, 3vw, 32px);
+  padding: 0.75em 1.4em;
   border-radius: 9999px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.85rem, 2.2vw, 1.05rem);
-  letter-spacing: 0.1em;
+  font-size: var(--fs-cta);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -648,7 +671,7 @@ body {
 }
 #redir small {
   font-family: var(--font-body);
-  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  font-size: var(--fs-sm);
   opacity: 0.7;
   color: inherit;
 }
@@ -721,7 +744,7 @@ body {
 
 .footer-brand p {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   line-height: 1.6;
   color: var(--text-muted);
 }
@@ -765,14 +788,14 @@ body {
 .social-text strong {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: #ffffff;
   letter-spacing: 0.02em;
 }
 
 .social-text small {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--text-subtle);
 }
 
@@ -806,7 +829,7 @@ body {
 
 .footer-bottom span {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   color: var(--text-subtle);
 }
 

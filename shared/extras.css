@@ -173,7 +173,7 @@ section.faq {
 .footer-legal {
   color: var(--text-muted);
   text-decoration: underline;
-  font-size: 0.78rem;
+  font-size: var(--fs-sm);
   display: inline-flex;
   align-items: center;
   min-height: 44px;

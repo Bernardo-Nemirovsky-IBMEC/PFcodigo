@@ -26,13 +26,28 @@
    ============================================================ */
 :root {
   /* altura do header sticky: compensa as âncoras (scroll-padding-top) */
-  --header-h: 72px;
+  --header-h: 5.25rem;
   /* curva "expo out" usada no painel do menu e na revelação ao rolar */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Escala tipográfica (rem: acompanha o html font-size fluido abaixo).
+     Piso: nenhum texto visível < 14px (--fs-xs). Texto corrido >= --fs-base. */
+  --fs-xs: 0.875rem; /* etiquetas em caixa-alta, selos (14px) */
+  --fs-sm: 0.9375rem; /* rótulos de formulário, rodapé legal, notas (15px) */
+  --fs-base: 1rem; /* texto corrido e de apoio (16px) */
+  --fs-lg: 1.125rem; /* parágrafo de abertura, menu mobile */
+  --fs-xl: 1.3rem; /* títulos de card */
+  --fs-h2: clamp(1.8rem, 3.5vw, 2.3rem);
+  --fs-hero: clamp(2.4rem, 8vw, 5.2rem);
+}
+/* Base fluida: 16px até ~1200px, 17px em 1440, 19px em 1920 (teto 20px).
+   Em rem para respeitar a preferência de fonte do usuário. */
+html {
+  font-size: clamp(1rem, 0.6875rem + 0.4167vw, 1.25rem);
 }
 @media (max-width: 768px) {
   :root {
-    --header-h: 64px;
+    --header-h: 4rem;
   }
 }
 
@@ -56,6 +71,7 @@ body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   font-family: var(--font-body);
+  font-size: var(--fs-base);
   line-height: 1.6;
   width: 100%;
   position: relative;
@@ -174,7 +190,7 @@ h3 {
   align-items: center;
   min-height: 44px;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   white-space: nowrap;
   transition: color 0.2s ease;
@@ -336,9 +352,10 @@ h3 {
 }
 .section-tag {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--pill-fg);
   background: var(--pill-bg);
   border: var(--pill-border);
@@ -348,20 +365,20 @@ h3 {
   align-self: flex-start;
 }
 .about-content-col h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  font-size: var(--fs-h2);
   color: var(--text-primary);
   margin-bottom: 16px;
   line-height: 1.25;
 }
 .about-lead {
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   color: var(--text-lead);
   line-height: 1.7;
   margin-bottom: 12px;
 }
 .about-content-col p {
   color: var(--text-muted);
-  font-size: 0.98rem;
+  font-size: var(--fs-base);
   margin-bottom: 24px;
 }
 .about-highlights {
@@ -391,12 +408,12 @@ h3 {
 }
 .highlight-item strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   margin-bottom: 3px;
 }
 .highlight-item p {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: var(--fs-base);
   color: var(--text-muted);
 }
 
@@ -478,7 +495,7 @@ h3 {
   right: 18px;
   background: transparent;
   border: none;
-  font-size: 28px;
+  font-size: 1.75rem;
   color: var(--text-subtle);
   cursor: pointer;
   padding: 4px 8px;
@@ -492,7 +509,7 @@ h3 {
   border-radius: 8px;
   background-color: var(--bg-input);
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: var(--fs-base);
   margin-bottom: 16px;
 }
 .modal-input[aria-invalid="true"] {
@@ -515,7 +532,7 @@ h3 {
 }
 .modal-badge {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -528,7 +545,7 @@ h3 {
 }
 .modal-label {
   display: block;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 6px;
@@ -542,7 +559,7 @@ textarea.modal-input {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--text-muted);
   margin: 4px 0 12px;
   cursor: pointer;
@@ -557,7 +574,7 @@ textarea.modal-input {
 }
 .booking-error {
   color: var(--danger);
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   margin: -8px 0 14px;
 }
 .booking-confirmation {
@@ -615,7 +632,7 @@ textarea.modal-input {
   font-weight: 700;
 }
 .time-heading {
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 14px;
@@ -690,12 +707,12 @@ textarea.modal-input {
 }
 .cross-brand-text h3 {
   margin: 6px 0;
-  font-size: 1.3rem;
+  font-size: var(--fs-xl);
 }
 .cross-brand-text p {
   color: var(--text-muted);
   margin: 0;
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
 }
 
 /* ============================================================
@@ -720,7 +737,7 @@ textarea.modal-input {
 }
 .footer-brand p,
 .footer-contact p {
-  font-size: 0.88rem;
+  font-size: var(--fs-base);
   color: var(--text-muted);
   line-height: 1.6;
 }
@@ -734,7 +751,7 @@ textarea.modal-input {
   text-decoration: none;
   color: var(--social-fg);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
   transition:
     transform 0.25s ease,
     border-color 0.25s ease;
@@ -761,8 +778,12 @@ textarea.modal-input {
   text-align: center;
 }
 .footer-bottom span {
-  font-size: 0.78rem;
+  font-size: var(--fs-sm);
   color: var(--text-footnote);
+}
+/* link de privacidade com style="font-size:0.78rem" inline nas páginas de aula */
+.footer-bottom a[style] {
+  font-size: var(--fs-sm) !important;
 }
 @media (max-width: 640px) {
   .footer-inner {
@@ -894,7 +915,7 @@ textarea.modal-input {
     display: block;
     width: 100%;
     padding: 16px;
-    font-size: 1.1rem;
+    font-size: var(--fs-lg);
     border-radius: 8px;
   }
 }

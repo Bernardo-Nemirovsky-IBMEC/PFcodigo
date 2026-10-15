@@ -57,7 +57,7 @@
   min-height: 48px;
   padding: 12px 20px;
   border: 2px solid transparent;
-  font-size: 1rem;
+  font-size: var(--fs-base);
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
@@ -126,7 +126,7 @@ section.cta-band {
 }
 .cta-band-sub {
   max-width: 46ch;
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   color: var(--cta-band-sub);
 }
 .cta-band-actions {

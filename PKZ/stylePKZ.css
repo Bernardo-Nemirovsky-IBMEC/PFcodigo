@@ -106,7 +106,7 @@
 
 /* ---------- Hero ---------- */
 .hero-content h1 {
-  font-size: clamp(2.4rem, 8vw, 6rem);
+  font-size: var(--fs-hero);
   font-weight: 900;
   font-style: italic;
   line-height: 1.1;
@@ -160,7 +160,8 @@
 }
 .support-tag {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--pill-fg);
@@ -179,7 +180,7 @@
   max-width: 640px;
   margin: 0 auto 40px;
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: var(--fs-base);
   line-height: 1.7;
 }
 .trust-grid {
@@ -207,12 +208,12 @@
   margin-bottom: 16px;
 }
 .trust-card h3 {
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   margin-bottom: 8px;
   color: var(--text-primary);
 }
 .trust-card p {
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
   color: var(--text-muted);
   margin: 0;
   line-height: 1.6;
@@ -246,12 +247,12 @@
   text-align: left;
 }
 .sport-label {
-  font-size: 1.05rem;
+  font-size: var(--fs-lg);
   margin-bottom: 4px;
 }
 .sport-sub {
   display: block;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
