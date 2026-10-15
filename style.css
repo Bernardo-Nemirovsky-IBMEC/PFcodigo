@@ -1,3 +1,16 @@
+/* Landing PKZ Lab + Studio One To One: tokens (valores iguais aos das páginas de marca). */
+:root {
+  --bg-base: #020b18; /* fundo escuro (PKZ) */
+  --bg-deep: #012133; /* azul profundo: trilho do slider, fim do degradê da apresentação */
+  --accent: #014c6f; /* azul petróleo (One To One) */
+  --accent-light: #00bbff; /* ciano (One To One): destaques, foco, hover */
+  --text-muted: #cbd5e1; /* texto de apoio sobre fundo escuro */
+  --text-subtle: #94a3b8; /* texto terciário */
+  --font-display: "Barlow Condensed", "Plus Jakarta Sans", sans-serif; /* rótulos e títulos PKZ */
+  --font-display-oto: "Plus Jakarta Sans", "Inter", sans-serif; /* títulos One To One */
+  --font-body: "Inter", sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +19,18 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 body {
@@ -23,14 +48,14 @@ body {
   left: 0;
   right: 0;
   height: 96px;
-  background: #020b18;
+  background: var(--bg-base);
   z-index: 200;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 clamp(16px, 4vw, 52px) 12px;
   gap: 8px;
-  border-bottom: 1px solid #014c6f;
+  border-bottom: 1px solid var(--accent);
   user-select: none;
 }
 
@@ -64,7 +89,7 @@ body {
 }
 
 #drag-hint span {
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(10px, 2.2vw, 12px);
   letter-spacing: 0.12em;
@@ -72,11 +97,11 @@ body {
 }
 
 #drag-hint .hint-pkz {
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
 #drag-hint .hint-oto {
-  color: #00bbff;
+  color: var(--accent-light);
 }
 
 /* Nomes das Empresas (Desktop) */
@@ -87,17 +112,18 @@ body {
 }
 
 .bar-label {
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(14px, 3.5vw, 19px);
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  text-decoration: none;
 }
 .bar-label.pkz {
   color: #ffffff;
 }
 .bar-label.oto {
-  color: #00bbff;
+  color: var(--accent-light);
 }
 
 @media (max-width: 768px) {
@@ -106,9 +132,8 @@ body {
   }
 }
 
-.bar-label:focus-visible,
-#drag-hint span:focus-visible {
-  outline: 2px solid #00bbff;
+.bar-label:focus-visible {
+  outline: 2px solid var(--accent-light);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -123,7 +148,7 @@ body {
 #track {
   width: 100%;
   height: 5px;
-  background: #012133;
+  background: var(--bg-deep);
   border-radius: 3px;
   position: relative;
 }
@@ -134,7 +159,7 @@ body {
   top: 0;
   bottom: 0;
   width: 50%;
-  background: #014c6f;
+  background: var(--accent);
   border-radius: 3px;
   opacity: 0.85;
   pointer-events: none;
@@ -145,13 +170,14 @@ body {
   top: 0;
   bottom: 0;
   width: 50%;
-  background: #00bbff;
+  background: var(--accent-light);
   border-radius: 3px;
   opacity: 0.85;
   pointer-events: none;
 }
 
 #handle {
+  padding: 4px 0;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -162,6 +188,26 @@ body {
 }
 #handle:active {
   cursor: grabbing;
+}
+/* empurrão de descoberta: some no primeiro uso (.used) e com reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  #handle:not(.used) {
+    animation: nudge 1.4s ease-in-out 0.6s 1;
+  }
+}
+@keyframes nudge {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  15%,
+  55% {
+    translate: -10px 0;
+  }
+  35%,
+  75% {
+    translate: 10px 0;
+  }
 }
 #handle svg {
   width: clamp(56px, 15vw, 76px);
@@ -179,7 +225,7 @@ body {
   APRESENTAÇÃO (Texto + Imagem)
 ═══════════════════════════════════════ */
 #intro {
-  background: linear-gradient(160deg, #020b18 0%, #051a30 55%, #012133 100%);
+  background: linear-gradient(160deg, var(--bg-base) 0%, #051a30 55%, var(--bg-deep) 100%);
   padding: clamp(56px, 9vh, 96px) clamp(20px, 5vw, 48px);
 }
 
@@ -194,12 +240,12 @@ body {
 
 .intro-tag {
   display: inline-block;
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(11px, 2vw, 13px);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #00bbff;
+  color: var(--accent-light);
   background: rgba(0, 187, 255, 0.12);
   border: 1px solid rgba(0, 187, 255, 0.35);
   padding: 6px 14px;
@@ -208,7 +254,7 @@ body {
 }
 
 .intro-text h2 {
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
   font-style: italic;
   font-size: clamp(1.8rem, 4.2vw, 2.8rem);
@@ -219,10 +265,10 @@ body {
 }
 
 .intro-text p {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.9rem, 1.6vw, 1.02rem);
   line-height: 1.7;
-  color: #cbd5e1;
+  color: var(--text-muted);
   margin-bottom: 16px;
   max-width: 46ch;
 }
@@ -236,6 +282,7 @@ body {
 .intro-photo {
   position: absolute;
   object-fit: cover;
+  height: auto; /* o atributo height da img não deve esticar a foto */
   border-radius: 16px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
@@ -254,7 +301,7 @@ body {
   aspect-ratio: 4 / 3;
   bottom: 0;
   right: 0;
-  border: 4px solid #020b18;
+  border: 4px solid var(--bg-base);
   z-index: 2;
 }
 
@@ -278,17 +325,23 @@ body {
 #stage {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 96px);
+  height: calc(100svh - 96px);
   display: flex;
   overflow: hidden;
 }
 
 #pkz {
   width: 50%;
-  background-color: #020b18;
+  background-color: var(--bg-base);
   background-image:
-    linear-gradient(to bottom, rgba(2, 11, 24, 0.88), rgba(2, 11, 24, 0.82)),
-    url("Fotos/LandingPKZ.webp");
+    radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      rgba(2, 11, 24, 0.55),
+      rgba(2, 11, 24, 0) 100%
+    ),
+    linear-gradient(rgba(2, 11, 24, 0.62), rgba(2, 11, 24, 0.62)),
+    url("Fotos/LandingPKZ-1280.webp");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -300,20 +353,45 @@ body {
 
 #oto {
   flex: 1;
-  background-color: #00bbff;
+  background-color: var(--accent-light);
   background-image:
-    linear-gradient(
-      to bottom,
-      rgba(179, 236, 255, 0.88),
-      rgba(255, 255, 255, 0.85)
+    radial-gradient(
+      ellipse 70% 60% at 50% 50%,
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0) 100%
     ),
-    url("Fotos/LandingOneToOne.webp");
+    linear-gradient(rgba(214, 245, 255, 0.66), rgba(255, 255, 255, 0.64)),
+    url("Fotos/LandingOneToOne-1280.webp");
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+/* Fundos menores no mobile (mesmos gradientes, variante -800) */
+@media (max-width: 768px) {
+  #pkz {
+    background-image:
+      radial-gradient(
+        ellipse 70% 60% at 50% 50%,
+        rgba(2, 11, 24, 0.55),
+        rgba(2, 11, 24, 0) 100%
+      ),
+      linear-gradient(rgba(2, 11, 24, 0.62), rgba(2, 11, 24, 0.62)),
+      url("Fotos/LandingPKZ-800.webp");
+  }
+  #oto {
+    background-image:
+      radial-gradient(
+        ellipse 70% 60% at 50% 50%,
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0) 100%
+      ),
+      linear-gradient(rgba(214, 245, 255, 0.66), rgba(255, 255, 255, 0.64)),
+      url("Fotos/LandingOneToOne-800.webp");
+  }
 }
 
 #div-line {
@@ -341,7 +419,7 @@ body {
 
 .tag {
   display: inline-block;
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(9px, 2vw, 11px);
   letter-spacing: 0.18em;
@@ -374,7 +452,7 @@ body {
   width: 100%;
 }
 
-#pkz h1 {
+#pkz h2 {
   font-family: "Barlow Condensed", sans-serif;
   font-weight: 900;
   font-style: italic;
@@ -385,22 +463,22 @@ body {
   word-break: break-word;
 }
 
-#oto h1 {
-  font-family: "Just Sans", "Inter", sans-serif;
+#oto h2 {
+  font-family: var(--font-display-oto);
   font-weight: 800;
   font-size: clamp(1.5rem, 5vw, 3rem);
   line-height: 1;
-  color: #014c6f;
+  color: var(--accent);
   letter-spacing: -0.01em;
   margin-bottom: 2px;
   word-break: break-word;
 }
 
 #oto .sub {
-  font-family: "Just Sans", "Inter", sans-serif;
+  font-family: var(--font-display-oto);
   font-weight: 700;
   font-size: clamp(0.9rem, 3vw, 1.4rem);
-  color: #00bbff;
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 1px;
   white-space: nowrap;
@@ -408,20 +486,19 @@ body {
 
 #pkz p,
 #oto p {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.75rem, 2.2vw, 0.9rem);
   line-height: 1.5;
   max-width: 260px;
   width: 100%;
   margin: 0 auto clamp(14px, 2vh, 24px);
-  height: auto;
 }
 
 #pkz p {
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 #oto p {
-  color: #014c6f;
+  color: var(--accent);
 }
 
 /* ═══════════════════════════════════════
@@ -433,14 +510,13 @@ body {
   justify-content: center;
   padding: clamp(10px, 1.8vh, 14px) clamp(22px, 3vw, 32px);
   border-radius: 9999px;
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(0.85rem, 2.2vw, 1.05rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  margin-bottom: 0;
   white-space: nowrap;
   outline: none;
   transition:
@@ -453,7 +529,7 @@ body {
 
 .pkz-btn {
   background-color: #ffffff;
-  color: #020b18;
+  color: var(--bg-base);
   border: 2px solid #ffffff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
@@ -471,15 +547,15 @@ body {
 }
 
 .oto-btn {
-  background-color: #014c6f;
+  background-color: var(--accent);
   color: #ffffff;
-  border: 2px solid #014c6f;
+  border: 2px solid var(--accent);
   box-shadow: 0 4px 16px rgba(1, 76, 111, 0.25);
 }
 
 .oto-btn:hover {
-  background-color: #00bbff;
-  border-color: #00bbff;
+  background-color: var(--accent-light);
+  border-color: var(--accent-light);
   color: #000000;
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 6px 22px rgba(0, 187, 255, 0.35);
@@ -518,7 +594,7 @@ body {
 
 .arrow-hint.l {
   left: clamp(12px, 2vw, 24px);
-  background-color: #020b18;
+  background-color: var(--bg-base);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -542,12 +618,6 @@ body {
   }
 }
 
-.arrow-hint:focus-visible {
-  outline: 3px solid #00bbff;
-  outline-offset: 2px;
-  opacity: 1;
-}
-
 #redir {
   position: fixed;
   inset: 0;
@@ -560,12 +630,15 @@ body {
   pointer-events: none;
   transition: opacity 0.45s;
 }
+#redir[hidden] {
+  display: none;
+}
 #redir.on {
   opacity: 1;
   pointer-events: all;
 }
 #redir h2 {
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
   font-style: italic;
   font-size: clamp(2.5rem, 10vw, 4.5rem);
@@ -574,24 +647,46 @@ body {
   text-align: center;
 }
 #redir small {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.75rem, 2vw, 0.85rem);
   opacity: 0.7;
   color: inherit;
 }
 
+#redir-cancel {
+  margin-top: 28px;
+  padding: 10px 28px;
+  border: 2px solid currentColor;
+  border-radius: 9999px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+#redir-cancel:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
 #handle:focus-visible,
+#redir-cancel:focus-visible,
 .cta-button:focus-visible {
-  outline: 3px solid #00bbff;
+  outline: 3px solid var(--accent-light);
   outline-offset: 3px;
+}
+#redir-cancel:focus-visible {
+  outline-color: #ffffff;
 }
 
 /* ═══════════════════════════════════════
   FOOTER
 ═══════════════════════════════════════ */
 #site-footer {
-  background: #020b18;
-  border-top: 1px solid #014c6f;
+  background: var(--bg-base);
+  border-top: 1px solid var(--accent);
   padding: clamp(40px, 6vh, 64px) clamp(20px, 5vw, 48px) 24px;
 }
 
@@ -611,7 +706,7 @@ body {
 
 .footer-logo {
   display: block;
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 900;
   font-style: italic;
   font-size: clamp(1.2rem, 2.6vw, 1.6rem);
@@ -621,14 +716,14 @@ body {
 }
 
 .footer-amp {
-  color: #00bbff;
+  color: var(--accent-light);
 }
 
 .footer-brand p {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   line-height: 1.6;
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
 .footer-social {
@@ -668,7 +763,7 @@ body {
 }
 
 .social-text strong {
-  font-family: "Barlow Condensed", "Just Sans", sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9rem;
   color: #ffffff;
@@ -676,9 +771,9 @@ body {
 }
 
 .social-text small {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .social-pkz .social-icon {
@@ -692,7 +787,7 @@ body {
 }
 
 .social-oto .social-icon {
-  color: #00bbff;
+  color: var(--accent-light);
   background: rgba(0, 187, 255, 0.12);
 }
 .social-oto:hover {
@@ -710,7 +805,21 @@ body {
 }
 
 .footer-bottom span {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--text-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .arrow-hint.on {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,44 +1,5 @@
-function getFocusable(container) {
-  return Array.from(
-    container.querySelectorAll(
-      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
-    ),
-  ).filter((el) => el.offsetParent !== null);
-}
-
-function trapFocus(e, container) {
-  if (e.key !== "Tab") return;
-  const focusable = getFocusable(container);
-  if (!focusable.length) return;
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
-    first.focus();
-  }
-}
-
-function smoothScrollTo(targetY, duration = 1000) {
-  const startY = window.pageYOffset;
-  const distance = targetY - startY;
-  const startTime = performance.now();
-
-  function easeInOutQuad(t) {
-    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  }
-
-  function step(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, startY + distance * easeInOutQuad(progress));
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
+// Dados da marca vêm de ../shared/data.js (fonte única); cada <html> define data-brand.
+const BRAND = window.SITE_DATA.brands[document.documentElement.dataset.brand];
 
 document.addEventListener("DOMContentLoaded", () => {
   // Configuração refinada do IntersectionObserver para renderização baseada na rolagem
@@ -52,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        // Opcional: observerInstance.unobserve(entry.target); se desejar animar apenas uma vez
+        observerInstance.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -92,23 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   navLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      closeMobileMenu();
-      const targetId = link.getAttribute("href");
-      if (link.id === "open-contact-modal" || targetId === "#") return;
-
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        e.preventDefault();
-        const headerHeight =
-          document.querySelector(".site-header")?.offsetHeight || 60;
-        const targetPosition =
-          targetSection.getBoundingClientRect().top +
-          window.pageYOffset -
-          headerHeight;
-        window.scrollTo({ top: targetPosition, behavior: "smooth" });
-      }
-    });
+    link.addEventListener("click", () => closeMobileMenu());
   });
 
   const modal = document.getElementById("contact");
@@ -116,46 +61,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModalBtn = document.getElementById("close-modal");
   const nameInput = document.getElementById("name");
   const wppBtn = document.getElementById("whatsapp-cta");
-  let lastFocusedBeforeModal = null;
 
+  // <dialog> nativo: ESC, trava de foco e retorno do foco ao gatilho são do navegador.
   function openModal(e) {
     if (e) e.preventDefault();
     if (!modal) return;
-    lastFocusedBeforeModal = document.activeElement;
-    modal.classList.add("active");
-    modal.setAttribute("aria-hidden", "false");
+    if (typeof modal.showModal === "function") modal.showModal();
+    else modal.setAttribute("open", "");
     document.body.classList.add("no-scroll");
-    setTimeout(() => {
-      if (nameInput) nameInput.focus();
-    }, 150);
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("no-scroll");
-    if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
   }
 
   if (openModalBtn) openModalBtn.addEventListener("click", openModal);
-  if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
   if (modal) {
+    const closeModal = () => {
+      if (typeof modal.close === "function") return modal.close();
+      modal.removeAttribute("open"); // fallback sem <dialog>: dispara o "close" na mão
+      modal.dispatchEvent(new Event("close"));
+    };
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
     });
-    modal.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeModal();
-      else trapFocus(e, modal);
+    modal.addEventListener("close", () => {
+      document.body.classList.remove("no-scroll");
+      openModalBtn?.focus(); // Safari não foca <button> ao clicar; garante o retorno ao gatilho
     });
   }
 
   if (wppBtn) {
     wppBtn.addEventListener("click", () => {
-      const userName = nameInput?.value?.trim() || "Atleta";
-      const message = `Fala equipe PKZ! Meu nome é ${userName} e gostaria de saber mais sobre as modalidades.`;
-      const url = `https://wa.me/5521000000000?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank");
+      const userName = nameInput?.value?.trim() || BRAND.contactFallbackName;
+      const url = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(BRAND.contactMessage(userName))}`;
+      window.open(url, "_blank", "noopener,noreferrer");
     });
   }
 
@@ -164,9 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) backToTopBtn.classList.add("show");
       else backToTopBtn.classList.remove("show");
-    });
+    }, { passive: true });
     backToTopBtn.addEventListener("click", () => {
-      smoothScrollTo(0, 1200);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
     });
   }
 });

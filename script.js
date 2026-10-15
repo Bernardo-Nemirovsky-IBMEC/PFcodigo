@@ -1,9 +1,12 @@
 const PKZ_URL = "PKZ/indexPKZ.html";
 const OTO_URL = "OneToOne/indexOTO.html";
+const EDGE = 10; // soltar com p <= 10 (PKZ) ou p >= 90 (One To One) redireciona
 
 const handle = document.getElementById("handle");
 const track = document.getElementById("track");
 const pkzPanel = document.getElementById("pkz");
+const pkzInner = pkzPanel.querySelector(".p-inner");
+const otoInner = document.querySelector("#oto .p-inner");
 const fillL = document.getElementById("fill-l");
 const fillR = document.getElementById("fill-r");
 const divLine = document.getElementById("div-line");
@@ -11,6 +14,7 @@ const arrL = document.getElementById("arr-l");
 const arrR = document.getElementById("arr-r");
 const redir = document.getElementById("redir");
 const rName = document.getElementById("redir-name");
+const redirCancel = document.getElementById("redir-cancel");
 
 const dragHint = document.getElementById("drag-hint");
 
@@ -22,15 +26,38 @@ const btnOtoCta = document.getElementById("btn-oto-cta");
 let dragging = false;
 let redirected = false;
 let hasDragged = false;
+let redirTimer = null;
+let pos = 50;
 
 function toPercent(clientX) {
   const r = track.getBoundingClientRect();
   return Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
 }
 
+// Conteúdo do painel: 0 abaixo de 22% de largura, 1 acima de 38%, linear no meio
+function fadeInner(el, width) {
+  const o = Math.max(0, Math.min(1, (width - 22) / 16));
+  el.style.opacity = o;
+  el.style.visibility = o === 0 ? "hidden" : "visible";
+  el.inert = o === 0;
+}
+
 function apply(p) {
+  pos = p;
   handle.style.left = p + "%";
   handle.setAttribute("aria-valuenow", Math.round(p));
+  handle.setAttribute(
+    "aria-valuetext",
+    p <= EDGE
+      ? "PKZ. Pressione Enter para visitar"
+      : p >= 100 - EDGE
+        ? "One To One. Pressione Enter para visitar"
+        : p < 45
+          ? "Mais perto da PKZ"
+          : p > 55
+            ? "Mais perto da One To One"
+            : "Centro",
+  );
 
   const pkzWidth = 100 - p;
 
@@ -38,32 +65,60 @@ function apply(p) {
   divLine.style.left = `calc(${pkzWidth}% - 1px)`;
   fillL.style.width = pkzWidth + "%";
   fillR.style.width = p + "%";
+  fadeInner(pkzInner, pkzWidth);
+  fadeInner(otoInner, p);
 
   if (hintPkzBox) {
     hintPkzBox.style.width = pkzWidth + "%";
   }
 
-  arrL.classList.toggle("on", p < 18);
-  arrR.classList.toggle("on", p > 82);
+  // sinal de "solte para entrar"
+  arrL.classList.toggle("on", p <= EDGE);
+  arrR.classList.toggle("on", p >= 100 - EDGE);
+}
 
-  if (redirected) return;
-  if (p <= 1) doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL);
-  if (p >= 99) doRedirect("ONE TO ONE", "#38b6ff", "#ffffff", OTO_URL);
+// Só redireciona ao soltar (ou Enter/Espaço) perto de uma borda
+function commit() {
+  if (pos <= EDGE) doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL);
+  else if (pos >= 100 - EDGE)
+    doRedirect("ONE TO ONE", "#014c6f", "#ffffff", OTO_URL);
 }
 
 function doRedirect(name, bg, color, url) {
+  if (redirected) return;
   redirected = true;
   redir.style.background = bg;
   redir.style.color = color;
   rName.textContent = name;
+  redir.hidden = false;
+  void redir.offsetWidth;
   redir.classList.add("on");
-  setTimeout(() => {
+  redirCancel.focus();
+  redirTimer = setTimeout(() => {
     window.location.href = url;
   }, 900);
 }
 
+function cancelRedirect() {
+  clearTimeout(redirTimer);
+  redirected = false;
+  redir.classList.remove("on");
+  redir.hidden = true;
+  apply(50);
+}
+
+redirCancel.addEventListener("click", () => {
+  cancelRedirect();
+  handle.focus();
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && redirected) redirCancel.click();
+});
+
 if (btnPkzCta) {
   btnPkzCta.addEventListener("click", (e) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
     doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL);
   });
@@ -71,80 +126,92 @@ if (btnPkzCta) {
 
 if (btnOtoCta) {
   btnOtoCta.addEventListener("click", (e) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
-    doRedirect("ONE TO ONE", "#38b6ff", "#ffffff", OTO_URL);
+    doRedirect("ONE TO ONE", "#014c6f", "#ffffff", OTO_URL);
   });
 }
 
-handle.addEventListener("mousedown", (e) => {
-  dragging = true;
-  if (!hasDragged) {
-    hasDragged = true;
-    dragHint.style.opacity = "0";
+// Primeiro uso: some a dica de texto e para o "empurrão" do halter
+function firstUse() {
+  if (hasDragged) return;
+  hasDragged = true;
+  dragHint.style.opacity = "0";
+  handle.classList.add("used");
+}
+
+// Aplica no máximo uma vez por frame (evita reflow a cada evento de ponteiro)
+let pendingP = null;
+function scheduleApply(p) {
+  if (pendingP === null) {
+    requestAnimationFrame(() => {
+      if (pendingP !== null) apply(pendingP);
+      pendingP = null;
+    });
   }
+  pendingP = p;
+}
+
+// Pointer Events cobrem mouse, touch e caneta; touch-action: none no CSS evita o scroll
+handle.addEventListener("pointerdown", (e) => {
+  if (e.button !== 0) return;
+  dragging = true;
+  firstUse();
+  handle.setPointerCapture(e.pointerId);
   e.preventDefault();
 });
 
-window.addEventListener("mousemove", (e) => {
-  if (dragging) apply(toPercent(e.clientX));
+handle.addEventListener("pointermove", (e) => {
+  if (!dragging) return;
+  scheduleApply(toPercent(e.clientX));
 });
 
-window.addEventListener("mouseup", () => {
+handle.addEventListener("pointerup", () => {
+  if (!dragging) return;
   dragging = false;
+  // aplica a posição pendente antes de decidir o redirecionamento
+  if (pendingP !== null) {
+    apply(pendingP);
+    pendingP = null;
+  }
+  commit();
 });
 
-handle.addEventListener(
-  "touchstart",
-  (e) => {
-    dragging = true;
-    if (!hasDragged) {
-      hasDragged = true;
-      dragHint.style.opacity = "0";
-    }
-    e.preventDefault();
-  },
-  { passive: false },
-);
-
-window.addEventListener(
-  "touchmove",
-  (e) => {
-    if (dragging) {
-      apply(toPercent(e.touches[0].clientX));
-      e.preventDefault();
-    }
-  },
-  { passive: false },
-);
-
-window.addEventListener("touchend", () => {
+handle.addEventListener("pointercancel", () => {
   dragging = false;
 });
 
 apply(50);
 
-// Keyboard support for slider
+// Teclado: setas/Home/End só movem; Enter/Espaço entram se estiver numa borda
 handle.addEventListener("keydown", (e) => {
-  const current = parseFloat(handle.style.left) || 50;
-  let newPos = current;
   const step = 5;
+  let newPos = pos;
 
   if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
-    newPos = Math.max(0, current - step);
-    e.preventDefault();
+    newPos = Math.max(0, pos - step);
   } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
-    newPos = Math.min(100, current + step);
-    e.preventDefault();
+    newPos = Math.min(100, pos + step);
   } else if (e.key === "Home") {
     newPos = 0;
-    e.preventDefault();
   } else if (e.key === "End") {
     newPos = 100;
+  } else if (e.key === "Enter" || e.key === " ") {
     e.preventDefault();
+    commit();
+    return;
+  } else {
+    return;
   }
 
-  if (newPos !== current) {
+  e.preventDefault();
+  if (newPos !== pos) {
+    firstUse();
     apply(newPos);
-    handle.setAttribute("aria-valuenow", Math.round(newPos));
   }
+});
+
+// Ao voltar pelo histórico (bfcache), limpa o overlay e recentraliza o halter
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) cancelRedirect();
 });

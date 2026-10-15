@@ -1,115 +1,96 @@
-@import url("https://fonts.googleapis.com/css2?family=Just+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+/*
+  Studio One To One — tema claro (branco + azul petróleo + ciano), tipografia arredondada.
+  Carregar DEPOIS de ../shared/base.css (estrutura) e ANTES de ../shared/cta.css.
+  Aqui: tokens da marca + só o que é específico da One To One (logotipo, hero, serviços).
+*/
 
 :root {
-  --bg-base: #ffffff;
-  --bg-surface: #b3ecff;
-  --accent: #014c6f;
-  --accent-light: #00bbff;
-  --accent-hover: #00bbff;
-  --text-primary: #000000;
-  --text-muted: #014c6f;
-  --text-placeholder: #64748b;
-  --border: rgba(1, 76, 111, 0.2);
+  /* ---------- Superfícies ---------- */
+  --bg-base: #ffffff; /* fundo da página */
+  --bg-surface: #b3ecff; /* cards, tags, rodapé */
+  --bg-header: rgba(255, 255, 255, 0.95); /* header sticky (translúcido, com blur) */
+  --bg-nav-panel: var(--bg-base); /* painel do menu mobile */
+  --bg-modal: var(--bg-base); /* caixa do modal */
+  --bg-input: rgba(179, 236, 255, 0.15); /* campos do formulário */
+  --slot-bg: var(--bg-base); /* botão de horário (repouso) */
+
+  /* ---------- Acento ---------- */
+  --accent: #014c6f; /* azul petróleo: marca, botão primário, voltar ao topo */
+  --accent-strong: var(--accent); /* preenchimento de ação primária (botões, chip ativo) */
+  --accent-light: #00bbff; /* ciano: hover/pressionado (shared/cta.css lê este nome) */
+  --accent-ink: var(--accent); /* cor de texto/ícone/borda de destaque */
+  --on-accent: #ffffff; /* texto sobre --accent */
+
+  /* ---------- Texto ---------- */
+  --text-primary: #000000; /* títulos e texto principal */
+  --text-muted: #014c6f; /* texto de apoio (azul petróleo) */
+  --text-subtle: #64748b; /* links secundários, botão fechar */
+  --text-lead: var(--text-primary); /* parágrafo de abertura da seção "Sobre" */
+  --text-footnote: #475569; /* linha de direitos no rodapé */
+
+  /* ---------- Bordas, estados e foco ---------- */
+  --border: rgba(1, 76, 111, 0.2); /* divisórias e contorno de card */
+  --border-strong: rgba(1, 76, 111, 0.6); /* chip de dia */
+  --border-slot: rgba(1, 76, 111, 0.6); /* botão de horário */
+  --border-input: rgba(1, 76, 111, 0.65); /* campo de formulário */
+  --danger: #b91c1c; /* erro de validação */
+  --focus: var(--accent-ink); /* anel de foco (outline) */
+
+  /* ---------- Pílulas (tags, badge, link destacado) ---------- */
+  --pill-bg: var(--bg-surface);
+  --pill-border: none;
+  --pill-fg: var(--accent-ink);
+  --pill-hover-bg: var(--accent);
+  --pill-hover-fg: #ffffff;
+  --icon-bg: #ffffff; /* quadrado do ícone em "destaques" */
+  --social-icon-bg: rgba(0, 187, 255, 0.15); /* ícone do Instagram no rodapé */
+  --social-fg: var(--accent); /* texto do botão de rede social */
+
+  /* ---------- Hover e pressionado (chip de dia, horário, menu) ---------- */
+  --hover-bg: var(--bg-surface);
+  --hover-border: var(--accent);
+  --hover-fg: var(--text-primary);
+  --press-bg: var(--accent-light); /* horário em :active */
+  --press-fg: var(--text-primary);
+  --hover-tint: rgba(0, 187, 255, 0.12); /* fundo do botão hambúrguer em hover */
+
+  /* ---------- Botões ---------- */
+  --btn-padding: 13px 28px;
+  --btn-border: none;
+  --btn-hover-bg: var(--accent-light);
+  --btn-hover-fg: #000000;
+  --radius-btn: 24px; /* botões da página (.btn) */
+  --radius-btn-modal: 24px; /* botão do modal */
+
+  /* ---------- Tipografia ---------- */
+  --font-display: "Plus Jakarta Sans", "Inter", sans-serif; /* títulos e logotipo */
+  --font-body: "Inter", "Plus Jakarta Sans", sans-serif;
+  --heading-weight: 700;
+  --heading-tracking: normal;
+  --nav-weight: 600; /* links do menu */
+  --nav-size: 0.95rem;
+  --nav-hover: var(--accent);
+  --nav-hover-decoration: underline;
+  --nav-transition:
+    color 0.2s,
+    background-color 0.2s;
+  --logo-size-mobile: clamp(1.3rem, 6vw, 1.6rem); /* logotipo curto no header mobile */
+  --ease-hamburger: ease; /* animação do ícone do menu */
+
+  /* ---------- Sombras ---------- */
+  --shadow-hero: 0 16px 36px rgba(1, 76, 111, 0.1); /* foto do hero */
+  --shadow-nav: 0 16px 36px rgba(1, 76, 111, 0.15); /* painel do menu mobile */
+  --fab-shadow: none; /* botão voltar ao topo (sem sombra nesta marca) */
+  --fab-offset: 0px; /* deslocamento do botão enquanto escondido */
+
+  /* ---------- Overlays ---------- */
+  --overlay: rgba(1, 76, 111, 0.45); /* ::backdrop do modal <dialog> */
+  --overlay-menu: rgba(1, 76, 111, 0.3); /* fundo atrás do menu mobile */
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
-  background-color: var(--bg-base);
-  color: var(--text-primary);
-  font-family: "Inter", "Just Sans", sans-serif;
-  line-height: 1.6;
-  width: 100%;
-  position: relative;
-}
-
-body.no-scroll {
-  overflow: hidden;
-}
-
-section {
-  padding: 80px 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Header */
-.site-header {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: max(12px, env(safe-area-inset-top))
-    max(24px, env(safe-area-inset-right)) 12px
-    max(24px, env(safe-area-inset-left));
-  position: sticky;
-  top: 0;
-  z-index: 200;
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  max-width: 1080px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.nav-left {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
-}
-.nav-center {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.nav-right {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-/* Logo Tipográfica One To One Estilizada */
-.brand-logo-link {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
+/* ---------- Logotipo (tipográfico, cor sólida) ---------- */
 .brand-text {
-  font-family: "Just Sans", "Inter", sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(1.6rem, 3.5vw, 2.1rem);
   color: var(--accent);
@@ -119,150 +100,20 @@ section {
     color 0.2s ease,
     transform 0.2s ease;
 }
-
-.mobile-logo {
-  display: none;
-}
-
 .brand-logo-link:hover .brand-text {
-  color: var(--accent-light);
+  opacity: 0.8;
   transform: scale(1.03);
 }
 
-.nav-links {
-  display: flex;
-  gap: 14px;
-  list-style: none;
-  align-items: center;
-}
-.nav-link,
-.back-link {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition:
-    color 0.2s,
-    background-color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-}
-.nav-link:hover,
-.back-link:hover {
-  color: var(--accent-light);
-}
-
-.cross-brand-nav-link {
-  color: var(--text-placeholder);
-  text-decoration: none;
-  font-size: 0.8rem;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: color 0.2s ease;
-}
-.cross-brand-nav-link:hover {
-  color: var(--accent);
-}
-@media (max-width: 640px) {
-  .cross-brand-nav-link {
-    display: none;
-  }
-}
-
-.nav-link-highlight {
-  color: var(--accent);
-  background-color: var(--bg-surface);
-  padding: 6px 14px;
-  border-radius: 20px;
-}
-.nav-link-highlight:hover {
-  color: #ffffff;
-  background-color: var(--accent);
-}
-
-.menu-toggle {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  z-index: 210;
-  transition: background-color 0.2s ease;
-}
-.menu-toggle:hover {
-  background-color: rgba(0, 187, 255, 0.12);
-}
-.hamburger-bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background-color: var(--text-primary);
-  border-radius: 2px;
-  transition:
-    transform 0.3s ease,
-    opacity 0.2s ease;
-}
-.menu-toggle.active .hamburger-bar:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.menu-toggle.active .hamburger-bar:nth-child(2) {
-  opacity: 0;
-}
-.menu-toggle.active .hamburger-bar:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(1, 76, 111, 0.3);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s ease;
-  z-index: 150;
-}
-.menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-h1,
-h2,
-h3 {
-  margin-bottom: 16px;
-  font-family: "Just Sans", "Inter", sans-serif;
-  font-weight: 700;
-}
-.hero-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 78px);
-  min-height: calc(100dvh - 78px);
-  padding: 60px 24px;
-  max-width: 900px;
-  margin: 0 auto;
-}
+/* ---------- Hero ---------- */
 .hero-content h1 {
   font-weight: 800;
-  font-style: italic;
   font-size: clamp(2.6rem, 7vw, 5.2rem);
   line-height: 1.15;
   color: var(--accent);
   margin-bottom: 20px;
 }
 .hero-content p {
-  font-style: italic;
   font-size: clamp(1.1rem, 2.6vw, 1.5rem);
   color: var(--text-muted);
   margin-bottom: 32px;
@@ -271,74 +122,28 @@ h3 {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
+/* ---------- Botões: fonte, transição e elevação no hover ---------- */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 13px 28px;
-  border-radius: 24px;
-  font-weight: 700;
   font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
-  font-family: "Just Sans", sans-serif;
-  min-height: 44px;
+  font-family: "Plus Jakarta Sans", sans-serif;
   transition:
     background-color 0.2s,
     transform 0.15s;
 }
-.btn-primary {
-  background-color: var(--accent);
-  color: #ffffff;
-}
 .btn-primary:hover {
-  background-color: var(--accent-light);
-  color: #000000;
   transform: translateY(-1px);
 }
-
-.about-section {
-  max-width: 1080px;
-  padding: 85px 24px;
-  margin: 0 auto;
+.btn-modal {
+  font-family: var(--font-display);
+  transition: background-color 0.2s;
 }
-.about-container {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 48px;
-  text-align: left;
-}
-.about-image-wrapper {
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 16px 36px rgba(1, 76, 111, 0.1);
-  border: 1px solid var(--border);
-}
-.about-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s;
-}
-.about-image-wrapper:hover img {
-  transform: scale(1.03);
-}
-.section-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--accent);
-  background-color: var(--bg-surface);
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 12px;
+.btn-modal:hover {
+  background-color: var(--btn-hover-bg);
 }
 
+/* ---------- Serviços ---------- */
 .services-section {
   background-color: rgba(179, 236, 255, 0.2);
 }
@@ -383,14 +188,15 @@ h3 {
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent);
-  background: var(--bg-surface);
+  color: var(--pill-fg);
+  background: var(--pill-bg);
   padding: 4px 10px;
   border-radius: 16px;
   margin-bottom: 12px;
   align-self: flex-start;
 }
 
+/* ---------- Mapa ---------- */
 .map-wrapper {
   border-radius: 10px;
   overflow: hidden;
@@ -400,229 +206,15 @@ h3 {
   width: 100%;
 }
 
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(1, 76, 111, 0.45);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s;
-}
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-.modal-box {
-  background: #ffffff;
-  border-radius: 16px;
-  max-width: 480px;
-  width: 100%;
-  padding: 36px 32px;
-  transform: translateY(24px) scale(0.96);
-  transition: transform 0.3s;
-}
-.modal-overlay.active .modal-box {
-  transform: translateY(0) scale(1);
-}
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 18px;
-  background: transparent;
-  border: none;
-  font-size: 28px;
-  color: var(--text-placeholder);
-  cursor: pointer;
-  padding: 4px 8px;
-  min-height: 44px;
-}
-.modal-input {
-  width: 100%;
-  padding: 13px 16px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background-color: rgba(179, 236, 255, 0.15);
-  color: var(--text-primary);
-  font-size: 1rem;
-  margin-bottom: 16px;
-}
-.btn-modal {
-  width: 100%;
-  background-color: var(--accent);
-  color: #fff;
-  padding: 14px 20px;
-  font-weight: 700;
-  border-radius: 24px;
-  border: none;
-  cursor: pointer;
-  font-family: "Just Sans", "Inter", sans-serif;
-  transition: background-color 0.2s;
-}
-.btn-modal:hover {
-  background-color: var(--accent-light);
-}
-
-.modal-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.modal-badge {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  background-color: var(--bg-surface);
-  padding: 5px 14px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-}
-.modal-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-textarea.modal-input {
-  resize: vertical;
-  min-height: 80px;
-  font-family: inherit;
-}
-.booking-error {
-  color: #b91c1c;
-  font-size: 0.85rem;
-  margin: -8px 0 14px;
-}
-.booking-confirmation {
-  text-align: center;
-}
-.booking-confirmation p {
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-/* Aula Experimental — Grade de Horários */
-.schedule-section {
-  max-width: 1100px;
-}
-.schedule-intro {
-  color: var(--text-muted);
-  max-width: 640px;
-  margin: 0 auto 32px;
-}
-.schedule-grid-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-.schedule-grid {
-  display: grid;
-  grid-template-columns: 74px repeat(7, minmax(84px, 1fr));
-  grid-template-rows: auto repeat(16, 1fr);
-  min-width: 720px;
-}
-.schedule-row {
-  display: contents;
-}
-.schedule-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 6px;
-  border: 1px solid var(--border);
-  font-size: 0.85rem;
-}
-.schedule-header .schedule-cell {
-  font-weight: 700;
-  background: var(--bg-surface);
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-.schedule-time-label,
-.schedule-corner {
-  font-weight: 600;
-  background: var(--bg-surface);
-  position: sticky;
-  left: 0;
-  z-index: 1;
-}
-.schedule-corner {
-  z-index: 3;
-}
-.schedule-slot {
-  background: var(--bg-base);
-  cursor: pointer;
-  min-height: 40px;
-  border: 1px solid var(--border);
-  transition: background-color 0.15s;
-}
-.schedule-slot:hover,
-.schedule-slot:focus-visible {
-  background-color: var(--accent-light);
-}
-
-/* Conheça Também (cross-brand) */
-.cross-brand-section {
-  max-width: 1080px;
-}
-.cross-brand-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 32px;
-  text-align: left;
-}
+/* ---------- Conheça também: título na cor da marca ---------- */
 .cross-brand-text h3 {
-  margin: 6px 0;
-  font-size: 1.3rem;
   color: var(--accent);
 }
-.cross-brand-text p {
-  color: var(--text-muted);
-  margin: 0;
-  font-size: 0.95rem;
-}
 
-/* Footer */
-.site-footer-page {
-  background-color: var(--bg-surface);
-  border-top: 1px solid var(--border);
-  padding: 48px 24px 24px;
-}
-
-.footer-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 28px;
-}
-
-.footer-brand {
-  max-width: 340px;
-}
-
+/* ---------- Rodapé: logotipo ---------- */
 .footer-logo {
   display: block;
-  font-family: "Just Sans", "Inter", sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.15rem;
   letter-spacing: 0.5px;
@@ -631,188 +223,14 @@ textarea.modal-input {
   margin-bottom: 8px;
 }
 
-.footer-brand p,
-.footer-contact p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.footer-social {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  border-radius: 9999px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.footer-social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: rgba(0, 187, 255, 0.15);
-  color: var(--accent);
-}
-
-.footer-social:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-}
-
-.footer-bottom {
-  max-width: 1080px;
-  margin: 32px auto 0;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-
-.footer-bottom span {
-  font-size: 0.78rem;
-  color: var(--text-placeholder);
-}
-
-@media (max-width: 640px) {
-  .footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-}
-
-.back-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--accent);
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 900;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s;
-}
-.back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Scroll-driven Rendering Animation */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(35px);
-  transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (max-width: 860px) {
-  .about-container {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-}
-
+/* ---------- Responsivo (marca) ---------- */
 @media (max-width: 768px) {
-  .site-header {
-    padding: max(8px, env(safe-area-inset-top))
-      max(16px, env(safe-area-inset-right)) 8px
-      max(16px, env(safe-area-inset-left));
-  }
-
-  .back-text {
-    display: none;
-  }
-  .back-link {
-    padding: 8px;
-    margin-left: -8px;
-  }
-  .desktop-logo {
-    display: none;
-  }
-  .mobile-logo {
-    display: block;
-    font-size: clamp(1.3rem, 6vw, 1.6rem);
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background-color: var(--bg-base);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 16px 24px 32px;
-    border-bottom: 1px solid var(--border);
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    box-shadow: 0 16px 36px rgba(1, 76, 111, 0.15);
-    transform: translateY(-150%);
-    opacity: 0;
-    pointer-events: none;
-    transition:
-      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.3s ease;
-    z-index: 160;
-  }
-  .nav-links.nav-open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .nav-link {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    font-size: 1.1rem;
-    border-radius: 8px;
-  }
-
   .card-grid {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  section {
-    padding: 60px 18px;
-  }
-  .hero-section {
-    min-height: calc(100vh - 66px);
-    min-height: calc(100dvh - 66px);
-    padding: 30px 18px;
-  }
   .hero-content h1 {
     font-size: clamp(2.1rem, 9vw, 2.8rem);
     margin-bottom: 14px;
@@ -827,21 +245,5 @@ textarea.modal-input {
   }
   .service-body {
     padding: 20px;
-  }
-  .modal-box {
-    padding: 26px 20px;
-  }
-  .schedule-cell {
-    padding: 8px 4px;
-    font-size: 0.78rem;
-    min-width: 62px;
-  }
-  .schedule-time-label {
-    min-width: 56px;
-  }
-  .cross-brand-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 22px;
   }
 }
