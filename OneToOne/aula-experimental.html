@@ -66,6 +66,17 @@
         </div>
 
         <div class="nav-right">
+          <button
+            id="mobile-menu-btn"
+            class="menu-toggle"
+            aria-label="Menu de navegação"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
           <ul id="primary-navigation" class="nav-links">
             <li><a href="indexOTO.html#sobre" class="nav-link">Sobre</a></li>
             <li><a href="indexOTO.html#location" class="nav-link">Localização</a></li>
@@ -78,17 +89,6 @@
               >
             </li>
           </ul>
-          <button
-            id="mobile-menu-btn"
-            class="menu-toggle"
-            aria-label="Abrir menu de navegação"
-            aria-expanded="false"
-            aria-controls="primary-navigation"
-          >
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-          </button>
         </div>
       </nav>
     </header>
@@ -141,14 +141,14 @@
         </div>
         <form id="booking-form" class="modal-body" novalidate>
           <label for="booking-modality" class="modal-label">Modalidade</label>
-          <select id="booking-modality" class="modal-input" required autofocus>
+          <select id="booking-modality" aria-describedby="booking-error" class="modal-input" required autofocus>
             <option value="">Selecione</option>
           </select>
 
           <label for="booking-name" class="modal-label">Nome completo</label>
           <input
             type="text"
-            id="booking-name"
+            id="booking-name" aria-describedby="booking-error"
             class="modal-input"
             placeholder="Digite seu nome completo"
             autocomplete="name"
@@ -160,7 +160,7 @@
           >
           <input
             type="tel"
-            id="booking-phone"
+            id="booking-phone" aria-describedby="booking-error"
             class="modal-input"
             placeholder="(21) 90000-0000"
             autocomplete="tel"
@@ -175,8 +175,10 @@
             placeholder="000.000.000-00"
             inputmode="numeric"
             maxlength="14"
+            aria-describedby="booking-cpf-hint booking-error"
             required
           />
+          <p id="booking-cpf-hint" class="modal-hint">Só números; a pontuação entra sozinha.</p>
 
           <label for="booking-notes" class="modal-label"
             >Dúvida ou observação (opcional)</label
@@ -190,7 +192,7 @@
 
           <label class="booking-consent">
             <input type="checkbox" id="booking-consent" required />
-            <span>Autorizo o uso dos meus dados, inclusive o CPF, apenas para o agendamento e o controle interno da One To One. Veja a <a href="../privacidade.html" target="_blank" rel="noopener noreferrer" aria-label="Política de Privacidade (abre em nova aba)" style="color: var(--accent-ink); text-decoration: underline">Política de Privacidade</a>.</span>
+            <span>Autorizo o uso dos meus dados, inclusive o CPF, apenas para o agendamento e o controle interno da One To One. Veja a <a href="../privacidade.html" target="_blank" rel="noopener noreferrer" aria-label="Política de Privacidade (abre em nova aba)" class="text-link">Política de Privacidade</a>.</span>
           </label>
 
           <p id="booking-error" class="booking-error" role="alert" hidden></p>
@@ -259,7 +261,7 @@
           href="https://www.instagram.com/studioonetoone/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Instagram do Studio One To One (abre em nova aba)"
+          aria-label="Instagram @studioonetoone (abre em nova aba)"
         >
           <span class="footer-social-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
@@ -270,25 +272,27 @@
 
       <div class="footer-bottom">
         <span>&copy; 2026 Studio One To One. Todos os direitos reservados.</span>
-        <a href="../privacidade.html" style="margin-left: 12px; font-size: 0.78rem; color: var(--text-footnote); text-decoration: underline">Política de Privacidade</a>
+        <a class="footer-legal" href="../privacidade.html">Política de Privacidade</a>
       </div>
     </footer>
 
-    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao início">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 19V5M5 12l7-7 7 7" />
-      </svg>
-    </button>
+    <aside class="floating-actions" aria-label="Atalhos da página">
+      <button id="back-to-top" class="back-to-top" aria-label="Voltar ao início">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+      </button>
+    </aside>
 
     <script src="../shared/data.js" defer></script>
     <script src="./scriptAula.js" defer></script>

@@ -54,9 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const primaryNav = document.getElementById("primary-navigation");
   const menuOverlay = document.getElementById("mobile-menu-overlay");
 
+  // Com o menu aberto, só o header (botão + links) recebe foco: o resto da página fica inerte.
+  const setPageInert = (on) =>
+    document
+      .querySelectorAll("body > *:not(header):not(#mobile-menu-overlay):not(script)")
+      .forEach((el) => (el.inert = on));
+
   function toggleMobileMenu() {
     if (!mobileMenuBtn || !primaryNav) return;
     const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+    setPageInert(!isExpanded);
     mobileMenuBtn.classList.toggle("active");
     primaryNav.classList.toggle("nav-open");
     mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
@@ -64,20 +71,29 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("no-scroll");
   }
 
-  function closeMobileMenu() {
+  function closeMobileMenu(returnFocus = false) {
     if (!mobileMenuBtn || !primaryNav) return;
+    const wasOpen = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+    setPageInert(false);
     mobileMenuBtn.classList.remove("active");
     primaryNav.classList.remove("nav-open");
     mobileMenuBtn.setAttribute("aria-expanded", "false");
     if (menuOverlay) menuOverlay.classList.remove("active");
     document.body.classList.remove("no-scroll");
+    if (returnFocus && wasOpen) mobileMenuBtn.focus(); // Esc devolve o foco ao botão do menu
   }
 
   if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", toggleMobileMenu);
-  if (menuOverlay) menuOverlay.addEventListener("click", closeMobileMenu);
+  if (menuOverlay) menuOverlay.addEventListener("click", () => closeMobileMenu());
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMobileMenu();
+    if (e.key === "Escape") closeMobileMenu(true);
   });
+
+  // Devolve o foco ao gatilho do diálogo; se ele está dentro do menu recolhido (mobile), vai ao botão do menu.
+  const focusTrigger = (el) => {
+    const visible = el && el.getClientRects().length && getComputedStyle(el).visibility !== "hidden";
+    (visible ? el : mobileMenuBtn)?.focus();
+  };
 
   const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
   navLinks.forEach((link) => {
@@ -104,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     contactModal.addEventListener("close", () => {
       document.body.classList.remove("no-scroll");
-      openContactBtn?.focus(); // Safari não foca <button> ao clicar; garante o retorno ao gatilho
+      focusTrigger(openContactBtn); // Safari não foca <button> ao clicar; garante o retorno ao gatilho
     });
   }
 

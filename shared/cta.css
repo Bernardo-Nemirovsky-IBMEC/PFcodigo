@@ -53,9 +53,9 @@
 
 /* ---------- Botões ---------- */
 .cta-btn {
-  gap: 10px;
-  min-height: 48px;
-  padding: 12px 20px;
+  gap: 0.625rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.25rem;
   border: 2px solid transparent;
   font-size: var(--fs-base);
   line-height: 1.2;
@@ -87,22 +87,22 @@
   color: var(--cta-secondary-fg);
 }
 .cta-icon {
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   flex-shrink: 0;
   fill: currentColor;
 }
 
 /* ---------- Faixa de conversão ---------- */
 section.cta-band {
-  width: min(1080px, 100% - 36px);
+  width: min(67.5rem, 100% - 2.25rem);
   max-width: none;
-  margin: 24px auto 0;
-  padding: 44px 40px;
+  margin: 1.5rem auto 0;
+  padding: 2.75rem 2.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px 40px;
+  gap: 1.75rem 2.5rem;
   flex-wrap: wrap;
   text-align: left;
   background: var(--cta-band-bg);
@@ -111,11 +111,11 @@ section.cta-band {
   border-radius: 16px;
 }
 .cta-band-text {
-  flex: 1 1 360px;
+  flex: 1 1 22.5rem;
   min-width: 0;
 }
 .cta-band h2 {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   font-size: clamp(1.6rem, 4vw, 2.2rem);
   line-height: 1.2;
   color: var(--cta-band-fg);
@@ -131,7 +131,7 @@ section.cta-band {
 }
 .cta-band-actions {
   display: flex;
-  gap: 12px;
+  gap: 0.75rem;
   flex: 0 1 auto;
   flex-wrap: wrap;
 }
@@ -160,9 +160,16 @@ section.cta-band {
   outline-color: #fff;
 }
 
-@media (max-width: 640px) {
+@media (min-width: 68.8125em) {
   section.cta-band {
-    padding: 32px 22px;
+    width: var(--wrap);
+    padding: 3rem clamp(2.5rem, 5%, 5rem);
+  }
+}
+
+@media (max-width: 40em) {
+  section.cta-band {
+    padding: 2rem 1.375rem;
   }
   .cta-band-actions {
     flex-direction: column;
@@ -178,8 +185,8 @@ section.cta-band {
   display: none;
 }
 
-@media (max-width: 768px) {
-  /* z-index: acima do conteúdo, abaixo do overlay do menu (150), do header (200),
+@media (max-width: 68.75em) {
+  /* a barra substitui o WhatsApp flutuante até 1100px (acima disso ele cabe na gutter lateral). z-index: acima do conteúdo, abaixo do overlay do menu (150), do header (200),
      do back-to-top (900) e dos modais (1000) */
   .mobile-cta {
     position: fixed;
@@ -188,11 +195,11 @@ section.cta-band {
     bottom: 0;
     z-index: 120;
     display: flex;
-    gap: 10px;
-    min-height: 56px;
-    padding: 10px max(12px, env(safe-area-inset-right))
-      calc(10px + env(safe-area-inset-bottom))
-      max(12px, env(safe-area-inset-left));
+    gap: 0.625rem;
+    min-height: 3.5rem;
+    padding: 0.625rem max(0.75rem, env(safe-area-inset-right))
+      calc(0.625rem + env(safe-area-inset-bottom))
+      max(0.75rem, env(safe-area-inset-left));
     background: var(--cta-bar-bg);
     border-top: 1px solid var(--cta-bar-line);
     box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.18);
@@ -200,17 +207,29 @@ section.cta-band {
   .mobile-cta .cta-btn {
     flex: 1 1 0;
     min-width: 0;
-    padding-inline: 10px;
+    padding-inline: 0.625rem;
   }
   body.no-scroll .mobile-cta {
     display: none;
   }
   /* o rodapé não fica escondido atrás da barra (10 + 48 + 10 px) */
   body {
-    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
   }
-  body .back-to-top {
-    bottom: calc(76px + env(safe-area-inset-bottom));
+  /* o voltar ao topo ocupa uma vaga na própria barra (à direita) quando aparece, em vez de cobrir o conteúdo */
+  body .floating-actions {
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
+    right: max(0.75rem, env(safe-area-inset-right));
+  }
+  .mobile-cta {
+    transition: padding-right 0.25s ease;
+  }
+  body:has(.back-to-top.show) .mobile-cta {
+    padding-right: calc(max(0.75rem, env(safe-area-inset-right)) + 2.75rem + 0.625rem);
+  }
+  /* o foco não fica escondido atrás da barra fixa */
+  html {
+    scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
   }
 }
 

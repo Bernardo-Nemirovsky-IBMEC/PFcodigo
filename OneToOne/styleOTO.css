@@ -24,7 +24,7 @@
   /* ---------- Texto ---------- */
   --text-primary: #000000; /* títulos e texto principal */
   --text-muted: #014c6f; /* texto de apoio (azul petróleo) */
-  --text-subtle: #64748b; /* links secundários, botão fechar */
+  --text-subtle: #5a6a7f; /* links secundários, botão fechar */
   --text-lead: var(--text-primary); /* parágrafo de abertura da seção "Sobre" */
   --text-footnote: #475569; /* linha de direitos no rodapé */
 
@@ -55,7 +55,7 @@
   --hover-tint: rgba(0, 187, 255, 0.12); /* fundo do botão hambúrguer em hover */
 
   /* ---------- Botões ---------- */
-  --btn-padding: 13px 28px;
+  --btn-padding: 0.8125rem 1.75rem;
   --btn-border: none;
   --btn-hover-bg: var(--accent-light);
   --btn-hover-fg: #000000;
@@ -111,16 +111,16 @@
   font-size: clamp(2.6rem, 7vw, 5.2rem);
   line-height: 1.15;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 .hero-content p {
   font-size: clamp(1.1rem, 2.6vw, 1.5rem);
   color: var(--text-muted);
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
 }
 .hero-actions {
   display: flex;
-  gap: 14px;
+  gap: 0.875rem;
   flex-wrap: wrap;
 }
 
@@ -149,10 +149,10 @@
 }
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 28px;
-  margin-top: 32px;
-  max-width: 1080px;
+  grid-template-columns: repeat(auto-fit, minmax(min(18.125rem, 100%), 1fr));
+  gap: 1.75rem;
+  margin-top: 2rem;
+  max-width: var(--wrap);
   margin-left: auto;
   margin-right: auto;
 }
@@ -178,7 +178,7 @@
   object-fit: cover;
 }
 .service-body {
-  padding: 24px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -191,9 +191,9 @@
   text-transform: uppercase;
   color: var(--pill-fg);
   background: var(--pill-bg);
-  padding: 4px 10px;
+  padding: 0.25rem 0.625rem;
   border-radius: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
   align-self: flex-start;
 }
 
@@ -202,7 +202,7 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   width: 100%;
 }
@@ -221,30 +221,64 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 /* ---------- Responsivo (marca) ---------- */
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(16.25rem, 100%), 1fr));
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40em) {
   .hero-content h1 {
     font-size: clamp(2.1rem, 9vw, 2.8rem);
-    margin-bottom: 14px;
+    margin-bottom: 0.875rem;
   }
   .hero-content p {
     font-size: 1.1rem;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
   }
   .card-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 1.25rem;
   }
   .service-body {
-    padding: 20px;
+    padding: 1.25rem;
+  }
+}
+
+/* ---------- Desktop largo (>= 1101px): hierarquia e composição ---------- */
+@media (min-width: 68.8125em) {
+  .brand-text {
+    font-size: var(--fs-logo);
+  }
+  .hero-content h1 {
+    font-size: var(--fs-hero);
+    line-height: 1.1;
+  }
+  .hero-content p {
+    font-size: var(--fs-lg);
+    max-width: 40ch;
+  }
+  .services-section {
+    padding-inline: clamp(1.5rem, 4%, 4rem);
+    border-radius: 1.25rem;
+  }
+  .card-grid {
+    max-width: none;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5%, 3rem);
+  }
+  .service-body {
+    padding: 1.75rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .service-card,
+  .map-wrapper {
+    border: 1px solid CanvasText;
   }
 }

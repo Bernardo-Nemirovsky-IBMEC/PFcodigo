@@ -55,7 +55,7 @@
   --hover-tint: rgba(255, 255, 255, 0.08); /* fundo do botão hambúrguer em hover */
 
   /* ---------- Botões ---------- */
-  --btn-padding: 12px 24px;
+  --btn-padding: 0.75rem 1.5rem;
   --btn-border: 1px solid var(--accent-ink); /* contorno claro no botão primário */
   --btn-hover-bg: #0052c2;
   --btn-hover-fg: #ffffff;
@@ -111,7 +111,7 @@
   font-style: italic;
   line-height: 1.1;
   letter-spacing: -1px;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   background: linear-gradient(180deg, #ffffff 30%, var(--accent-ink) 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -128,24 +128,24 @@
 
 /* tag da seção: respiro maior que o padrão do base */
 .section-tag {
-  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
 }
 
 /* ---------- Equipe de apoio ---------- */
 .team-support-card {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 2.25rem;
   background-color: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 28px;
-  margin: 0 auto 48px;
+  padding: 1.75rem;
+  margin: 0 auto 3rem;
   text-align: left;
 }
 .team-support-img {
   flex: 0 0 45%;
-  max-width: 420px;
+  max-width: 26.25rem;
   border-radius: 10px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
@@ -167,49 +167,53 @@
   color: var(--pill-fg);
   background: var(--pill-bg);
   border: var(--pill-border);
-  padding: 4px 12px;
+  padding: 0.25rem 0.75rem;
   border-radius: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
 }
 
 /* ---------- Confiança para pais e responsáveis ---------- */
 .family-trust-section {
-  max-width: 1080px;
+  max-width: var(--wrap);
 }
 .trust-intro {
-  max-width: 640px;
-  margin: 0 auto 40px;
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
   color: var(--text-muted);
   font-size: var(--fs-base);
   line-height: 1.7;
 }
 .trust-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.5rem;
   text-align: left;
 }
 .trust-card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 26px 22px;
+  padding: 1.625rem 1.375rem;
 }
 .trust-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 10px;
   background: var(--pill-bg);
   border: var(--pill-border);
   color: var(--accent-ink);
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+.trust-icon svg {
+  width: 1.375rem;
+  height: 1.375rem;
 }
 .trust-card h3 {
   font-size: var(--fs-lg);
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   color: var(--text-primary);
 }
 .trust-card p {
@@ -222,9 +226,9 @@
 /* ---------- Modalidades esportivas ---------- */
 .sport-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 28px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
 }
 .sport-card {
   border-radius: 10px;
@@ -243,12 +247,12 @@
   object-fit: cover;
 }
 .sport-caption {
-  padding: 16px 18px;
+  padding: 1rem 1.125rem;
   text-align: left;
 }
 .sport-label {
   font-size: var(--fs-lg);
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
 }
 .sport-sub {
   display: block;
@@ -260,23 +264,26 @@
 }
 .services-intro {
   color: var(--text-muted);
-  max-width: 640px;
-  margin: 0 auto 32px;
+  max-width: 40rem;
+  margin: 0 auto 2rem;
 }
 .services-footer {
   color: var(--text-muted);
-  margin-top: 32px;
+  margin-top: 2rem;
 }
 
 /* ---------- Mapa ---------- */
 .map-wrapper {
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
   width: 100%;
 }
 
 /* ---------- Modal: seletor com tema escuro nativo ---------- */
+.modal-box {
+  color-scheme: dark; /* barra de rolagem escura quando o modal rola */
+}
 select.modal-input {
   color-scheme: dark;
 }
@@ -297,29 +304,95 @@ select.modal-input option {
   background: linear-gradient(135deg, #ffffff 40%, var(--accent-ink) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 /* ---------- Responsivo (marca) ---------- */
-@media (max-width: 860px) {
+@media (max-width: 53.75em) {
   .team-support-card {
     flex-direction: column;
-    padding: 20px;
+    padding: 1.25rem;
   }
   .team-support-img {
     max-width: 100%;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40em) {
   .hero-content h1 {
     font-size: clamp(2rem, 11vw, 3rem);
-    margin-bottom: 14px;
+    margin-bottom: 0.875rem;
   }
   .hero-content h2 {
     font-size: 1.15rem;
   }
   .sport-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Desktop largo (>= 1101px): hierarquia e composição ---------- */
+@media (min-width: 68.8125em) {
+  .brand-text {
+    font-size: var(--fs-logo);
+  }
+  .hero-content h2 {
+    font-size: var(--fs-lg);
+  }
+  .family-trust-section {
+    width: var(--wrap);
+    max-width: none;
+    padding-inline: 0;
+  }
+  .trust-intro,
+  .services-intro {
+    max-width: 62ch;
+  }
+  .trust-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2%, 2.5rem);
+  }
+  .trust-card {
+    padding: 1.75rem 1.5rem;
+  }
+  .team-support-card {
+    gap: var(--gap-col);
+    padding: clamp(1.5rem, 3%, 3rem);
+  }
+  .team-support-img {
+    flex: 0 0 48%;
+    max-width: none;
+  }
+  .team-support-content p {
+    max-width: 60ch;
+  }
+  .sport-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5%, 3rem);
+  }
+  .sport-caption {
+    padding: 1.25rem 1.5rem;
+  }
+}
+@media (min-width: 81.25em) {
+  .trust-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Alto contraste: texto em gradiente (background-clip) some; usa a cor do sistema */
+@media (forced-colors: active) {
+  .brand-text,
+  .footer-logo,
+  .hero-content h1 {
+    background: none;
+    -webkit-text-fill-color: CanvasText;
+    color: CanvasText;
+    filter: none;
+  }
+  .trust-card,
+  .sport-card,
+  .team-support-card {
+    border: 1px solid CanvasText;
   }
 }

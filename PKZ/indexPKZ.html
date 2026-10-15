@@ -91,6 +91,17 @@
         </div>
 
         <div class="nav-right">
+          <button
+            id="mobile-menu-btn"
+            class="menu-toggle"
+            aria-label="Menu de navegação"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
           <ul id="primary-navigation" class="nav-links">
             <li><a href="#sobre" class="nav-link">Sobre</a></li>
             <li><a href="#location" class="nav-link">Localização</a></li>
@@ -108,17 +119,6 @@
               >
             </li>
           </ul>
-          <button
-            id="mobile-menu-btn"
-            class="menu-toggle"
-            aria-label="Abrir menu de navegação"
-            aria-expanded="false"
-            aria-controls="primary-navigation"
-          >
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-          </button>
         </div>
       </nav>
     </header>
@@ -463,6 +463,7 @@
         <div class="map-wrapper">
           <iframe
             title="Localização PKZ"
+            tabindex="-1"
             src="https://www.google.com/maps?q=Av.+Armando+Lombardi,+949,+Barra+da+Tijuca,+Rio+de+Janeiro&output=embed"
             width="100%"
             height="400"
@@ -482,23 +483,24 @@
           >
         </div>
       </section>
+
+      <section class="cross-brand-section animate-on-scroll">
+        <div class="cross-brand-card">
+          <div class="cross-brand-text">
+            <span class="section-tag">Conheça Também</span>
+            <h3>Studio One To One</h3>
+            <p>
+              Personal training individualizado e ambiente sofisticado, para
+              quem busca evolução física com atendimento exclusivo.
+            </p>
+          </div>
+          <a href="../OneToOne/indexOTO.html" class="btn btn-primary"
+            >Visitar Studio One To One</a
+          >
+        </div>
+      </section>
     </main>
 
-    <section class="cross-brand-section animate-on-scroll">
-      <div class="cross-brand-card">
-        <div class="cross-brand-text">
-          <span class="section-tag">Conheça Também</span>
-          <h3>Studio One To One</h3>
-          <p>
-            Personal training individualizado e ambiente sofisticado, para
-            quem busca evolução física com atendimento exclusivo.
-          </p>
-        </div>
-        <a href="../OneToOne/indexOTO.html" class="btn btn-primary"
-          >Visitar Studio One To One</a
-        >
-      </div>
-    </section>
 
     <footer class="site-footer-page">
       <div class="footer-inner">
@@ -522,7 +524,7 @@
           href="https://www.instagram.com/playmakerz_pkz/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Instagram da PKZ (abre em nova aba)"
+          aria-label="Instagram @playmakerz_pkz (abre em nova aba)"
         >
           <span class="footer-social-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
@@ -567,27 +569,6 @@
       </div>
     </dialog>
 
-    <button
-      id="back-to-top"
-      class="back-to-top"
-      aria-label="Voltar ao início"
-      title="Voltar ao topo"
-    >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 19V5M5 12l7-7 7 7" />
-      </svg>
-    </button>
-
     <!-- Número placeholder: manter igual a whatsapp em shared/data.js -->
     <nav class="mobile-cta" aria-label="Ações rápidas">
       <a href="aula-experimental.html" class="btn cta-btn cta-btn-primary">Agendar aula</a>
@@ -603,9 +584,31 @@
       </a>
     </nav>
 
-    <a class="wa-fab" href="https://wa.me/5521000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp: falar com a equipe (abre em nova aba)">
-      <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
-    </a>
+    <aside class="floating-actions" aria-label="Atalhos da página">
+      <button
+        id="back-to-top"
+        class="back-to-top"
+        aria-label="Voltar ao início"
+        title="Voltar ao topo"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+      </button>
+      <a class="wa-fab" href="https://wa.me/5521000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp: falar com a equipe (abre em nova aba)">
+        <svg aria-hidden="true" focusable="false"><use href="#icon-whatsapp"></use></svg>
+      </a>
+    </aside>
 
     <script src="../shared/data.js" defer></script>
     <script src="./scriptPKZ.js" defer></script>

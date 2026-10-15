@@ -7,11 +7,11 @@
 /* ---------- Pular para o conteúdo ---------- */
 .skip-link {
   position: fixed;
-  top: 8px;
-  left: 8px;
+  top: 0.5rem;
+  left: 0.5rem;
   z-index: 1100; /* acima do header (200), do back-to-top (900) e dos modais (1000) */
-  padding: 12px 20px;
-  min-height: 44px;
+  padding: 0.75rem 1.25rem;
+  min-height: 2.75rem;
   display: inline-flex;
   align-items: center;
   background: var(--accent-strong, #014c6f);
@@ -25,7 +25,7 @@
 .skip-link:focus,
 .skip-link:focus-visible {
   transform: translateY(0);
-  outline: 3px solid var(--on-accent, #fff);
+  outline: 3px solid var(--focus, #fff);
   outline-offset: 2px;
 }
 /* alvo do skip-link: sem anel ao receber foco programático */
@@ -37,73 +37,97 @@
 .location-actions {
   display: flex;
   justify-content: center;
-  margin-top: -8px; /* compensa o margin-bottom do .map-wrapper */
+  margin-top: -0.5rem; /* compensa o margin-bottom do .map-wrapper */
 }
 
-/* ---------- WhatsApp flutuante (desktop; no mobile existe a .mobile-cta) ---------- */
+/* ---------- Atalhos flutuantes (voltar ao topo + WhatsApp) ----------
+   >= 1101px: encostados na borda direita, DENTRO da gutter lateral que o container
+   (--wrap: 92%) deixa livre (4% de cada lado): nunca cobrem texto nem links.
+   <= 1100px: o WhatsApp vive na barra .mobile-cta; o voltar ao topo flutua no canto e
+   some enquanto o foco de teclado está em outro controle (nunca esconde o foco). */
+.floating-actions {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.625rem;
+  pointer-events: none; /* só os botões recebem clique */
+}
+.floating-actions > * {
+  pointer-events: auto;
+}
+.floating-actions .back-to-top {
+  position: static;
+  width: 2.75rem;
+  height: 2.75rem;
+}
 .wa-fab {
   display: none;
 }
-@media (min-width: 769px) {
+@media (max-width: 68.75em) {
+  body:has(:focus-visible):not(:has(.floating-actions :focus-visible)) .back-to-top.show {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+@media (min-width: 68.8125em) {
+  .floating-actions {
+    right: 0;
+    bottom: 1.5rem;
+  }
+  .floating-actions .back-to-top,
   .wa-fab {
-    position: fixed;
-    right: 26px; /* centro alinhado ao do .back-to-top (30px + 24px) */
-    bottom: 94px; /* acima do .back-to-top: 30 + 48 + 16 */
-    z-index: 890; /* logo abaixo do back-to-top (900) */
-    width: 56px;
-    height: 56px;
+    width: min(2.75rem, calc(4vw - 1px)); /* 4vw = a gutter (-1px: barra de rolagem); nunca mais larga que ela */
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 50% 0 0 50%; /* aba presa à borda */
+  }
+  .floating-actions .back-to-top:focus-visible,
+  .wa-fab:focus-visible {
+    outline: 3px solid var(--on-accent, #fff); /* anel por dentro: não invade o conteúdo */
+    outline-offset: -5px;
+  }
+  .wa-fab {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
     background: var(--accent-strong, #014c6f);
     color: var(--on-accent, #fff);
     border: 2px solid var(--on-accent, #fff);
+    border-right: 0;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     text-decoration: none;
     transition: transform 0.2s ease;
   }
   .wa-fab:hover {
-    transform: scale(1.06);
-  }
-  .wa-fab:focus-visible {
-    outline: 3px solid var(--focus, #014c6f);
-    outline-offset: 3px;
+    transform: translateX(-2px);
   }
   .wa-fab svg {
-    width: 28px;
-    height: 28px;
+    width: 1.5rem;
+    height: 1.5rem;
     fill: currentColor;
   }
   body.no-scroll .wa-fab {
     display: none;
   }
 }
-/* pulso sutil: só sem preferência de redução, 2 ciclos */
-@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
-  .wa-fab {
-    animation: wa-pulse 2s ease-out 2;
-  }
-  @keyframes wa-pulse {
-    0% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 var(--wa-pulse, rgba(1, 76, 111, 0.5)); }
-    100% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 16px transparent; }
-  }
-}
 [data-brand="pkz"] .wa-fab {
-  --wa-pulse: rgba(147, 197, 253, 0.55);
   border-color: #93c5fd;
 }
 
 /* ---------- FAQ ---------- */
 section.faq {
-  max-width: 800px;
+  max-width: 50rem;
   margin: 0 auto;
 }
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 24px;
+  gap: 0.625rem;
+  margin-top: 1.5rem;
   text-align: left;
 }
 .faq-item {
@@ -115,9 +139,9 @@ section.faq {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  min-height: 44px;
-  padding: 12px 18px;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 1.125rem;
   cursor: pointer;
   list-style: none; /* marcador próprio */
   font-weight: 600;
@@ -132,8 +156,8 @@ section.faq {
 .faq-item summary::after {
   content: "";
   flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
+  width: 0.5rem;
+  height: 0.5rem;
   border-right: 2px solid var(--accent-ink);
   border-bottom: 2px solid var(--accent-ink);
   transform: rotate(45deg);
@@ -148,13 +172,14 @@ section.faq {
   border-radius: 10px;
 }
 .faq-item p {
-  padding: 0 18px 16px;
+  padding: 0 1.125rem 1rem;
   color: var(--text-muted);
   max-width: 68ch;
 }
 .faq-item p a {
   color: inherit;
   text-decoration: underline;
+  padding-block: 0.15em; /* área de toque >= 24px mesmo em linha */
 }
 @media (prefers-reduced-motion: reduce) {
   .faq-item summary::after {
@@ -169,6 +194,28 @@ section.faq {
   }
 }
 
+/* >= 1101px: título à esquerda, perguntas à direita, na largura do container */
+@media (min-width: 68.8125em) {
+  section.faq {
+    width: var(--wrap);
+    max-width: none;
+    padding-inline: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    column-gap: var(--gap-col);
+    align-items: start;
+    text-align: left;
+  }
+  section.faq .faq-list {
+    margin-top: 0;
+  }
+}
+@media (forced-colors: active) {
+  .faq-item {
+    border: 1px solid CanvasText;
+  }
+}
+
 /* ---------- Política de Privacidade no rodapé ---------- */
 .footer-legal {
   color: var(--text-muted);
@@ -176,6 +223,25 @@ section.faq {
   font-size: var(--fs-sm);
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  margin-left: 12px;
+  min-height: 2.75rem;
+  margin-left: 0.75rem;
+}
+
+/* ---------- Link do consentimento e dica de campo (modal de agendamento) ---------- */
+.text-link {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  padding-block: 0.15em;
+}
+.modal-hint {
+  margin: -0.625rem 0 1rem;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+iframe:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+iframe {
+  scroll-margin-block: 5rem; /* o mapa não fica atrás do header nem da barra fixa ao receber foco */
 }
