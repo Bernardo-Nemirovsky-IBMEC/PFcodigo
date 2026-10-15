@@ -88,7 +88,7 @@ function commit(ms) {
 const REDIRECT_MS = 900;
 const REDIRECT_MS_KEYBOARD = 3000;
 // Enquanto o aviso está aberto o resto da página fica inerte (foco preso no botão Cancelar).
-const behind = () => document.querySelectorAll("main, #site-footer");
+const behind = () => document.querySelectorAll("#bar, main, #site-footer");
 
 function doRedirect(name, bg, color, url, ms = REDIRECT_MS) {
   if (redirected) return;
@@ -141,8 +141,19 @@ if (btnOtoCta) {
   });
 }
 
+// A barra fica fixa no topo e os painéis abaixo da apresentação: ao mexer no halter,
+// leva a página até os painéis para o arrasto nunca acontecer "às cegas".
+const stageEl = document.getElementById("stage");
+function showStage() {
+  const r = stageEl.getBoundingClientRect();
+  if (r.top < innerHeight * 0.25 && r.bottom > innerHeight * 0.75) return; // já está à vista
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  stageEl.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+}
+
 // Primeiro uso: some a dica de texto e para o "empurrão" do halter
 function firstUse() {
+  showStage();
   if (hasDragged) return;
   hasDragged = true;
   dragHint.style.opacity = "0";
