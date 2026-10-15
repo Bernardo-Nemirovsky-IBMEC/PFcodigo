@@ -1,0 +1,1010 @@
+/*
+  Base compartilhada PKZ Lab + Studio One To One (estrutura, sem cor/fonte de marca).
+  Ordem de carga:  shared/base.css  ->  <marca>.css  ->  shared/cta.css (só nas páginas com CTA)
+
+  Contrato: cada CSS de marca define, em :root, os tokens abaixo (o base só usa var(--token)).
+  Tokens de layout/movimento iguais nas duas marcas ficam aqui em :root e a marca só sobrescreve se precisar.
+
+  Marca (obrigatórios)
+    Cor         --bg-base --bg-surface --bg-header --bg-nav-panel --bg-modal --bg-input
+                --slot-bg --accent --accent-strong --accent-ink --on-accent
+                --text-primary --text-muted --text-subtle --text-lead --text-footnote
+                --border --border-strong --border-slot --border-input --danger --focus
+    Realce      --pill-bg --pill-border --pill-fg --pill-hover-bg --pill-hover-fg
+                --icon-bg --social-icon-bg --social-fg
+                --hover-bg --hover-border --hover-fg --press-bg --press-fg --hover-tint
+    Botão       --btn-padding --btn-border --btn-hover-bg --btn-hover-fg --radius-btn --radius-btn-modal
+    Tipografia  --font-display --font-body --heading-weight --heading-tracking
+                --nav-weight --nav-size --nav-hover --nav-hover-decoration --nav-transition
+                --logo-size-mobile --ease-hamburger
+    Sombra      --shadow-hero --shadow-nav --fab-shadow --fab-offset
+    Overlay     --overlay (modal <dialog>) --overlay-menu (menu mobile)
+*/
+
+/* ============================================================
+   Tokens neutros de layout/movimento (iguais nas duas marcas)
+   ============================================================ */
+:root {
+  /* altura do header sticky: compensa as âncoras (scroll-padding-top) */
+  --header-h: 72px;
+  /* curva "expo out" usada no painel do menu e na revelação ao rolar */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (max-width: 768px) {
+  :root {
+    --header-h: 64px;
+  }
+}
+
+/* ============================================================
+   Reset e documento
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  width: 100%;
+  position: relative;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+/* html tem overflow-x: hidden, então o body sozinho não trava a rolagem */
+html:has(body.no-scroll) {
+  overflow: hidden;
+}
+
+section {
+  padding: 80px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+}
+
+/* ============================================================
+   Header, navegação e menu mobile
+   ============================================================ */
+.site-header {
+  background-color: var(--bg-header);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: max(12px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right)) 12px
+    max(24px, env(safe-area-inset-left));
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.nav-left {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+.nav-center {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-right {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* o visual do logotipo (.brand-text) é da marca */
+.brand-logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-logo {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-link,
+.back-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: var(--nav-weight);
+  font-size: var(--nav-size);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--nav-transition);
+  min-height: 44px;
+}
+.nav-link:hover,
+.back-link:hover {
+  color: var(--nav-hover);
+  text-decoration: var(--nav-hover-decoration);
+}
+
+.cross-brand-nav-link {
+  color: var(--text-subtle);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.cross-brand-nav-link:hover {
+  color: var(--accent-ink);
+}
+@media (max-width: 640px) {
+  .cross-brand-nav-link {
+    display: none;
+  }
+}
+
+.nav-link-highlight {
+  color: var(--pill-fg);
+  background: var(--pill-bg);
+  border: var(--pill-border);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+.nav-link-highlight:hover {
+  color: var(--pill-hover-fg);
+  background: var(--pill-hover-bg);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 210;
+  transition: background-color 0.2s ease;
+}
+.menu-toggle:hover {
+  background-color: var(--hover-tint);
+}
+.hamburger-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition:
+    transform 0.3s var(--ease-hamburger),
+    opacity 0.2s ease;
+}
+.menu-toggle.active .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--overlay-menu);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 150;
+}
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============================================================
+   Hero (o texto do hero é da marca)
+   ============================================================ */
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: stretch;
+  min-height: clamp(420px, 62vh, 620px);
+  padding: 60px 24px 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
+}
+/* Páginas de aula: hero sem imagem, coluna única */
+#aula-hero {
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+.hero-image {
+  align-self: center;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-hero);
+  border: 1px solid var(--border);
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   Botões
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--btn-padding);
+  border-radius: var(--radius-btn);
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  min-height: 44px;
+}
+.btn-primary {
+  background-color: var(--accent-strong);
+  border: var(--btn-border);
+  color: var(--on-accent);
+}
+.btn-primary:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-fg);
+}
+
+/* ============================================================
+   Sobre, tags, cards e ícones
+   ============================================================ */
+.about-section {
+  max-width: 1080px;
+  padding: 40px 24px 85px;
+  margin: 0 auto;
+}
+.about-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
+}
+.about-content-col {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--pill-fg);
+  background: var(--pill-bg);
+  border: var(--pill-border);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  align-self: flex-start;
+}
+.about-content-col h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.about-lead {
+  font-size: 1.05rem;
+  color: var(--text-lead);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.about-content-col p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin-bottom: 24px;
+}
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.highlight-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 18px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.highlight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background-color: var(--icon-bg);
+  color: var(--accent-ink);
+  flex-shrink: 0;
+}
+.highlight-item strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 3px;
+}
+.highlight-item p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Localização
+   ============================================================ */
+.location-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.location-address-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.meta-icon {
+  flex-shrink: 0;
+  color: var(--accent-ink);
+}
+.location-city {
+  display: block;
+  color: var(--text-muted);
+}
+/* .map-wrapper (raio/borda/sombra) é da marca */
+
+/* ============================================================
+   Modal <dialog> (showModal): ESC, foco preso e ::backdrop são do navegador
+   Marcação:  <dialog class="modal-dialog" aria-labelledby="..."><div class="modal-box">...</div></dialog>
+   ============================================================ */
+.modal-dialog {
+  /* o reset global (* { margin: 0 }) anula o margin: auto do UA, que centraliza o dialog */
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  max-width: min(480px, calc(100vw - 40px));
+  width: 100%;
+  max-height: calc(100dvh - 40px);
+  overflow: visible;
+  color: inherit;
+}
+.modal-dialog::backdrop {
+  background-color: var(--overlay, rgba(0, 0, 0, 0.6));
+  backdrop-filter: blur(10px);
+}
+/* entrada: só existe quando o dialog abre (reduced-motion desliga no bloco final) */
+.modal-dialog[open] .modal-box {
+  animation: modal-in 0.3s ease;
+}
+.modal-dialog[open]::backdrop {
+  animation: modal-fade 0.3s ease;
+}
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+}
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.modal-box {
+  background: var(--bg-modal);
+  border-radius: 16px;
+  max-width: 480px;
+  width: 100%;
+  padding: 36px 32px;
+  position: relative;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 4px 8px;
+  min-width: 44px;
+  min-height: 44px;
+}
+.modal-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--border-input);
+  border-radius: 8px;
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+.modal-input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+.btn-modal {
+  width: 100%;
+  background-color: var(--accent-strong);
+  color: var(--on-accent);
+  padding: 14px 20px;
+  font-weight: 700;
+  border-radius: var(--radius-btn-modal);
+  border: var(--btn-border);
+  cursor: pointer;
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.modal-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pill-fg);
+  background: var(--pill-bg);
+  border: var(--pill-border);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.modal-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+textarea.modal-input {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+.booking-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 4px 0 12px;
+  cursor: pointer;
+}
+.booking-consent input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-ink);
+  flex-shrink: 0;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.booking-error {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin: -8px 0 14px;
+}
+.booking-confirmation {
+  text-align: center;
+}
+.booking-confirmation p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   Aula Experimental: agenda (chips de dia + lista de horários)
+   ============================================================ */
+.schedule-section {
+  max-width: 1100px;
+}
+.schedule-intro {
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+.day-chips {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.day-chip {
+  min-height: 44px;
+  min-width: 56px;
+  padding: 0 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.day-chip:hover {
+  background: var(--hover-bg);
+  border-color: var(--hover-border);
+  color: var(--hover-fg);
+}
+.day-chip[aria-pressed="true"] {
+  background: var(--accent-strong);
+  border-color: var(--accent-ink);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+.time-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.time-heading:empty {
+  display: none;
+}
+.time-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 10px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.time-list.is-fresh {
+  animation: slots-in 0.15s ease-out;
+}
+@keyframes slots-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.time-slot {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border-slot);
+  border-radius: 10px;
+  background: var(--slot-bg);
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    transform 0.1s;
+}
+.time-slot:hover {
+  background: var(--hover-bg);
+  border-color: var(--hover-border);
+  color: var(--hover-fg);
+}
+.time-slot:active {
+  background: var(--press-bg);
+  color: var(--press-fg);
+  transform: scale(0.97);
+}
+
+/* ============================================================
+   Conheça também (cross-brand)
+   ============================================================ */
+.cross-brand-section {
+  max-width: 1080px;
+}
+.cross-brand-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: left;
+}
+.cross-brand-text h3 {
+  margin: 6px 0;
+  font-size: 1.3rem;
+}
+.cross-brand-text p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   Rodapé (o logotipo .footer-logo é da marca)
+   ============================================================ */
+.site-footer-page {
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  padding: 48px 24px 24px;
+}
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+}
+.footer-brand {
+  max-width: 340px;
+}
+.footer-brand p,
+.footer-contact p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--social-fg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+.footer-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--social-icon-bg);
+  color: var(--accent-ink);
+}
+.footer-social:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-ink);
+}
+.footer-bottom {
+  max-width: 1080px;
+  margin: 32px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.footer-bottom span {
+  font-size: 0.78rem;
+  color: var(--text-footnote);
+}
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   Voltar ao topo e revelação ao rolar
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--on-accent);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--fab-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--fab-offset));
+  transition: 0.3s;
+}
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Responsivo (860 / 768 / 640 — os mesmos breakpoints das marcas)
+   ============================================================ */
+@media (max-width: 860px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    min-height: 0;
+  }
+  .hero-image img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: max(8px, env(safe-area-inset-top))
+      max(16px, env(safe-area-inset-right)) 8px
+      max(16px, env(safe-area-inset-left));
+  }
+  .back-text {
+    display: none;
+  }
+  .back-link {
+    padding: 8px;
+    margin-left: -8px;
+  }
+
+  .desktop-logo {
+    display: none;
+  }
+  .mobile-logo {
+    display: block;
+  }
+  /* (0,2,0): vence o font-size do .brand-text da marca, que carrega depois */
+  .brand-text.mobile-logo {
+    font-size: var(--logo-size-mobile);
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+  /* painel do menu: abaixo do header (60px), recolhido fora da tela e fora da ordem de tab */
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--bg-nav-panel);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 16px 24px 32px;
+    border-bottom: 1px solid var(--border);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    box-shadow: var(--shadow-nav);
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition:
+      transform 0.4s var(--ease-out),
+      opacity 0.3s ease,
+      visibility 0s linear 0.4s;
+    z-index: 160;
+  }
+  .nav-links.nav-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    padding: 60px 18px;
+  }
+  .hero-section {
+    padding: 30px 18px 10px;
+  }
+  .modal-box {
+    padding: 26px 20px;
+  }
+  /* chips de dia: faixa rolável com fade nas pontas (indica que rola) */
+  .day-chips {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -18px;
+    padding: 8px 20px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+  }
+  .day-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .day-chip {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+  .cross-brand-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+  }
+}
+
+/* ============================================================
+   Foco visível e movimento reduzido
+   ============================================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+  .time-list.is-fresh {
+    animation: none;
+  }
+  .time-slot:active {
+    transform: none;
+  }
+  /* ::backdrop não é alcançado por "*" */
+  .modal-dialog[open] .modal-box,
+  .modal-dialog[open]::backdrop {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   legado — remover após migração para <dialog>
+   Overlay antigo (<div class="modal-overlay" role="dialog"> + .active via JS).
+   Nenhum HTML/JS usa mais; fica só como rede de segurança.
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--overlay);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-overlay .modal-box {
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.3s;
+}
+.modal-overlay.active .modal-box {
+  transform: translateY(0) scale(1);
+}

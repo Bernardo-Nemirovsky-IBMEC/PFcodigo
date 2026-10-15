@@ -1,0 +1,221 @@
+/*
+  CTA compartilhado (PKZ Lab + Studio One To One).
+  Carregar DEPOIS do CSS da marca. A marca é escolhida por <html data-brand="pkz|oto">;
+  as cores vêm das variáveis da marca (--accent, --bg-base, --bg-surface, --border)
+  e, onde a marca não tem equivalente, dos tokens --cta-* abaixo.
+*/
+
+/* ---------- Tokens ---------- */
+:root {
+  /* fallback neutro = tema claro (OTO) */
+  --cta-bar-bg: var(--bg-base, #fff);
+  --cta-bar-line: var(--border, rgba(0, 0, 0, 0.15));
+  --cta-primary-bg: var(--accent, #014c6f);
+  --cta-primary-fg: #fff;
+  --cta-primary-line: var(--accent, #014c6f);
+  --cta-primary-hover-bg: var(--accent-light, #00bbff);
+  --cta-primary-hover-fg: #000;
+  --cta-secondary-bg: var(--bg-base, #fff);
+  --cta-secondary-fg: var(--accent, #014c6f);
+  --cta-secondary-line: var(--accent, #014c6f);
+  --cta-secondary-hover-bg: var(--bg-surface, #b3ecff);
+  /* faixa de conversão */
+  --cta-band-bg: var(--accent, #014c6f);
+  --cta-band-fg: #fff;
+  --cta-band-sub: #fff;
+  --cta-band-line: transparent;
+  --cta-band-btn-fg: var(--accent, #014c6f);
+  --cta-band-btn-hover-bg: var(--bg-surface, #b3ecff);
+}
+
+[data-brand="pkz"] {
+  --cta-bar-bg: var(--bg-base, #020b18);
+  --cta-primary-bg: var(--accent-hover, #004099);
+  --cta-primary-line: #93c5fd;
+  --cta-primary-hover-bg: #0052c2;
+  --cta-primary-hover-fg: #fff;
+  --cta-secondary-bg: transparent;
+  --cta-secondary-fg: #fff;
+  --cta-secondary-line: #93c5fd;
+  --cta-secondary-hover-bg: rgba(147, 197, 253, 0.16);
+  --cta-band-bg: linear-gradient(135deg, #002d6b 0%, #004099 100%);
+  --cta-band-sub: #dbeafe;
+  --cta-band-line: rgba(147, 197, 253, 0.45);
+  --cta-band-btn-fg: #002d6b;
+  --cta-band-btn-hover-bg: #dbeafe;
+}
+
+[data-brand="oto"] {
+  --cta-band-bg:
+    radial-gradient(circle at 100% 0, rgba(0, 187, 255, 0.35), transparent 55%),
+    #014c6f;
+}
+
+/* ---------- Botões ---------- */
+.cta-btn {
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.cta-btn-primary {
+  background-color: var(--cta-primary-bg);
+  color: var(--cta-primary-fg);
+  border-color: var(--cta-primary-line);
+}
+.cta-btn-primary:hover {
+  background-color: var(--cta-primary-hover-bg);
+  color: var(--cta-primary-hover-fg);
+  border-color: var(--cta-primary-hover-bg);
+  transform: none;
+}
+.cta-btn-secondary {
+  background-color: var(--cta-secondary-bg);
+  color: var(--cta-secondary-fg);
+  border-color: var(--cta-secondary-line);
+}
+.cta-btn-secondary:hover {
+  background-color: var(--cta-secondary-hover-bg);
+  color: var(--cta-secondary-fg);
+}
+.cta-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+/* ---------- Faixa de conversão ---------- */
+section.cta-band {
+  width: min(1080px, 100% - 36px);
+  max-width: none;
+  margin: 24px auto 0;
+  padding: 44px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px 40px;
+  flex-wrap: wrap;
+  text-align: left;
+  background: var(--cta-band-bg);
+  color: var(--cta-band-fg);
+  border: 1px solid var(--cta-band-line);
+  border-radius: 16px;
+}
+.cta-band-text {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+.cta-band h2 {
+  margin-bottom: 8px;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--cta-band-fg);
+}
+[data-brand="pkz"] .cta-band h2 {
+  font-weight: 900;
+  font-style: italic;
+}
+.cta-band-sub {
+  max-width: 46ch;
+  font-size: 1.05rem;
+  color: var(--cta-band-sub);
+}
+.cta-band-actions {
+  display: flex;
+  gap: 12px;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+}
+/* na faixa o primário é invertido (fundo claro) e o secundário é contorno claro */
+.cta-band .cta-btn-primary {
+  background-color: #fff;
+  color: var(--cta-band-btn-fg);
+  border-color: #fff;
+}
+.cta-band .cta-btn-primary:hover {
+  background-color: var(--cta-band-btn-hover-bg);
+  color: var(--cta-band-btn-fg);
+  border-color: var(--cta-band-btn-hover-bg);
+}
+.cta-band .cta-btn-secondary {
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+.cta-band .cta-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+/* o foco global da OTO é #014c6f: invisível sobre a faixa */
+.cta-band a:focus-visible {
+  outline-color: #fff;
+}
+
+@media (max-width: 640px) {
+  section.cta-band {
+    padding: 32px 22px;
+  }
+  .cta-band-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .cta-band-actions .cta-btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Barra fixa (mobile) ---------- */
+.mobile-cta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* z-index: acima do conteúdo, abaixo do overlay do menu (150), do header (200),
+     do back-to-top (900) e dos modais (1000) */
+  .mobile-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
+    display: flex;
+    gap: 10px;
+    min-height: 56px;
+    padding: 10px max(12px, env(safe-area-inset-right))
+      calc(10px + env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left));
+    background: var(--cta-bar-bg);
+    border-top: 1px solid var(--cta-bar-line);
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.18);
+  }
+  .mobile-cta .cta-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 10px;
+  }
+  body.no-scroll .mobile-cta {
+    display: none;
+  }
+  /* o rodapé não fica escondido atrás da barra (10 + 48 + 10 px) */
+  body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+  body .back-to-top {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-btn {
+    transition: none;
+  }
+}

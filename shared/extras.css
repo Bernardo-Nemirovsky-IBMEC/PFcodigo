@@ -1,0 +1,181 @@
+/*
+  Extras compartilhados (PKZ Lab + Studio One To One): pular para o conteúdo,
+  botão flutuante de WhatsApp (desktop), FAQ e ações da localização.
+  Carregar DEPOIS do CSS da marca e de cta.css. Cores vêm dos tokens da marca.
+*/
+
+/* ---------- Pular para o conteúdo ---------- */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1100; /* acima do header (200), do back-to-top (900) e dos modais (1000) */
+  padding: 12px 20px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent-strong, #014c6f);
+  color: var(--on-accent, #fff);
+  border: 2px solid var(--on-accent, #fff);
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--on-accent, #fff);
+  outline-offset: 2px;
+}
+/* alvo do skip-link: sem anel ao receber foco programático */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* ---------- Ações da localização ---------- */
+.location-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: -8px; /* compensa o margin-bottom do .map-wrapper */
+}
+
+/* ---------- WhatsApp flutuante (desktop; no mobile existe a .mobile-cta) ---------- */
+.wa-fab {
+  display: none;
+}
+@media (min-width: 769px) {
+  .wa-fab {
+    position: fixed;
+    right: 26px; /* centro alinhado ao do .back-to-top (30px + 24px) */
+    bottom: 94px; /* acima do .back-to-top: 30 + 48 + 16 */
+    z-index: 890; /* logo abaixo do back-to-top (900) */
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-strong, #014c6f);
+    color: var(--on-accent, #fff);
+    border: 2px solid var(--on-accent, #fff);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  .wa-fab:hover {
+    transform: scale(1.06);
+  }
+  .wa-fab:focus-visible {
+    outline: 3px solid var(--focus, #014c6f);
+    outline-offset: 3px;
+  }
+  .wa-fab svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+  }
+  body.no-scroll .wa-fab {
+    display: none;
+  }
+}
+/* pulso sutil: só sem preferência de redução, 2 ciclos */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+  .wa-fab {
+    animation: wa-pulse 2s ease-out 2;
+  }
+  @keyframes wa-pulse {
+    0% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 var(--wa-pulse, rgba(1, 76, 111, 0.5)); }
+    100% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 0 16px transparent; }
+  }
+}
+[data-brand="pkz"] .wa-fab {
+  --wa-pulse: rgba(147, 197, 253, 0.55);
+  border-color: #93c5fd;
+}
+
+/* ---------- FAQ ---------- */
+section.faq {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+  text-align: left;
+}
+.faq-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 12px 18px;
+  cursor: pointer;
+  list-style: none; /* marcador próprio */
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary::marker {
+  content: "";
+}
+.faq-item summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--accent-ink);
+  border-bottom: 2px solid var(--accent-ink);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.faq-item[open] summary::after {
+  transform: rotate(-135deg);
+}
+.faq-item summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+.faq-item p {
+  padding: 0 18px 16px;
+  color: var(--text-muted);
+  max-width: 68ch;
+}
+.faq-item p a {
+  color: inherit;
+  text-decoration: underline;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item summary::after {
+    transition: none;
+  }
+  .faq-item[open] summary::after {
+    transform: rotate(45deg); /* sem rotação: troca o sentido por forma */
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 2px solid var(--accent-ink);
+    border-top: 2px solid var(--accent-ink);
+  }
+}
+
+/* ---------- Política de Privacidade no rodapé ---------- */
+.footer-legal {
+  color: var(--text-muted);
+  text-decoration: underline;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-left: 12px;
+}
