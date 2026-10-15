@@ -24,7 +24,7 @@
   /* Altura da barra superior: mobile sem rótulos; desktop com rótulos + dica + trilho. */
   --bar-h: 96px;
 }
-@media (min-width: 769px) {
+@media (min-width: 48.0625em) {
   :root {
     --bar-h: calc(108px + 1.2vw);
   }
@@ -54,21 +54,17 @@ html {
 
 body {
   min-height: 100%;
-  padding-top: var(--bar-h);
   overflow-x: hidden;
+  overflow-wrap: anywhere; /* fonte grande: palavra longa quebra em vez de vazar do painel */
 }
 
 /* ═══════════════════════════════════════
-  BARRA SUPERIOR COM HALTER
+  BARRA COM HALTER (no topo da seção #portal, logo acima dos painéis)
 ═══════════════════════════════════════ */
 #bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   height: var(--bar-h);
   background: var(--bg-base);
-  z-index: 200;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -87,7 +83,7 @@ body {
   align-items: center;
   pointer-events: none;
   transition: opacity 0.5s;
-  white-space: nowrap;
+  text-align: center;
   z-index: 210;
 }
 
@@ -133,6 +129,10 @@ body {
 }
 
 .bar-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem; /* alvo de toque >= 44px, sem mudar a altura da barra: */
+  margin-block: min(0px, calc((1.2 * var(--fs-label) - 2.75rem) / 2));
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--fs-label);
@@ -148,7 +148,7 @@ body {
   color: var(--accent-light);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .bar-labels {
     display: none;
   }
@@ -275,7 +275,7 @@ body {
   margin-bottom: 18px;
 }
 
-.intro-text h2 {
+.intro-text h1 {
   font-family: var(--font-display);
   font-weight: 900;
   font-style: italic;
@@ -327,7 +327,7 @@ body {
   z-index: 2;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 53.75em) {
   .intro-inner {
     grid-template-columns: 1fr;
   }
@@ -393,7 +393,7 @@ body {
 }
 
 /* Fundos menores no mobile (mesmos gradientes, variante -800) */
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   #pkz {
     background-image:
       radial-gradient(
@@ -532,6 +532,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0.75em 1.4em;
+  min-height: 2.75rem;
   border-radius: 9999px;
   font-family: var(--font-display);
   font-weight: 700;
@@ -540,7 +541,8 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  white-space: nowrap;
+  text-align: center;
+  max-width: 100%; /* com fonte grande o texto quebra em vez de vazar do painel */
   outline: none;
   transition:
     transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
@@ -678,6 +680,7 @@ body {
 
 #redir-cancel {
   margin-top: 28px;
+  min-height: 2.75rem;
   padding: 10px 28px;
   border: 2px solid currentColor;
   border-radius: 9999px;
@@ -703,6 +706,14 @@ body {
 #redir-cancel:focus-visible {
   outline-color: #ffffff;
 }
+/* painel claro (One To One): o anel ciano some sobre o fundo pastel; usa o azul petróleo */
+.oto-btn:focus-visible {
+  outline-color: var(--accent);
+}
+.social-card:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
 
 /* ═══════════════════════════════════════
   FOOTER
@@ -714,7 +725,7 @@ body {
 }
 
 .footer-inner {
-  max-width: 1100px;
+  max-width: clamp(1100px, 62vw, 1500px);
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -724,7 +735,7 @@ body {
 }
 
 .footer-brand {
-  max-width: 420px;
+  max-width: clamp(420px, 28vw, 640px);
 }
 
 .footer-logo {
@@ -820,7 +831,7 @@ body {
 }
 
 .footer-bottom {
-  max-width: 1100px;
+  max-width: clamp(1100px, 62vw, 1500px);
   margin: 32px auto 0;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -831,6 +842,58 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-xs);
   color: var(--text-subtle);
+}
+
+/* Alto contraste do sistema: o que é só fundo (trilho, preenchimentos, painéis sobre foto) ganha forma/borda */
+@media (forced-colors: active) {
+  #track {
+    background: Canvas;
+    border: 1px solid CanvasText;
+  }
+  #fill-l,
+  #fill-r {
+    background: Highlight;
+    opacity: 1;
+  }
+  #div-line {
+    background: CanvasText;
+    box-shadow: none;
+  }
+  .p-inner {
+    background: Canvas;
+    border: 1px solid CanvasText;
+    border-radius: 12px;
+  }
+  .tag,
+  .intro-tag,
+  .cta-button,
+  .social-card,
+  #redir-cancel {
+    border: 2px solid ButtonText;
+  }
+  #handle:focus-visible,
+  .cta-button:focus-visible,
+  .bar-label:focus-visible,
+  .social-card:focus-visible,
+  #redir-cancel:focus-visible {
+    outline: 3px solid Highlight;
+  }
+  #redir {
+    background: Canvas !important;
+    color: CanvasText !important;
+  }
+}
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: #ffffff;
+    --text-subtle: #e2e8f0;
+  }
+  .tag,
+  .intro-tag,
+  .social-card {
+    border-width: 2px;
+    border-color: currentColor;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -26,220 +26,228 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- ═══ BARRA COM HALTER (Header/Navegação) ═══ -->
-    <header id="bar">
-      <div id="drag-hint">
-        <div class="hint-box pkz-box" id="hint-pkz-box">
-          <span class="hint-pkz">← arraste e solte</span>
-        </div>
-        <div class="hint-box oto-box">
-          <span class="hint-oto">arraste e solte →</span>
-        </div>
-      </div>
-
-      <!-- Nomes das empresas restaurados -->
-      <div class="bar-labels">
-        <a class="bar-label pkz" href="PKZ/indexPKZ.html">← PKZ</a>
-        <a class="bar-label oto" href="OneToOne/indexOTO.html">ONE TO ONE →</a>
-      </div>
-
-      <div id="track-area">
-        <div id="track">
-          <div id="fill-l"></div>
-          <div id="fill-r"></div>
-        </div>
-
-        <div
-          id="handle"
-          role="slider"
-          aria-label="Seletor de marcas PKZ e One To One"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="50"
-          aria-valuetext="Centro"
-          tabindex="0"
-        >
-          <svg
-            viewBox="0 0 76 36"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#e2e2e2" />
-                <stop offset="45%" stop-color="#c4c4c4" />
-                <stop offset="100%" stop-color="#8c8c8c" />
-              </linearGradient>
-              <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#aaa" />
-                <stop offset="55%" stop-color="#777" />
-                <stop offset="100%" stop-color="#555" />
-              </linearGradient>
-            </defs>
-            <rect
-              x="0.5"
-              y="2"
-              width="9"
-              height="32"
-              rx="2.5"
-              fill="url(#pg)"
-              stroke="#666"
-              stroke-width="0.4"
-            />
-            <rect
-              x="9.5"
-              y="8"
-              width="5"
-              height="20"
-              rx="2"
-              fill="url(#pg)"
-              stroke="#777"
-              stroke-width="0.4"
-            />
-            <rect
-              x="14.5"
-              y="15"
-              width="47"
-              height="6"
-              rx="3"
-              fill="url(#bg)"
-            />
-            <line
-              x1="28"
-              y1="15.5"
-              x2="28"
-              y2="20.5"
-              stroke="#555"
-              stroke-width="1.3"
-              stroke-linecap="round"
-            />
-            <line
-              x1="34"
-              y1="15.5"
-              x2="34"
-              y2="20.5"
-              stroke="#555"
-              stroke-width="1.3"
-              stroke-linecap="round"
-            />
-            <line
-              x1="40"
-              y1="15.5"
-              x2="40"
-              y2="20.5"
-              stroke="#555"
-              stroke-width="1.3"
-              stroke-linecap="round"
-            />
-            <line
-              x1="46"
-              y1="15.5"
-              x2="46"
-              y2="20.5"
-              stroke="#555"
-              stroke-width="1.3"
-              stroke-linecap="round"
-            />
-            <rect
-              x="61.5"
-              y="8"
-              width="5"
-              height="20"
-              rx="2"
-              fill="url(#pg)"
-              stroke="#777"
-              stroke-width="0.4"
-            />
-            <rect
-              x="66.5"
-              y="2"
-              width="9"
-              height="32"
-              rx="2.5"
-              fill="url(#pg)"
-              stroke="#666"
-              stroke-width="0.4"
-            />
-          </svg>
-        </div>
-      </div>
-    </header>
-
-    <!-- ═══ PAINÉIS (Conteúdo Principal) ═══ -->
-    <main id="stage">
-      <h1 class="visually-hidden">PKZ Lab e Studio One To One</h1>
-      <section id="pkz" aria-label="Universo PKZ">
-        <div class="p-inner">
-          <div class="tag">Alto Rendimento</div>
-          <div class="title-box">
-            <h2>PKZ</h2>
+    <main>
+      <!-- ═══ APRESENTAÇÃO (Texto + Imagem) ═══ -->
+      <section id="intro" aria-label="Apresentação">
+        <div class="intro-inner">
+          <div class="intro-text">
+            <span class="intro-tag">Portal PKZ &amp; One To One</span>
+            <h1>Duas estruturas, um só padrão de excelência</h1>
+            <p>
+              Reunimos em um só lugar a alta performance esportiva da PKZ e o
+              acompanhamento individualizado do Studio One To One. Cada marca
+              tem sua própria identidade, metodologia e equipe especializada,
+              mas compartilham o mesmo compromisso: resultado real, com
+              segurança e acompanhamento de perto.
+            </p>
+            <p>
+              Escolha abaixo o universo que combina com o seu objetivo — treino
+              de alto rendimento ou musculação com atendimento individualizado —
+              e conheça de perto a estrutura de cada uma.
+            </p>
           </div>
-          <p>
-            Treino sério, resultados reais. Estrutura completa para quem quer ir
-            além.
-          </p>
 
-          <!-- Botão CTA PKZ -->
-          <a
-            href="PKZ/indexPKZ.html"
-            class="cta-button pkz-btn"
-            id="btn-pkz-cta"
-            >Quero conhecer</a
-          >
+          <div class="intro-media" aria-hidden="true">
+            <img class="intro-photo photo-pkz" src="PKZ/Fotos/EquipePKZ-800.webp" srcset="PKZ/Fotos/EquipePKZ-480.webp 480w, PKZ/Fotos/EquipePKZ-800.webp 800w, PKZ/Fotos/EquipePKZ-1280.webp 1280w" sizes="(max-width: 860px) 290px, 320px" alt="" width="2760" height="1504" decoding="async" loading="lazy" />
+            <img class="intro-photo photo-oto" src="OneToOne/Fotos/equipe-800.webp" srcset="OneToOne/Fotos/equipe-480.webp 480w, OneToOne/Fotos/equipe-800.webp 800w, OneToOne/Fotos/equipe-1280.webp 1280w" sizes="(max-width: 860px) 235px, 260px" alt="" width="2760" height="1504" decoding="async" loading="lazy" />
+          </div>
         </div>
       </section>
 
-      <div id="div-line" aria-hidden="true"></div>
-
-      <section id="oto" aria-label="Universo One To One">
-        <div class="p-inner">
-          <div class="tag">Personal Training &amp; Saúde</div>
-          <div class="title-box">
-            <h2>ONE TO ONE</h2>
-            <div class="sub">Personal Training</div>
+      <!-- ═══ ESCOLHA SEU UNIVERSO: barra do halter + painéis ═══ -->
+      <section id="portal" aria-label="Escolha seu universo">
+        <div id="bar">
+          <div id="drag-hint">
+            <div class="hint-box pkz-box" id="hint-pkz-box">
+              <span class="hint-pkz">← arraste e solte</span>
+            </div>
+            <div class="hint-box oto-box">
+              <span class="hint-oto">arraste e solte →</span>
+            </div>
           </div>
-          <p>
-            Acompanhamento exclusivo, totalmente adaptado ao seu objetivo e
-            ritmo.
+
+          <!-- Nomes das empresas restaurados -->
+          <div class="bar-labels">
+            <a class="bar-label pkz" href="PKZ/indexPKZ.html"><span aria-hidden="true">← </span>PKZ</a>
+            <a class="bar-label oto" href="OneToOne/indexOTO.html">ONE TO ONE<span aria-hidden="true"> →</span></a>
+          </div>
+
+          <p id="handle-help" class="visually-hidden">
+            Use as setas para mover. Em uma das pontas, pressione Enter ou
+            Espaço para entrar.
           </p>
 
-          <!-- Botão CTA ONE TO ONE -->
-          <a
-            href="OneToOne/indexOTO.html"
-            class="cta-button oto-btn"
-            id="btn-oto-cta"
-            >Quero conhecer</a
-          >
+          <div id="track-area">
+            <div id="track">
+              <div id="fill-l"></div>
+              <div id="fill-r"></div>
+            </div>
+
+            <div
+              id="handle"
+              role="slider"
+              aria-label="Seletor de marcas PKZ e One To One"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-valuetext="Centro"
+              aria-describedby="handle-help"
+              tabindex="0"
+            >
+              <svg
+                viewBox="0 0 76 36"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#e2e2e2" />
+                    <stop offset="45%" stop-color="#c4c4c4" />
+                    <stop offset="100%" stop-color="#8c8c8c" />
+                  </linearGradient>
+                  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#aaa" />
+                    <stop offset="55%" stop-color="#777" />
+                    <stop offset="100%" stop-color="#555" />
+                  </linearGradient>
+                </defs>
+                <rect
+                  x="0.5"
+                  y="2"
+                  width="9"
+                  height="32"
+                  rx="2.5"
+                  fill="url(#pg)"
+                  stroke="#666"
+                  stroke-width="0.4"
+                />
+                <rect
+                  x="9.5"
+                  y="8"
+                  width="5"
+                  height="20"
+                  rx="2"
+                  fill="url(#pg)"
+                  stroke="#777"
+                  stroke-width="0.4"
+                />
+                <rect
+                  x="14.5"
+                  y="15"
+                  width="47"
+                  height="6"
+                  rx="3"
+                  fill="url(#bg)"
+                />
+                <line
+                  x1="28"
+                  y1="15.5"
+                  x2="28"
+                  y2="20.5"
+                  stroke="#555"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="34"
+                  y1="15.5"
+                  x2="34"
+                  y2="20.5"
+                  stroke="#555"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="40"
+                  y1="15.5"
+                  x2="40"
+                  y2="20.5"
+                  stroke="#555"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                />
+                <line
+                  x1="46"
+                  y1="15.5"
+                  x2="46"
+                  y2="20.5"
+                  stroke="#555"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                />
+                <rect
+                  x="61.5"
+                  y="8"
+                  width="5"
+                  height="20"
+                  rx="2"
+                  fill="url(#pg)"
+                  stroke="#777"
+                  stroke-width="0.4"
+                />
+                <rect
+                  x="66.5"
+                  y="2"
+                  width="9"
+                  height="32"
+                  rx="2.5"
+                  fill="url(#pg)"
+                  stroke="#666"
+                  stroke-width="0.4"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div id="stage">
+          <section id="pkz" aria-label="Universo PKZ">
+            <div class="p-inner">
+              <div class="tag">Alto Rendimento</div>
+              <div class="title-box">
+                <h2>PKZ</h2>
+              </div>
+              <p>
+                Treino sério, resultados reais. Estrutura completa para quem quer ir
+                além.
+              </p>
+
+              <!-- Botão CTA PKZ -->
+              <a
+                href="PKZ/indexPKZ.html"
+                class="cta-button pkz-btn"
+                id="btn-pkz-cta"
+                >Quero conhecer</a
+              >
+            </div>
+          </section>
+
+          <div id="div-line" aria-hidden="true"></div>
+
+          <section id="oto" aria-label="Universo One To One">
+            <div class="p-inner">
+              <div class="tag">Personal Training &amp; Saúde</div>
+              <div class="title-box">
+                <h2>ONE TO ONE</h2>
+                <div class="sub">Personal Training</div>
+              </div>
+              <p>
+                Acompanhamento exclusivo, totalmente adaptado ao seu objetivo e
+                ritmo.
+              </p>
+
+              <!-- Botão CTA ONE TO ONE -->
+              <a
+                href="OneToOne/indexOTO.html"
+                class="cta-button oto-btn"
+                id="btn-oto-cta"
+                >Quero conhecer</a
+              >
+            </div>
+          </section>
         </div>
       </section>
     </main>
-
-    <!-- ═══ APRESENTAÇÃO (Texto + Imagem) ═══ -->
-    <section id="intro" aria-label="Apresentação">
-      <div class="intro-inner">
-        <div class="intro-text">
-          <span class="intro-tag">Portal PKZ &amp; One To One</span>
-          <h2>Duas estruturas, um só padrão de excelência</h2>
-          <p>
-            Reunimos em um só lugar a alta performance esportiva da PKZ e o
-            acompanhamento individualizado do Studio One To One. Cada marca
-            tem sua própria identidade, metodologia e equipe especializada,
-            mas compartilham o mesmo compromisso: resultado real, com
-            segurança e acompanhamento de perto.
-          </p>
-          <p>
-            Escolha acima o universo que combina com o seu objetivo — treino
-            de alto rendimento ou musculação com atendimento individualizado —
-            e conheça de perto a estrutura de cada uma.
-          </p>
-        </div>
-
-        <div class="intro-media" aria-hidden="true">
-          <img class="intro-photo photo-pkz" src="PKZ/Fotos/EquipePKZ-800.webp" srcset="PKZ/Fotos/EquipePKZ-480.webp 480w, PKZ/Fotos/EquipePKZ-800.webp 800w, PKZ/Fotos/EquipePKZ-1280.webp 1280w" sizes="(max-width: 860px) 290px, 320px" alt="" width="2760" height="1504" decoding="async" loading="lazy" />
-          <img class="intro-photo photo-oto" src="OneToOne/Fotos/equipe-800.webp" srcset="OneToOne/Fotos/equipe-480.webp 480w, OneToOne/Fotos/equipe-800.webp 800w, OneToOne/Fotos/equipe-1280.webp 1280w" sizes="(max-width: 860px) 235px, 260px" alt="" width="2760" height="1504" decoding="async" loading="lazy" />
-        </div>
-      </div>
-    </section>
 
     <div class="arrow-hint l" id="arr-l" aria-hidden="true">
       <svg
@@ -324,7 +332,7 @@
             href="https://www.instagram.com/playmakerz_pkz/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram da PKZ (abre em nova aba)"
+            aria-label="PKZ @playmakerz_pkz, Instagram (abre em nova aba)"
           >
             <span class="social-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>
@@ -340,7 +348,7 @@
             href="https://www.instagram.com/studioonetoone/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram do Studio One To One (abre em nova aba)"
+            aria-label="One To One @studioonetoone, Instagram (abre em nova aba)"
           >
             <span class="social-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"></circle></svg>

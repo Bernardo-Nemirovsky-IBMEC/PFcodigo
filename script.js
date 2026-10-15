@@ -78,15 +78,22 @@ function apply(p) {
 }
 
 // Só redireciona ao soltar (ou Enter/Espaço) perto de uma borda
-function commit() {
-  if (pos <= EDGE) doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL);
+function commit(ms) {
+  if (pos <= EDGE) doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL, ms);
   else if (pos >= 100 - EDGE)
-    doRedirect("ONE TO ONE", "#014c6f", "#ffffff", OTO_URL);
+    doRedirect("ONE TO ONE", "#014c6f", "#ffffff", OTO_URL, ms);
 }
 
-function doRedirect(name, bg, color, url) {
+// Quem usa teclado/leitor de tela ganha mais tempo para ouvir o aviso e cancelar (900ms para ponteiro).
+const REDIRECT_MS = 900;
+const REDIRECT_MS_KEYBOARD = 3000;
+// Enquanto o aviso está aberto o resto da página fica inerte (foco preso no botão Cancelar).
+const behind = () => document.querySelectorAll("main, #site-footer");
+
+function doRedirect(name, bg, color, url, ms = REDIRECT_MS) {
   if (redirected) return;
   redirected = true;
+  behind().forEach((el) => (el.inert = true));
   redir.style.background = bg;
   redir.style.color = color;
   rName.textContent = name;
@@ -96,12 +103,13 @@ function doRedirect(name, bg, color, url) {
   redirCancel.focus();
   redirTimer = setTimeout(() => {
     window.location.href = url;
-  }, 900);
+  }, ms);
 }
 
 function cancelRedirect() {
   clearTimeout(redirTimer);
   redirected = false;
+  behind().forEach((el) => (el.inert = false));
   redir.classList.remove("on");
   redir.hidden = true;
   apply(50);
@@ -120,7 +128,8 @@ if (btnPkzCta) {
   btnPkzCta.addEventListener("click", (e) => {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
-    doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL);
+    // e.detail === 0: ativado por teclado (Enter) ou tecnologia assistiva
+    doRedirect("PKZ", "#07111e", "#ffffff", PKZ_URL, e.detail === 0 ? REDIRECT_MS_KEYBOARD : REDIRECT_MS);
   });
 }
 
@@ -128,7 +137,7 @@ if (btnOtoCta) {
   btnOtoCta.addEventListener("click", (e) => {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
-    doRedirect("ONE TO ONE", "#014c6f", "#ffffff", OTO_URL);
+    doRedirect("ONE TO ONE", "#014c6f", "#ffffff", OTO_URL, e.detail === 0 ? REDIRECT_MS_KEYBOARD : REDIRECT_MS);
   });
 }
 
@@ -198,7 +207,7 @@ handle.addEventListener("keydown", (e) => {
     newPos = 100;
   } else if (e.key === "Enter" || e.key === " ") {
     e.preventDefault();
-    commit();
+    commit(REDIRECT_MS_KEYBOARD);
     return;
   } else {
     return;
